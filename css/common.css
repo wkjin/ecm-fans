@@ -1,0 +1,46 @@
+html ,body, h1, h2, h2, h4, h5, h6, span, p, footer, header, img{
+   padding: 0;
+   margin: 0; 
+   box-sizing: border-box;
+}
+
+/* 自定义滚动条的样式 */
+::-webkit-scrollbar{
+    width: 6px;
+    height: 100px;
+    background-color: #F5F5F5;
+}
+ 
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+    border-radius: 6px;
+    background-color: #F5F5F5;
+}
+ 
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb{
+    border-radius: 6px;
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    background: pink;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.header,
+.content-area,
+.footer{
+    width: 100%;
+    background: gray;
+}
+
+.content-center{
+    width: 1480px;
+    margin: 0 auto;
+}
+
