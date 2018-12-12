@@ -1,0 +1,102 @@
+// 字体的默认颜色
+@fontDefaultColor: #333333;
+
+/* header部分 */
+.header {
+    .content-center {
+        height: 4em;
+        line-height: 4em;
+        width: 57em;
+        &::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            clear: both;
+        }
+        .logo-area {
+            width: 18em;
+            height: 4em;
+            overflow: hidden;
+            display: block;
+            margin: 0;
+            padding: 0;
+            float: left;
+            img {
+                width: 100%;
+                display: block;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                *top: 0;
+                _top: 0;
+            }
+        }
+        .nav-header {
+            width: 36em;
+            padding-top: 1em;
+            line-height: 3em;
+            margin-left: 3em;
+            float: left;
+            > ul {
+                list-style: none;
+                > li {
+                    float: left;
+                    display: block;
+                    width: 6em;
+                    text-align: center;
+                    cursor: pointer;
+                    position: relative;
+                    z-index: 10;
+                    > .nav-drop-down {
+                        display: block;
+                        font-size: 16px;
+                        background: rgb(197, 227, 241);
+                        line-height: 2em;
+                        padding-bottom: 0.5em;
+                        width: 100%;
+                        padding: 0 0.25em 0.5em 0.25em;
+                        left: -10%;
+                        position: absolute;
+                        display: none;
+                        > a {
+                            display: block;
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                    a {
+                        color: @fontDefaultColor;
+                        height: 2em;
+                        overflow: hidden;
+                        background-color: transparent;
+                        &:hover {
+                            color: blue;
+                        }
+                    }
+                    &.nav-selected > .nav-drop-down {
+                        border-bottom: 3px solid green;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// footer部分
+.footer{
+    background-color: #087042;
+    font-size: 12px;
+    height: 4em;
+    line-height: 4em;
+    .content-center{
+        > div{
+            float: left;
+            text-align: left;
+            width: 50%;
+            color: #ffffff;
+        }
+    }
+}
+
