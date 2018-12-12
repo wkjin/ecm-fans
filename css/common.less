@@ -3,6 +3,18 @@ html ,body, div, h1, h2, h2, h4, h5, h6, span, ul, li, p, footer, header, img, a
    margin: 0; 
    box-sizing: border-box;
 }
+//公共变量
+@black: #333333;
+@lightBlack: #666666;
+@darkBlack: #999999;
+@tagBlack: #cccccc;
+@littleBlack: #F5F5F5;
+
+//before、after的统一样式
+.before-after{
+    content: '';
+    display: block;
+}
 
 /* 自定义滚动条的样式 */
 ::-webkit-scrollbar{
@@ -26,8 +38,9 @@ html ,body, div, h1, h2, h2, h4, h5, h6, span, ul, li, p, footer, header, img, a
 }
 
 .container {
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    max-width: 100vw;
+    width: 100%;
     background: pink;
     overflow-y: scroll;
     overflow-x: hidden;

@@ -5,11 +5,10 @@
 .footer{
     width: 100%;
     .content-center{
-        width: 1480px;
+        width: 1080px;//18px字体大小 * 60em
         margin: 0 auto;
     }
 }
-
 
 /* 头部 */
 .header {
@@ -17,5 +16,11 @@
     background-color: rgb(197, 227, 241);
     height: 4em;
 }
+.content-area{
+    min-height: calc(320px);
+}
+
 @import './header.less';
+@import './index/content-area.less';
+@import './footer.less';
 
