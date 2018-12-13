@@ -16,6 +16,18 @@ html ,body, div, h1, h2, h2, h4, h5, h6, span, ul, li, p, footer, header, img, a
     display: block;
 }
 
+// 图片无法拖拽与选中
+.imgUnHandle{
+    user-drag: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;
+    -khtml-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none; 
+    user-select: none;
+}
 /* 自定义滚动条的样式 */
 ::-webkit-scrollbar{
     width: 6px;
