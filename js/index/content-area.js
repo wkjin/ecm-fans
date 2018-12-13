@@ -38,6 +38,24 @@ var contentArea = {
         //产品展示图
         self._productParentObj = $(self._options.productSelector);
         self._productNum =  self._parentObj.find(self._options.productSelector).find('> a').length;
+        //生产产品展示的轮播图
+        self._generateProductShow();
+    },
+
+    //生成产品展示图的轮播
+    _generateProductShow: function(){
+        var self = this;
+        var parentObj = self._parentObj.find(self._options.productSelector);
+        //根据数量放在不同的product-show进行待显示与显示
+
+        //把前面四张产品图放在显示的div中
+        var html = '<div class="' + self._options.productShowSelector.replace(/\./, '') + '"></div>';
+        var showObj = $(html);
+        var cloneFirstImg = parentObj.find('> a:lt(4)');
+        self._showProductIndex = cloneFirstImg.length -1;
+        showObj.html(cloneFirstImg.clone());
+        parentObj.prepend(showObj);
+        parentObj.addClass(self._options.productCanMoveClass);
     },
     
     _initEven: function(){
@@ -91,7 +109,33 @@ var contentArea = {
         //产品图片展示
         //绑定产品图的点击事件
         self._parentObj.find(self._options.productSelector).off('click').on('click', function(e){
-            console.log(e,'===========> click product');
+            e.stopPropagation();
+            var $this = $(this);
+            var tagName = e.target.tagName;
+            if(tagName === 'IMG' || tagName === 'A'){
+                alert('点击的是图片');
+                e.preventDefault();
+                return;
+            }else{//不是点击在图片上
+                var fontWidth = 36;
+                var width = $this.width();
+                var height = $this.height();
+                var offsetY = e.offsetY;
+                var targetArea = (height - fontWidth)/2;
+                //点击在左右箭头上
+                if(offsetY >= targetArea && offsetY <= (targetArea + fontWidth) ){
+                    //查找到显示的product-show与等待显示的div
+
+                    if(e.offsetX <= fontWidth){
+                        self._changeProduct();
+                        alert('点击在左箭头上');
+                        return;
+                    }else if(e.offsetX >= (width - fontWidth)){
+                        alert('点击在右箭头上');
+                        return;
+                    }
+                }
+            }
         });
     },
 
@@ -143,6 +187,31 @@ var contentArea = {
             self._showBannerIndex = tempGoalIndex;
         }
         
+    },
+
+    //product切换
+    _changeProduct: function(callback, isRight, goalIndex){
+        var self = this;
+        var productContainerObj = self._parentObj.find(self._options.productSelector);
+        if(typeof isLeft !== 'undefined'){
+            isLeft = !!isLeft;
+        }else{
+            isLeft = true;
+        }
+        //目标图片索引
+        var tempGoalIndex = Number(goalIndex);
+        if(typeof goalIndex !== 'undefined' || isNaN(tempGoalIndex)){
+            var tempIndex = self._productNum + self._showProductIndex;
+            if(isLeft){
+                tempIndex -= 4;//4张图片轮播
+            }else{
+                tempIndex ++;
+            }
+            tempGoalIndex = tempIndex%self._bannerNum;
+        }else{
+            tempGoalIndex = tempGoalIndex%self._bannerNum;
+        }
+        console.log('====> ', tempGoalIndex);
     },
     
     _initEnd: function(){
