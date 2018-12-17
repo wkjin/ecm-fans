@@ -14,6 +14,8 @@ var contentArea = {
         productMovingClass: 'product-moving',//产品正在移动的class
         productShowSelector: '.product-show',//产品展示图显示的选择器
         productAnimateTime: 1500,//产品展示图的过渡动画时间（ms）
+        productShowNum: 4,// 产品展示的数量
+        productShowItemTag: 'a',//产品显示子项的tag名
     },
 
     _parentObj: null,//父容器的对象
@@ -125,15 +127,30 @@ var contentArea = {
                 //点击在左右箭头上
                 if(offsetY >= targetArea && offsetY <= (targetArea + fontWidth) ){
                     //查找到显示的product-show与等待显示的div
-
+                    // 查找到产品正在显示的div
+                    var productShowSelector = self._options.productShowSelector;
+                    var productShowNum = self._options.productShowNum;
+                    var productShowObj = self._parentObj.find(productShowSelector).not(':hidden');
+                    
+                    //查看是否已经生成等待显示的div（如果没有，就创建，如果有了以后就直接改变图片的地址）
+                    var productHiddenObj = self._parentObj.find(productShowSelector + ':hidden');
+                    if(typeof productHiddenObj === 'undefined' || productHiddenObj.length <= 0){//如果不存在，那么就创建
+                        productShowObj.after(productShowObj.clone().hide());
+                        productHiddenObj = self._parentObj.find(productShowSelector + ':hidden');
+                    }
+                    var startIndex = self._productNum * 4 + self._showProductIndex;
                     if(e.offsetX <= fontWidth){
-                        self._changeProduct();
-                        alert('点击在左箭头上');
-                        return;
+                        startIndex -= productShowNum;
                     }else if(e.offsetX >= (width - fontWidth)){
                         alert('点击在右箭头上');
+                    }else{
                         return;
                     }
+                    productHiddenObj.find('> ' + self._options.productShowItemTag).each(function(index){
+                        console.log(index, '====>');
+                    });
+                    self._changeProduct();
+                    return;
                 }
             }
         });
