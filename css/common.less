@@ -10,10 +10,20 @@ html ,body, div, h1, h2, h2, h4, h5, h6, span, ul, li, p, footer, header, img, a
 @tagBlack: #cccccc;
 @littleBlack: #F5F5F5;
 
+@littleYellow: lightyellow;
+
 //before、after的统一样式
 .before-after{
     content: '';
     display: block;
+}
+
+.clearfix{
+    content: '';
+    width: 0;
+    height: 0;
+    display: block;
+    clear: both;
 }
 
 //after 或者before使用fontawesome填充（使用定位）
@@ -81,13 +91,16 @@ html ,body, div, h1, h2, h2, h4, h5, h6, span, ul, li, p, footer, header, img, a
     min-height: 100vh;
     max-width: 100vw;
     width: 100%;
-    background: pink;
+    background-color: @littleBlack;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 a{
-    text-decoration: unset;
+    text-decoration: none;
     color: #333333;
     background-color: transparent;
+}
+img{
+    border-width: 0;
 }
 

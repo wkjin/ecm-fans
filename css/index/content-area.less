@@ -50,15 +50,37 @@
             }
         }
 
-        //新闻咨询
-        .news-area{
-            min-height: 100px;
+        //信息区域
+        .info-area{
+            min-height: 150px;
+            padding: 1em 0;
+            background: @littleBlack;
+            display: flex;
+            > div{
+                display: block;
+                background: #ffffff;
+            }
+            > div.left{
+                width: 30%;
+                > img{
+                    width: 100%;
+                }
+            }
+            > div.right{
+                width: 70%;
+                padding: 1em;
+                font-size: 18px;
+                color: @black;
+                letter-spacing: 1px;
+                text-indent: 2em;
+                line-height: 1.8em;
+            }
         }
 
         //产品部分
         .product-area{
             height: 200px;
-            background: lightblue;
+            /* background: lightblue; */
             position: relative;
             overflow: hidden;
             &::before,
@@ -87,7 +109,8 @@
                 height: 100%;
                 width: 25%;
                 float: left;
-                border-right: 1px solid @littleBlack;
+                background: #ffffff;
+                border-right: 2px solid @littleBlack;
                 &:nth-child(4){
                     border-right-color: transparent;
                 }
@@ -130,5 +153,85 @@
             }
         }
 
+        //浩沅课堂
+        .classroom-area{
+            padding: 1em 0;
+            height: 12em;
+            display: flex;
+            background: @littleBlack;
+            justify-content: center;
+            align-content: space-between;
+            > div {
+                height: 100%;
+                line-height: 2em;
+                overflow: hidden;
+                background: #ffffff;
+                &.thumb{
+                    width: 30%;
+                    background-color: #ffffff;
+                    > img{
+                        width: 100%;
+                        position: relative;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        *top: 0;
+                        display: block;
+                        margin: 0 auto;
+                    }
+                }
+                &.classroom-item{
+                    flex-grow: 1;
+                    border-left: 2px solid @littleBlack;
+                    padding: 1em;
+                    > a {
+                        display: block;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        -o-text-overflow:ellipsis;
+                        height: 2em;
+                        line-height: 2em;
+                        color: @lightBlack;
+                        letter-spacing: 1px;
+                        &:hover{
+                            color: blue;
+                        }
+                    }    
+                }
+            }
+             
+        }
+
+        //新闻咨询
+        .news-area{
+            display: flex;
+            flex-wrap: wrap;
+            background: #ffffff;
+            .news-item{
+                width: 33.33%;  
+                border: 2px solid @littleBlack;
+                padding: 0.5em;
+                > img{
+                    border-radius: 0.5em;
+                    display: block;
+                    width: 100%;
+                    height: 8em;
+                }
+                > div{
+                    line-height: 2em;
+                    letter-spacing: 1px;
+                    padding: 0.5em 1em;
+                    > h4{
+                        font-size: 20px;
+                        color: green;
+                    }
+                    > p{
+                        padding-top: 0.5em;
+                        line-height: 1.5em;
+                    }
+                }
+                  
+            }
+        }
     }
 }
