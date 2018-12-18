@@ -112,7 +112,8 @@ var contentArea = {
         //绑定产品图的点击事件
         self._parentObj.find(self._options.productSelector).off('click').on('click', function(e){
             e.stopPropagation();
-            var $this = $(this);
+            // var $this = $(this);
+            var $this = self._parentObj.find(self._options.productSelector);
             var tagName = e.target.tagName;
             if(tagName === 'IMG' || tagName === 'A'){
                 alert('点击的是图片');
@@ -134,6 +135,11 @@ var contentArea = {
                     
                     //查看是否已经生成等待显示的div（如果没有，就创建，如果有了以后就直接改变图片的地址）
                     var productHiddenObj = self._parentObj.find(productShowSelector + ':hidden');
+                    //开始移动
+                    if(productShowObj.is(":animated")){    //判断元素是否正处于动画状态
+                        //如果当前没有进行动画，则添加新动画
+                        return;
+                    }
                     if(typeof productHiddenObj === 'undefined' || productHiddenObj.length <= 0){//如果不存在，那么就创建
                         productShowObj.after(productShowObj.clone().hide());
                         productHiddenObj = self._parentObj.find(productShowSelector + ':hidden');
@@ -152,13 +158,14 @@ var contentArea = {
                     //进行图片地址更改
                     productHiddenObj.html('');
                     for(var i=0;i< productShowNum; i++){
+                        var selector = '> ' + self._options.productShowItemTag;
                         productHiddenObj.append(
-                            $this.find('> ' + self._options.productShowItemTag + ':nth-child(' + ((startIndex + i)%self._productNum + 1) + ')').clone(true)
+                            $this.find(selector).eq((startIndex + i)%self._productNum).clone()
                         );
-                        console.log('填充图片的index：' + ((startIndex + i)%self._productNum + 1) );
                     }
                     self._showProductIndex = (productShowNum + self._showProductIndex)%self._productNum; 
                     self._changeProduct(function(){
+                        //移动完毕
 
                     },isLeft);
                     return;
@@ -232,18 +239,22 @@ var contentArea = {
         //查看不显示图片的div
         var productHiddenObj = self._parentObj.find(productShowSelector + ':hidden');
         if(isLeft){
-            productHiddenObj.css({left: '100%'}).show().animate({ left: '0%'}, animateTime);
-            productShowObj.animate({ left: '-100%'}, animateTime, function(){
+            productHiddenObj.css({left: '100%'}).show().animate({ left: '0%'}, animateTime, function(){
                 if(typeof callback === 'function'){
                     callback();
                 }
             });
+            productShowObj.animate({ left: '-100%'}, animateTime, function() {
+                $(this).hide();
+            });
         }else{
-            productHiddenObj.css({left: '-100%'}).show().animate({ left: '0%'}, animateTime);
-            productShowObj.animate({ left: '100%'}, animateTime, function(){
+            productHiddenObj.css({left: '-100%'}).show().animate({ left: '0%'}, animateTime,function(){
                 if(typeof callback === 'function'){
                     callback();
                 }
+            });
+            productShowObj.animate({ left: '100%'}, animateTime, function(){
+                $(this).hide();
             });
         }
 
