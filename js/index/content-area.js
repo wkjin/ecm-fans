@@ -139,17 +139,28 @@ var contentArea = {
                         productHiddenObj = self._parentObj.find(productShowSelector + ':hidden');
                     }
                     var startIndex = self._productNum * 4 + self._showProductIndex;
-                    if(e.offsetX <= fontWidth){
+                    var isLeft = true;//是否先左边
+                    if(e.offsetX <= fontWidth){//点击左箭头
                         startIndex -= productShowNum;
-                    }else if(e.offsetX >= (width - fontWidth)){
-                        alert('点击在右箭头上');
+                        isLeft = true;
+                    }else if(e.offsetX >= (width - fontWidth)){//点击右箭头
+                        startIndex ++;
+                        isLeft = false;
                     }else{
                         return;
                     }
-                    productHiddenObj.find('> ' + self._options.productShowItemTag).each(function(index){
-                        console.log(index, '====>');
-                    });
-                    self._changeProduct();
+                    //进行图片地址更改
+                    productHiddenObj.html('');
+                    for(var i=0;i< productShowNum; i++){
+                        productHiddenObj.append(
+                            $this.find('> ' + self._options.productShowItemTag + ':nth-child(' + ((startIndex + i)%self._productNum + 1) + ')').clone(true)
+                        );
+                        console.log('填充图片的index：' + ((startIndex + i)%self._productNum + 1) );
+                    }
+                    self._showProductIndex = (productShowNum + self._showProductIndex)%self._productNum; 
+                    self._changeProduct(function(){
+
+                    },isLeft);
                     return;
                 }
             }
@@ -207,28 +218,35 @@ var contentArea = {
     },
 
     //product切换
-    _changeProduct: function(callback, isRight, goalIndex){
+    _changeProduct: function(callback, isLeft){
         var self = this;
         var productContainerObj = self._parentObj.find(self._options.productSelector);
-        if(typeof isLeft !== 'undefined'){
+        if(typeof isLeft !== 'boolean'){
             isLeft = !!isLeft;
-        }else{
-            isLeft = true;
         }
-        //目标图片索引
-        var tempGoalIndex = Number(goalIndex);
-        if(typeof goalIndex !== 'undefined' || isNaN(tempGoalIndex)){
-            var tempIndex = self._productNum + self._showProductIndex;
-            if(isLeft){
-                tempIndex -= 4;//4张图片轮播
-            }else{
-                tempIndex ++;
-            }
-            tempGoalIndex = tempIndex%self._bannerNum;
+        var animateTime = self._options.productAnimateTime;
+        var productShowSelector = self._options.productShowSelector;
+        //查看显示图片的div
+        var productShowObj = self._parentObj.find(productShowSelector).not(':hidden');
+
+        //查看不显示图片的div
+        var productHiddenObj = self._parentObj.find(productShowSelector + ':hidden');
+        if(isLeft){
+            productHiddenObj.css({left: '100%'}).show().animate({ left: '0%'}, animateTime);
+            productShowObj.animate({ left: '-100%'}, animateTime, function(){
+                if(typeof callback === 'function'){
+                    callback();
+                }
+            });
         }else{
-            tempGoalIndex = tempGoalIndex%self._bannerNum;
+            productHiddenObj.css({left: '-100%'}).show().animate({ left: '0%'}, animateTime);
+            productShowObj.animate({ left: '100%'}, animateTime, function(){
+                if(typeof callback === 'function'){
+                    callback();
+                }
+            });
         }
-        console.log('====> ', tempGoalIndex);
+
     },
     
     _initEnd: function(){
