@@ -1,6 +1,7 @@
 // 首页的内容区域的样式文件
 .content-area {
     .content-center{
+        overflow: hidden;
         //banner图部分
         .banner-area{
             width: 100%;
@@ -27,6 +28,13 @@
                 .angle-right;
                 right: 0;
             }
+            //被点击的banner区域
+            &.banner-click{
+                &::before,
+                &::after{
+                    cursor: not-allowed; 
+                }
+            }
             img{
                 height: 100%!important;
                 position: absolute;
@@ -41,13 +49,6 @@
             }
             img:not(:first-child){
                 left: 150%;
-            }
-        }
-        //被点击的banner区域
-        .banner-click{
-            &::before,
-            &::after{
-                cursor: not-allowed; 
             }
         }
 
@@ -104,6 +105,35 @@
                 background-color: rgba(250, 250, 250, .8);
                 display: block;
             }
+            // 产品的连接已经填充到.product-show，已经可以移动的时候
+            &.product-can-move{
+                > div.product-show{
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    &:first-child{
+                        left: 0;
+                    }
+                    &:not(:first-child){
+                        left: 100%;
+                    }
+                    > a {
+                        // 继承图片直接展示的样式，达到统一控制样式的作用
+                        &:extend(.content-area .content-center .product-area > a);
+                        &:last-child{
+                            &:extend(.content-area .content-center .product-area > a:nth-child(4));
+                        }
+                        > img{
+                            &:extend(.content-area .content-center .product-area > a > img);
+                        }
+                    }
+                }
+                > a{
+                    display: none;
+                }
+            }
             > div.product-show{
                 display: none;
             }
@@ -125,35 +155,7 @@
                 }
             }
         }
-        // 产品的连接已经填充到.product-show，已经可以移动的时候
-        .product-can-move{
-            > div.product-show{
-                display: block;
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                &:first-child{
-                    left: 0;
-                }
-                &:not(:first-child){
-                    left: 100%;
-                }
-                > a {
-                    // 继承图片直接展示的样式，达到统一控制样式的作用
-                    &:extend(.content-area .content-center .product-area > a);
-                    &:last-child{
-                        &:extend(.content-area .content-center .product-area > a:nth-child(4));
-                    }
-                    > img{
-                        &:extend(.content-area .content-center .product-area > a > img);
-                    }
-                }
-            }
-            > a{
-                display: none;
-            }
-        }
+        
 
         //浩沅课堂
         .classroom-area{
@@ -206,11 +208,42 @@
 
         //新闻咨询
         .news-area{
-            display: flex;
-            flex-wrap: wrap;
+            display: block;
             background: #ffffff;
+            min-width: 100%;
+            white-space:nowrap;
+            position: relative;
+            font-size: 0;
+            .before,
+            .after{
+                .font-awesome-before-after;
+                font-size: 36px;
+                z-index: 10;
+                display: block;
+                background-color: #ffffff;
+                opacity: 0.5;
+                color: @lightBlack;
+                &.disabled{
+                    cursor:  not-allowed;
+                }
+            }
+            .before{
+                .angle-left;
+                left: 0;
+            }
+            .after{
+                .angle-right;
+                right: 0;
+            }
+            .before:hover,
+            .after:hover{
+                color: @black;
+                opacity: 1;
+            }
             .news-item{
-                width: 33.33%;  
+                font-size: 14px;
+                display: inline-block;
+                width: 33.33%;
                 border: 2px solid @littleBlack;
                 padding: 0.5em;
                 > img{
