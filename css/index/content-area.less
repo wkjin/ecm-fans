@@ -2,6 +2,7 @@
 .content-area {
     .content-center{
         overflow: hidden;
+        padding: 0.5em 0 2em 0;
         //banner图部分
         .banner-area{
             width: 100%;
@@ -81,7 +82,7 @@
 
         //产品部分
         .product-area{
-            height: 200px;
+            height: 230px;
             /* background: lightblue; */
             position: relative;
             overflow: hidden;
@@ -160,7 +161,7 @@
         //浩沅课堂
         .classroom-area{
             padding: 1em 0;
-            height: 12em;
+            height: 15em;
             display: flex;
             background: @littleBlack;
             justify-content: center;
@@ -193,8 +194,8 @@
                         white-space: nowrap;
                         text-overflow: ellipsis;
                         -o-text-overflow:ellipsis;
-                        height: 2em;
-                        line-height: 2em;
+                        height: 3em;
+                        line-height: 3em;
                         color: @lightBlack;
                         letter-spacing: 1px;
                         &:hover{
@@ -250,11 +251,12 @@
                     width: 33.33%;
                     border: 2px solid @littleBlack;
                     padding: 0.5em;
+                    height: 19em;
                     > img{
                         border-radius: 0.5em;
                         display: block;
                         width: 100%;
-                        height: 8em;
+                        height: 12em;
                     }
                     > div{
                         line-height: 2em;
@@ -263,10 +265,13 @@
                         > h4{
                             font-size: 20px;
                             color: green;
+                            .ellipsis-row;
                         }
                         > p{
                             padding-top: 0.5em;
                             line-height: 1.5em;
+                            height: 3em;
+                            .ellipsis-row-two;
                         }
                     }
                 }   

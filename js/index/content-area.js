@@ -20,7 +20,9 @@ var contentArea = {
         //新闻咨询
         newsSelector: '.news-area',//新闻咨询容器
         newsDirectionClass: 'disabled',//新闻咨询方向按钮禁止按钮的class
-        
+        newsCanMoveSelector: '.news-can-move-area',//新闻可以移动容器的选择器
+        newsAnimateTime: 500,//新闻展示图的过渡动画时间（ms）
+        newsShowNum: 3,//新闻显示的条目 
 
     },
 
@@ -187,9 +189,30 @@ var contentArea = {
                 return;
             }else{
                 //判断是否是最后与最前面的
+                var canMoveObj = $this.parent().find(self._options.newsCanMoveSelector);
+                var allWidth = $this.parent().width();
+                var left = parseFloat(canMoveObj.css('left'));
+                var newsShowNum = self._options.newsShowNum;
+                var width = canMoveObj.find('> a').length/newsShowNum * allWidth;
 
-
-                //相应事件
+                if($this.hasClass('before')){
+                    left -= allWidth/3;
+                }else{
+                    left += allWidth/3;
+                }
+                canMoveObj.animate({ left: left}, self._options.newsAnimateTime,function(){
+                    var afterObj = $this.parent().find('.after');
+                    var beforeObj = $this.parent().find('.before');
+                    afterObj.removeClass(disabledClass);
+                    beforeObj.removeClass(disabledClass);
+                    left = Math.abs(left);
+                    if(left < allWidth/newsShowNum){
+                        afterObj.addClass(disabledClass);
+                    }
+                    if(left >= (width - allWidth)){
+                        beforeObj.addClass(disabledClass);
+                    }
+                });
             }
         });
     },
