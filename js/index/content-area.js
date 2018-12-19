@@ -16,6 +16,12 @@ var contentArea = {
         productAnimateTime: 1500,//产品展示图的过渡动画时间（ms）
         productShowNum: 4,// 产品展示的数量
         productShowItemTag: 'a',//产品显示子项的tag名
+
+        //新闻咨询
+        newsSelector: '.news-area',//新闻咨询容器
+        newsDirectionClass: 'disabled',//新闻咨询方向按钮禁止按钮的class
+        
+
     },
 
     _parentObj: null,//父容器的对象
@@ -170,6 +176,20 @@ var contentArea = {
                     },isLeft);
                     return;
                 }
+            }
+        });
+
+        //新闻咨询轮播
+        self._parentObj.find(self._options.newsSelector).off('click').on('click', 'span.before, span.after',function(e){
+            var $this = $(this);
+            var disabledClass = self._options.newsDirectionClass;
+            if($this.hasClass(disabledClass)){
+                return;
+            }else{
+                //判断是否是最后与最前面的
+
+
+                //相应事件
             }
         });
     },

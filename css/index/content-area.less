@@ -210,10 +210,9 @@
         .news-area{
             display: block;
             background: #ffffff;
-            min-width: 100%;
-            white-space:nowrap;
+            width: 100%;
+            overflow: hidden;
             position: relative;
-            font-size: 0;
             .before,
             .after{
                 .font-awesome-before-after;
@@ -240,33 +239,39 @@
                 color: @black;
                 opacity: 1;
             }
-            .news-item{
-                font-size: 14px;
-                display: inline-block;
-                width: 33.33%;
-                border: 2px solid @littleBlack;
-                padding: 0.5em;
-                > img{
-                    border-radius: 0.5em;
-                    display: block;
-                    width: 100%;
-                    height: 8em;
-                }
-                > div{
-                    line-height: 2em;
-                    letter-spacing: 1px;
-                    padding: 0.5em 1em;
-                    > h4{
-                        font-size: 20px;
-                        color: green;
+            .news-can-move-area{
+                min-width: 100%;
+                white-space:nowrap;
+                position: relative;
+                font-size: 0;
+                .news-item{
+                    font-size: 14px;
+                    display: inline-block;
+                    width: 33.33%;
+                    border: 2px solid @littleBlack;
+                    padding: 0.5em;
+                    > img{
+                        border-radius: 0.5em;
+                        display: block;
+                        width: 100%;
+                        height: 8em;
                     }
-                    > p{
-                        padding-top: 0.5em;
-                        line-height: 1.5em;
+                    > div{
+                        line-height: 2em;
+                        letter-spacing: 1px;
+                        padding: 0.5em 1em;
+                        > h4{
+                            font-size: 20px;
+                            color: green;
+                        }
+                        > p{
+                            padding-top: 0.5em;
+                            line-height: 1.5em;
+                        }
                     }
-                }
-                  
+                }   
             }
+            
         }
     }
 }
