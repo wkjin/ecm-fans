@@ -318,6 +318,6 @@ var contentArea = {
 
 $(function(){
     $('.content-area').load('./tpl/index/content-area.html', function(){
-        contentArea.init();                
+        contentArea.init();        
     });
 });
