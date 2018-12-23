@@ -6,7 +6,8 @@ var contentArea = {
         bannerImgContainerSelector: 'img',//banner图片容器的选择器
         bannerImgUrlAttrName: 'data-url',//banner图片上面的url的属性名
         bannerClickClass: 'banner-click',//banner被点击的class
-        bannerAnimateTime: 1500,//banner图的动画时间
+        bannerAnimateTime: 2000,//banner图的动画时间
+        bannerIntervalTime: 5000,//banner图的轮番周期
 
         //产品轮播图部分
         productSelector: '.product-area',//产品展示图的容器
@@ -32,6 +33,8 @@ var contentArea = {
     _bannerNum: 0,//图片的数量
     _showBannerIndex: 0,//显示图片的索引
     _bannerTimer: null,//banner图的时间记录器
+    _bannerIntervalTimer: null,//banner图的轮番图
+    _bannerRun: false,//banner正在工作（用于轮播图单例）
 
     //产品展示图
     _productNum: 0,//产品的数量
@@ -98,13 +101,17 @@ var contentArea = {
                     self._bannerTimer = null;
                 }, 3000);
                 if(e.offsetX <= fontWidth){
+                    self._stopBanner();
                     self._changeBanner(function(){
                         $this.removeClass(bannerClickClass);
+                        self._runBanner();//开始轮播
                     });
                     return;
                 }else if(e.offsetX >= (width - fontWidth)){
+                    self._stopBanner();
                     self._changeBanner(function(){
                         $this.removeClass(bannerClickClass);
+                        self._runBanner();//开始轮播
                     }, false);
                     return;
                 }
@@ -115,6 +122,8 @@ var contentArea = {
                 window.location.href = jumpUrl;
             }
         });
+
+        self._runBanner();//开始轮播
 
         //产品图片展示
         //绑定产品图的点击事件
@@ -220,11 +229,17 @@ var contentArea = {
     //banner图片切换
     _changeBanner: function(callback, isLeft, goalIndex){
         var self = this;
+        if(!self._bannerRun){
+            self._bannerRun = true;
+        }else{
+            return;
+        }
+        
         var imgContainerObj = self._parentObj.find(self._options.bannerSelector);
         if(typeof isLeft !== 'undefined'){
             isLeft = !!isLeft;
         }else{
-            isLeft = true;
+            isLeft = false;
         }
         //目标图片索引
         var tempGoalIndex = Number(goalIndex);
@@ -250,6 +265,7 @@ var contentArea = {
             if(isLeft){//向左移动
                 goalImgObj.css({left: '150%'}).show().animate({ left: '50%'}, animateTime);
                 showImgObj.animate({ left: '-50%'}, animateTime, function(){
+                    self._bannerRun = false;
                     if(typeof callback === 'function'){
                         callback();
                     }
@@ -257,6 +273,7 @@ var contentArea = {
             }else{//向右移动
                 goalImgObj.css({left: '-50%'}).show().animate({ left: '50%'}, animateTime);
                 showImgObj.animate({ left: '150%'}, animateTime, function(){
+                    self._bannerRun = false;
                     if(typeof callback === 'function'){
                         callback();
                     }
@@ -265,6 +282,26 @@ var contentArea = {
             self._showBannerIndex = tempGoalIndex;
         }
         
+    },
+
+    //banner开始自动轮播
+    _runBanner: function(){
+        var self = this;
+        //停止轮播
+        if(self._bannerIntervalTimer !== null){
+            self._stopBanner();
+        }
+        //banner图自动轮播
+        self._bannerIntervalTimer = setInterval(function(){
+            self._changeBanner();
+        }, self._options.bannerIntervalTime);
+    },
+    //banner停止轮播
+    _stopBanner: function(){
+        var self = this;
+        //banner图自动轮播
+        clearInterval(self._bannerIntervalTimer);
+        self._bannerIntervalTimer = null;
     },
 
     //product切换

@@ -2,6 +2,7 @@ html ,body, div, h1, h2, h2, h4, h5, h6, span, ul, li, p, footer, header, img, a
    padding: 0;
    margin: 0; 
    box-sizing: border-box;
+   font-family: "Microsoft Yahei UI", "Microsoft YaHei","Helvetica Neue", Helvetica, Arial,SimSun, SimHei, "宋体", simsun, sans-serif;	
 }
 //公共变量
 @black: #333333;
@@ -10,8 +11,13 @@ html ,body, div, h1, h2, h2, h4, h5, h6, span, ul, li, p, footer, header, img, a
 @tagBlack: #cccccc;
 @borderBlack: #eeeeee;
 @littleBlack: #F5F5F5;
+@likeWhite: #fbfbfb;
 
 @littleYellow: lightyellow;
+@indexBackground: #ffffff;
+@indexBorderRadus: 3px;
+@indexCategoryBorderColor: lightblue;
+@aTagHoverColor: blue;
 
 //before、after的统一样式
 .before-after{
@@ -115,9 +121,14 @@ img{
 
 // 两行省略号
 .ellipsis-row-two{
+    .ellipsis(2);
+}
+
+/* 多行省略 */
+.ellipsis(@row) {
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: @row;
     -webkit-box-orient: vertical;
-}
+  }

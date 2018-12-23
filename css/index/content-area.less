@@ -2,7 +2,45 @@
 .content-area {
     .content-center{
         overflow: hidden;
-        padding: 0.5em 0 2em 0;
+        padding: 0 0 2em 0;
+
+        /* 标题栏 */
+        .category-title {
+            display: block;
+            line-height: 2.8em;
+            height: 2.8em;
+            margin-top: 1.5em;
+            background: @indexBackground;
+            font-size: 15px;
+            border-bottom: 2px solid @indexCategoryBorderColor;
+            border-top-left-radius: @indexBorderRadus;
+            border-top-right-radius: @indexBorderRadus;
+            &:after{
+                .clearfix;
+            }
+            > a{
+                display: block;
+                letter-spacing: 1px;
+                font-weight: 600;
+                height: 100%;
+                padding: 0 1em;
+                color: @lightBlack;
+                cursor: pointer;
+                border-top-left-radius: @indexBorderRadus;
+                border-top-right-radius: @indexBorderRadus;
+                &.category-title-name{
+                    float: left;
+                    border-bottom: 4px solid @indexCategoryBorderColor;
+                    margin-top: 3px;
+                }
+                &.category-title-more{
+                    float: right;
+                    font-size: 12px;
+                    color: @tagBlack;
+                }
+            }
+        }
+
         //banner图部分
         .banner-area{
             width: 100%;
@@ -53,40 +91,11 @@
             }
         }
 
-        //信息区域
-        .info-area{
-            height: calc(~"1.8em * 6 + 1.5em");
-            padding: 1em 0;
-            background: @littleBlack;
-            display: flex;
-            overflow: hidden;
-            > div{
-                display: block;
-                background: #ffffff;
-            }
-            > div.left{
-                width: 33.33%;
-                > img{
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-            > div.right{
-                width: 66.67%;
-                padding: 1em;
-                font-size: 18px;
-                color: @black;
-                letter-spacing: 1px;
-                text-indent: 2em;
-                line-height: 1.8em;
-            }
-        }
-
         //产品部分
         .product-area{
+            width: 100%;
             height: 300px;
-            margin-top: 1.5em;
-            /* background: lightblue; */
+            left: 0;
             background-color: #ffffff;
             position: relative;
             overflow: hidden;
@@ -153,15 +162,15 @@
                 padding: 20px 0;
                 width: 25%;
                 float: left;
-                background: #ffffff;
-                border-right: 2px solid @borderBlack;
+                border-right: 2px solid @likeWhite;
                 overflow: hidden;
-                color: @black;
+                color: @lightBlack;
+                background: @indexBackground;
                 &:nth-child(4){
                     border-right-color: transparent;
                 }
                 &:hover{
-                    color: blue;
+                    color: @aTagHoverColor;
                 }
                 > img{
                     height: calc(~"100% - 2em");
@@ -175,21 +184,21 @@
                     letter-spacing: 1px;
                     height: 2em;
                     line-height: calc(~"2em + 10px");
-                    border-top: 1px solid @littleBlack;
+                    /* border-top: 1px solid @littleBlack; */
                     .ellipsis-row;
                     padding: 0 1em;
                     display: block;
                 }
             }
         }
-        
 
         //浩沅课堂
         .classroom-area{
+            width: 100%;
             padding: 1em 0;
-            height: 15em;
+            height: 12em;
             display: flex;
-            background: @littleBlack;
+            background: @indexBackground;
             justify-content: center;
             align-content: space-between;
             > div {
@@ -200,6 +209,7 @@
                 &.thumb{
                     width: 33.33%;
                     background-color: #ffffff;
+                    padding: 0 0.5em;
                     > img{
                         width: 100%;
                         position: relative;
@@ -212,35 +222,34 @@
                 }
                 &.classroom-item{
                     flex-grow: 1;
-                    border-left: 2px solid @littleBlack;
-                    padding: 1em;
+                    border-right: 2px solid @littleBlack;
+                    padding-left: 1em;
                     > a {
                         display: block;
-                        overflow: hidden;
-                        white-space: nowrap;
-                        text-overflow: ellipsis;
-                        -o-text-overflow:ellipsis;
-                        height: 3em;
-                        line-height: 3em;
+                        .ellipsis-row;
+                        height: 2.5em;
+                        line-height: 2.5em;
                         color: @lightBlack;
                         letter-spacing: 1px;
                         &:hover{
-                            color: blue;
+                            color: @aTagHoverColor;
                         }
                     }    
                 }
             }
              
         }
-
+        
         //新闻咨询
         .news-area{
             display: block;
-            // background: #ffffff;
+            background: @indexBackground;
             padding: 1em 0;
             width: 100%;
+            
             overflow: hidden;
             position: relative;
+            /*
             .before,
             .after{
                 .font-awesome-before-after;
@@ -267,6 +276,7 @@
                 color: @black;
                 opacity: 1;
             }
+            */
             .news-can-move-area{
                 min-width: 100%;
                 white-space:nowrap;
@@ -276,9 +286,10 @@
                     font-size: 14px;
                     display: inline-block;
                     width: 33.33%;
-                    border: 2px solid @littleBlack;
+                    border-right: 2px solid @likeWhite;
                     padding: 0.5em;
-                    height: 19em;
+                    height: 17em;
+                    overflow: hidden;
                     background: #ffffff;
                     > img{
                         border-radius: 0.5em;
@@ -289,9 +300,9 @@
                     > div{
                         line-height: 2em;
                         letter-spacing: 1px;
-                        padding: 0.5em 1em;
+                        padding: 0.5em 1em 0em 1em;
                         > h4{
-                            font-size: 20px;
+                            font-size: 18px;
                             color: green;
                             .ellipsis-row;
                         }
@@ -299,12 +310,53 @@
                             padding-top: 0.5em;
                             line-height: 1.5em;
                             height: 3em;
-                            .ellipsis-row-two;
+                            font-size: 15px;
+                            color: @lightBlack;
+                            .ellipsis-row;
+                            &:hover{
+                                color: @aTagHoverColor;
+                            }
                         }
                     }
                 }   
             }
             
+        }
+
+        //信息区域
+        .info-area{
+            @line: 5;
+            height: calc(~"2em + 1.8em * " @line);
+            padding: 1em 0;
+            margin: 1em 0;
+            background: @indexBackground;
+            display: flex;
+            overflow: hidden;
+            font-size: 15px;
+            border-top-left-radius: @indexBorderRadus;
+            border-top-right-radius: @indexBorderRadus;
+            > div{
+                display: block;
+            }
+            > div.left{
+                width: 33.33%;
+                padding: 0 0.5em;
+                > img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            > div.right{
+                .ellipsis(@line);
+                height: calc(1.8em * @line);
+                width: 66.67%;
+                padding: 0 1em;
+                color: @lightBlack;
+                letter-spacing: 1px;
+                text-indent: 2em;
+                line-height: 1.8em;
+                overflow: hidden;
+            }
         }
     }
 }
