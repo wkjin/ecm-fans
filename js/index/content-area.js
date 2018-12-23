@@ -105,7 +105,7 @@ var contentArea = {
                     self._changeBanner(function(){
                         $this.removeClass(bannerClickClass);
                         self._runBanner();//开始轮播
-                    });
+                    }, true);
                     return;
                 }else if(e.offsetX >= (width - fontWidth)){
                     self._stopBanner();

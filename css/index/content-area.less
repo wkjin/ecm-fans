@@ -250,7 +250,6 @@
             background: @indexBackground;
             padding: 1em 0;
             width: 100%;
-            
             overflow: hidden;
             position: relative;
             /*
@@ -291,8 +290,9 @@
                     display: inline-block;
                     width: 33.33%;
                     border-right: 2px solid @likeWhite;
+                    border-bottom: 2px solid @likeWhite;
                     padding: 0.5em;
-                    height: 17em;
+                    height: 22em;
                     overflow: hidden;
                     background: #ffffff;
                     > img{
@@ -312,11 +312,11 @@
                         }
                         > p{
                             padding-top: 0.5em;
-                            line-height: 1.5em;
-                            height: 3em;
-                            font-size: 15px;
+                            line-height: 2em;
+                            height: 6em;
+                            font-size: 14px;
                             color: @lightBlack;
-                            .ellipsis-row;
+                            .ellipsis(3);
                             &:hover{
                                 color: @aTagHoverColor;
                             }
