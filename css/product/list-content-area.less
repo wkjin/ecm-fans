@@ -1,0 +1,162 @@
+// 首页的内容区域的样式文件
+.content-area {
+    .content-center{
+        overflow: hidden;
+        padding: 0 0 2em 0;
+        background-color: @littleBlack;
+        //banner图
+        .banner-area{
+            width: 100%;
+            height: 300px;
+            > img{
+                height: 100%;
+                position: relative;
+                display: block;
+                left: 50%;
+                transform: translateX(-50%);
+                *left: 0;
+            }
+        }
+
+        //地址栏
+        .website-local{
+            width: 100%;
+            margin: 0.5em 0;
+            background: lightblue;
+            background-color: @productBackground;
+            line-height: 3em;
+            height: 3em;
+            overflow: hidden;
+            letter-spacing: 1px;
+            padding: 0 0.5em;
+            color: @lightBlack;
+            > span{
+                display: inline-block;
+                padding: 0 0.5em;
+            }
+            > a{
+                display: inline-block;
+                color: inherit;
+                &:hover{
+                    color: @aTagHoverColor;
+                }
+            }
+        }
+
+        //搜索栏
+        .search-area {
+            background-color: @productBackground;
+            border: 1px solid #eee;
+            margin: 0.5em 0;
+            border-left-width: 0;
+            border-right-width: 0;
+            .fast-search{
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                padding: 0.5em 0;
+                span.title{
+                    font-size: 16px;
+                    width: 7em;
+                    padding: 0 1em;
+                    display: block;
+                }
+                .list-group {
+                    flex-grow: 1;
+                    text-align: right;
+                    a {
+                        font-size: 14px;
+                        display: inline-block;
+                        background: @productHandleButtonColor;
+                        padding: 0 1em;
+                        margin: 0.2em 0.5em;
+                        line-height: 1.8em;
+                        border-radius: 0.2em;
+                        color: #ffffff;
+                    }
+                }
+            }
+            .category-search{
+                padding: 0.5em 0;
+                &:after{
+                    .clearfix;
+                }
+                .cs-item{
+                    display: inline-block;
+                    width: 33%;
+                    float: left;
+                    line-height: 2.5em;
+                    color: @black;
+                    span{
+                        width: 6em;
+                        display: inline-block;
+                        text-align: right;
+                    }
+                    select{
+                        padding: 0.4em 0.5em;
+                        border-radius: 0.2em;
+                        width: 15em;
+                        color: @lightBlack;
+                    }
+                    
+                }
+            }
+            .handle-bar{
+                line-height: 3em;
+                text-align: right;
+                > a{
+                    &:extend(.content-area .content-center .search-area .fast-search .list-group a);
+                }
+            }
+        }
+
+        //产品栏
+        .product-list{
+            padding: 0.5em 0;
+            &:after{
+                .clearfix;
+            }
+            > a{
+                width: 33.33%;
+                padding: 1em;
+                display: block;
+                height: 200px;
+                float: left;
+                overflow: hidden;
+                background-color: @productBackground;
+                border: 1px solid @borderBlack;
+                .left{
+                    width: 50%;
+                    height: 100%;
+                    float: left;
+                    > img{
+                        width: 100%;
+                        height: auto;
+                        max-height: 100%;
+                        position: relative;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        *top: 0;
+                    }
+                }
+                .right{
+                    float: left;
+                    width: 50%;
+                    height: 100%;
+                    padding: 0.5em;
+                    border-left: 1px solid @littleBlack;
+                    p{
+                        line-height: 2em;
+                        &:first-child{
+                            border-bottom: 1px solid @littleBlack;
+                            line-height: 2.5em;
+                            margin-bottom: 0.5em;
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+    }
+}
