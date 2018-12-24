@@ -1,0 +1,107 @@
+// 首页的内容区域的样式文件
+.content-area {
+    .content-center{
+        overflow: hidden;
+        padding: 0 0 2em 0;
+        background-color: @littleBlack;
+        //banner图
+        .banner-area{
+            width: 100%;
+            height: 300px;
+            > img{
+                height: 100%;
+                position: relative;
+                display: block;
+                left: 50%;
+                transform: translateX(-50%);
+                *left: 0;
+            }
+        }
+
+        //地址栏
+        .website-local{
+            width: 100%;
+            margin: 0.5em 0;
+            background: lightblue;
+            background-color: @productBackground;
+            line-height: 3em;
+            height: 3em;
+            overflow: hidden;
+            letter-spacing: 1px;
+            padding: 0 0.5em;
+            color: @lightBlack;
+            > span{
+                display: inline-block;
+                padding: 0 0.5em;
+            }
+            > a{
+                display: inline-block;
+                color: inherit;
+                &:hover{
+                    color: @aTagHoverColor;
+                }
+            }
+        }
+
+        //产品栏
+        .product-detail{
+            padding: 0.5em 0;
+            background-color: @productBackground;
+            color: @black;
+            > .product-info{
+                width: 100%;
+                padding: 1em;
+                display: block;
+                height: 230px;
+                overflow: hidden;
+                border: 1px solid @borderBlack;
+                &:after{
+                    .clearfix;
+                }
+                .left{
+                    width: 30%;
+                    height: 100%;
+                    float: left;
+                    > img{
+                        width: auto;
+                        height: 100%;
+                        max-height: 100%;
+                        position: relative;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        *top: 0;
+                    }
+                }
+                .right{
+                    float: left;
+                    width: 70%;
+                    height: 100%;
+                    padding: 0.5em;
+                    border-left: 1px solid @littleBlack;
+                    p{
+                        line-height: 2em;
+                        display: inline-block;
+                        width: 50%;
+                        float: left;
+                        &.produtc-name:first-child{
+                            border-bottom: 1px solid @littleBlack;
+                            line-height: 2.5em;
+                            margin-bottom: 0.5em;
+                            width: 100%;
+                            display: block;
+                        }
+                    }
+                }
+            }
+            > .product-description{
+                width: 100%;
+                padding: 1em;
+                p{
+                    line-height: 2em;
+                }
+            }
+        }
+        
+        
+    }
+}
