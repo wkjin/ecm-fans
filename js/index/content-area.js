@@ -128,15 +128,15 @@ var contentArea = {
         //产品图片展示
         //绑定产品图的点击事件
         self._parentObj.find(self._options.productSelector).off('click').on('click', function(e){
-            e.stopPropagation();
             // var $this = $(this);
             var $this = self._parentObj.find(self._options.productSelector);
             var tagName = e.target.tagName;
             if(tagName === 'IMG' || tagName === 'A'){
-                alert('点击的是图片');
-                e.preventDefault();
+                // alert('点击的是图片');
+                // e.preventDefault();
                 return;
             }else{//不是点击在图片上
+                e.stopPropagation();
                 var fontWidth = 36;
                 var width = $this.width();
                 var height = $this.height();
