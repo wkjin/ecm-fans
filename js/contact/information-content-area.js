@@ -3,6 +3,8 @@ var information = {
         company_latitude_longitude: '120.322356|30.152879',
         company_name: '杭州浩沅科技有限责任公司',
         telephone: '0571-82356956',
+        mapContainerID: 'map-content',//地图容器的id
+
     },
 
     isCanLoadMap: true,//是否能够加载地图
@@ -25,17 +27,16 @@ var information = {
 
     //调用地图进行初始化地图，并设置地图
     loadBaiduMap: function(){
-        var self = this;
-        console.log(self, '================>>>>', self._options['company_name']);
+        var self = information;
         var company_name = self._options.company_name;
         var telephone = self._options.telephone;
+        var mapContainerID = self._options.mapContainerID;
         var zoom = 18;
         var points = self._options.company_latitude_longitude;
-
         if(!self.isCanLoadMap) return;//只有能够加载地图的时候才加载
         //==============   1、由于无法接收到回调函数，启动脉搏进行手动检测   ===================
         if(typeof(BMap) === 'undefined' || typeof(BMap.Map) ==='undefined'){
-            console.log("地图服务还没有完全加载，正在加载...，等待时间：%dms",this.loadMapTime);
+            // console.log("地图服务还没有完全加载，正在加载...，等待时间：%dms",this.loadMapTime);
             self.loadMapTime *= 1.5;//脉搏逐渐减弱
             if(self.loadMapTime > 10000){//如果还没有加载出来，那么可能是网络错误
                 self.loadBMapScript();
@@ -87,8 +88,7 @@ var information = {
         //==============  2、创建地图实例   ================================================
         var initData = mapDateArr.initData;
         //在百度地图容器中创建一个地图,并设定地图的中心点和坐标并将地图显示在地图容器中
-        var map = new BMap.Map("map-content");
-        console.log(map, initData,'==============');
+        var map = new BMap.Map(mapContainerID);
         map.centerAndZoom(new BMap.Point(...initData.point.split("|")),initData.zoom);
 
         //==============  3、设置地图控件与事件   ==========================================
@@ -102,10 +102,7 @@ var information = {
         map.addControl(new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1}));//向地图中添加缩略图控件
         map.addControl(new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT}));//向地图中添加比例尺控件
 
-
-
         //==================  4、创建marker   =============================================
-
         for(var i=0;i<markerArr.length;i++){
             var json = markerArr[i];
             var point = new BMap.Point(...json.point.split("|"));

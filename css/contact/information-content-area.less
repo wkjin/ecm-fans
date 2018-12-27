@@ -1,5 +1,6 @@
 // 首页的内容区域的样式文件
 .content-area {
+    min-height: 85vh;
     .content-center{
         overflow: hidden;
         padding: 0 0 2em 0;
@@ -27,7 +28,7 @@
             display: flex;
             > a{
                 display: block;
-                border: 1px solid @tagBlack;
+                border: 1px solid @borderBlack;
                 border-right-width: 0;
                 padding: 0 1em;
                 flex-grow: 1;
@@ -50,7 +51,8 @@
             background: @contactBackground;
             display: flex;
             justify-items: stretch; 
-            color: @black;;        
+            color: @black;
+            min-height: 45vh;       
             > div{
                 display: block;
                 width: 50%;
@@ -66,13 +68,17 @@
                     }
                     > div.agent-area{
                         display: block;
-                        background: red;
                         padding: 0.5em 0;
                     }
                     
                 }
-                &.right{
-                    background: lightblue;
+                &.right{ 
+                    padding: 0;
+                    .map-content{
+                        width: 100%;
+                        height: 100%;
+                        
+                    }
                 }
             }
         }

@@ -285,10 +285,14 @@
                 min-width: 100%;
                 /* white-space:nowrap; */
                 position: relative;
-                font-size: 0;
+                font-size: 14px;
+                &::after{
+                    .clearfix;
+                }
                 .news-item{
-                    font-size: 14px;
-                    display: inline-block;
+                    
+                    display: block;
+                    float: left;
                     width: 33.33%;
                     border-right: 2px solid @likeWhite;
                     border-bottom: 2px solid @likeWhite;
@@ -308,7 +312,7 @@
                         padding: 0.5em 1em 0em 1em;
                         > h4{
                             font-size: 18px;
-                            color: green;
+                            color: @primaryColor;
                             .ellipsis-row;
                         }
                         > p{
