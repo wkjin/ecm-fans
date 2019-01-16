@@ -1,0 +1,72 @@
+.joinus-content-area {
+    min-height: 85vh;
+    width: 1080px;
+    margin: 0 auto 34px;
+    .content-center{
+        overflow: hidden;
+        padding: 0 0 2em 0;
+        background-color: @littleBlack;
+        //banner图
+        .banner-area{
+            width: 100%;
+            height: 300px;
+            > img{
+                height: 100%;
+                min-width: 100%;
+                position: relative;
+                display: inline-block;
+                left: 50%;
+                transform: translateX(-50%);
+                *left: 0;
+            }
+        }
+        .choice-box{
+            width: 100%;
+            height: 48px;
+            line-height: 48px;
+            border: 1px solid #ccc;
+            border-top: 0;
+            display: flex;
+            justify-content: space-between;
+            >a{
+                display: inline-block;
+                width: 50%;
+                text-align: center;
+                &:hover{
+                    color: green;
+                }
+            }
+            >a:first-child{
+                border-right: 1px solid #ccc;
+                color: green;
+            }
+        }
+        //职业发展
+        .develop{
+            width: 100%;
+            padding-top: 28px;
+            .rule{
+                margin: 10px 0;
+                font-size: 14px;
+                padding: 0;
+                letter-spacing: .1ch;
+                >span{
+                    font-weight: bold;
+                }
+                .rule-s{
+                    list-style: none;
+                    margin-left: 18px;
+                }
+                .rule-t{
+                    margin-left: 18px;
+                }
+            }
+        }
+        //社会招聘
+        .invite{
+            width: 140px;
+            margin: 168px auto 0;
+            display: none;
+        }
+    }
+}
