@@ -1,0 +1,63 @@
+@import './common-common.less';//引入公共的less文件
+
+@secondBackgroundGray: #f6f6f6;//灰色背景
+
+.container{
+    background: @secondBackgroundGray;
+}
+
+//banner的样式
+.banner-area{
+    width: 100%;
+    height: 300px;    
+    background-color: @defaultBackground;
+    .content-center{
+        height: 100%;
+        img {
+            height: 100%;
+            position: relative;
+            max-width: 100%;
+            left: 50%;
+            *left: 0;
+            transform: translateX(-50%);
+        } 
+    }
+}
+
+//二级导航
+.second-nav{
+    height: 60px;
+    background-color: @defaultBackground;
+    .content-center{
+        display: flex;
+        line-height: 60px;
+        font-size: 16px;
+        height: 100%;
+        > span{
+            display: block;
+            flex-grow: 1;
+            text-align: center;
+            border-width: 1px 0 1px 1px;
+            border-style: solid;
+            border-color: #f0f0f0;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: transform 0.5s;
+            &:last-child{
+                border-right-width: 1px;
+            }
+            &.second-nav-select{
+                color: @aTagHoverColor;
+                border-bottom-width: 0;
+                background-color: @secondBackgroundGray;
+                border-width: 0;
+                border-radius: 5px;
+            }
+            &:hover{
+                color: @aTagHoverColor;
+            }
+        }
+    }
+}
+
+

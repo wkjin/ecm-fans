@@ -1,0 +1,110 @@
+//功能：公共的clas、id与变量定义
+
+//START==========  1、变量  ==================
+@minWidth: 1200px;//页面的最小宽度
+
+@defaultFontColor: #333333;
+@primaryColor: #4395ff;
+@defaultBackground: #ffffff;
+@defaultBorderRadus: 3px;
+@defaultBorder: 1px solid #fafafa;
+@aTagHoverColor: #4395ff;
+
+@black3: #333333;
+@black6: #666666;
+@black9: #999999;
+@blackC: #cccccc;
+@blackE: #eeeeee;
+@blackF5: #F5F5F5;
+@blackFb: #fbfbfb;
+
+//END============ 变量 =======================
+
+
+//START==========  2、公共class、id  ==========
+.clearfix{
+    content: '';
+    width: 0;
+    height: 0;
+    display: block;
+    clear: both;
+}
+ 
+// 图片无法拖拽与选中
+.imgUnHandle{
+    user-drag: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;
+    -khtml-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none; 
+    user-select: none;
+}
+
+//滚动条没有颜色
+.scrollbarNoColor{
+    scrollbar-3dlight-color: transparent;
+    scrollbar-darkshadow-color: transparent;
+    scrollbar-highlight-color: transparent;
+    scrollbar-shadow-color: transparent;
+    scrollbar-arrow-color: transparent;
+    scrollbar-face-color: transparent;
+    scrollbar-track-color: transparent;
+    scrollbar-base-color: transparent;
+    scroll-behavior: smooth;
+}
+
+// 一行省略号
+.ellipsis-row{
+    .ellipsis(1);
+}
+
+ // 两行省略号
+ .ellipsis-row-two{
+     .ellipsis(2);
+ }
+ 
+ /* 多行省略 */
+ .ellipsis(@row) {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: @row;
+    -webkit-box-orient: vertical;
+}
+
+ //before、after的统一样式
+.before-after{
+    content: '';
+    display: block;
+}
+
+//after 或者before使用fontawesome填充（使用定位）
+.font-awesome-before-after{
+    content: '';
+    display: block;;
+    position: absolute;
+    font-family: FontAwesome;
+    font-size: 48px;
+    height: 1em;
+    width: 1em;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: @black9;
+    cursor: pointer;
+    display: none;
+    border-radius: 1em;
+}
+// 左箭头
+.angle-left{
+    content: "\f104";
+}
+// 右箭头
+.angle-right{
+   content: "\f105";
+}
+//END============ 公共class、id ===============

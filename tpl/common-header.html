@@ -1,0 +1,38 @@
+<div class="content-center">
+    <div class="header-left">
+        <a class="logo-area" href="/">
+            <script id="js-header-logo" type="text/html">
+                <img src="./image/logo.png">
+            </script>
+        </a>
+    </div>
+    <div class="header-right">
+        <div class="nav-top">
+            <button class="js-language-cn" data-language="CN">中文</button>
+            <button class="js-language-en" data-language="EN">English</button>
+        </div>
+        <div class="nav-bottom">
+            <ul class="nav-list">
+                <!-- 头部菜单模板 -->
+                <script id="js-header-category" type="text/html">
+                    {{each listData it i}}
+                        {{if it.is_index === '1'}}
+                        <li>
+                            <a href="{{it.url}}">{{it.name}}</a>
+                            {{if it._child.length > 0}}
+                            <div class="nav-drop-down">
+                                {{each it._child ii}}
+                                    {{if ii.is_index === '1'}}
+                                    <a href="{{ii.url}}">{{ii.name}}</a>
+                                    {{/if}}
+                                {{/each}}
+                            </div>
+                            {{/if}}
+                        </li>
+                        {{/if}}
+                    {{/each}}
+                </script>
+            </ul>
+        </div>
+    </div>
+</div> 

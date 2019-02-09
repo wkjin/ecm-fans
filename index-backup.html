@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=0.45,minimum-scale=0.45,maximum-scale=1.5,user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>杭州浩沅科技有限公司</title>
+    <link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/swiper.min.css">
+    <link rel="stylesheet/less" href="./less/common-index.less?v=1.02">
+    <script src="./assets/less.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header"></div>
+        <div class="content-area">
+            <!-- Slider main container -->
+            <div class="swiper-container test" style="height: 500px;background: lightblue;">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">Slide 1</div>
+                    <div class="swiper-slide">Slide 2</div>
+                    <div class="swiper-slide">Slide 3</div>
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+                <!-- If we need scrollbar -->
+                <!-- <div class="swiper-scrollbar"></div> -->
+            </div>
+        </div>
+        <!-- <div class="footer"></div> -->
+    </div>
+</body>
+<script src="./assets/jquery-3.3.1.min.js"></script>
+<script src="./assets/swiper.min.js"></script>
+<script src="./js/common-header.js"></script>
+<!-- <script src="./js/index/content-area.js"></script> -->
+<script src="./js/common-footer.js"></script>
+<script>
+    $(function(){
+        var mySwiper = new Swiper('.test', {
+            autoplay: {
+                delay: 5000,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'bullets',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            on: {
+                init: function () {
+                  console.log('swiper initialized');
+                },
+                click: function(index){
+                    console.log(arguments, index);
+                    
+                },
+                slideChange: function(){
+                    console.log('change');
+                }
+            },
+            speed: 1000,
+            spaceBetween: 0,
+            loop: true
+        });
+        /* $('swiper-button-next').off('click').on('click', function(){
+
+
+        });
+        $('swiper-button-prev').off('click').on('click', function(){
+
+            
+        }); */
+    });
+</script>
+</html>

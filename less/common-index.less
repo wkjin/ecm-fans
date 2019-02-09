@@ -1,0 +1,98 @@
+/**
+    @function: 批量定义样式已经头部与尾部页面
+    @author: wkj
+    @time: 2019.1.17
+*/
+@import './common-common.less';
+html ,body, div, h1, h2, h2, h4, h5, h6, span, ul, li, p, footer, header, img, a{
+    padding: 0;
+    margin: 0; 
+    box-sizing: border-box;
+    font-family: "Microsoft Yahei UI", "Microsoft YaHei","Helvetica Neue", Helvetica, Arial,SimSun, SimHei, "宋体", simsun, sans-serif;	
+} 
+
+a{
+    text-decoration: none;
+    color: #333333;
+    background-color: transparent;
+}
+
+.bottom-loadding{
+    display: none;
+    width: 100%;
+    height: 2em;
+    margin-top: 1em;
+    text-align: center;
+    line-height: 2em;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    color: #aaaaaa;
+}
+
+img{
+    border-width: 0;
+    .imgUnHandle;
+}
+
+ /* 自定义滚动条的样式 */
+::-webkit-scrollbar{
+    width: 0;
+    height: 100px;
+    background-color: #F5F5F5;
+}
+  
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3);
+    border-radius: 2px;
+    background-color: #F5F5F5;
+}
+  
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb{
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.3);
+    background-color: #F5F5F5;
+}
+
+body{
+    background-color: @defaultBackground;
+}
+//内容区域样式定义
+.container{
+    min-width: @minWidth;
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0 auto;
+    overflow-y: scroll;
+    > div{//包含 header content-area footer
+        width: 100%;
+        &.content-area{
+            > div{//内容区域的直接下级，也就是内容模块
+                width: 100%;
+                > div.content-center{//内容部分
+                    &:extend(.container .content-center);
+                }
+            }
+        }
+    }
+    //定义内容区域
+    .content-center{
+        width: @minWidth;
+        margin: 0 auto;
+    }
+}
+
+
+
+
+//引入页面头部与尾部页面
+@import './common-header.less';
+@import './common-footer.less';
+
+//=================   基本的样式 ========================
+
+
+
+//banner下面二级导航的样式
+
