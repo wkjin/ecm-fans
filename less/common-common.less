@@ -9,12 +9,23 @@
 @defaultBorderRadus: 3px;
 @defaultBorder: 1px solid #fafafa;
 @aTagHoverColor: #4395ff;
+@defaultHeaderColor: #c5e3f1;
 
+@black1: #111111;
+@black2: #222222;
 @black3: #333333;
+@black4: #444444;
+@black5: #555555;
 @black6: #666666;
+@black7: #777777;
+@black8: #898888;
 @black9: #999999;
+@blackA: #aaaaaa;
+@blackB: #bbbbbb;
 @blackC: #cccccc;
+@blackD: #dddddd;
 @blackE: #eeeeee;
+@blackF: #ffffff;
 @blackF5: #F5F5F5;
 @blackFb: #fbfbfb;
 
@@ -35,9 +46,13 @@
     user-drag: none;
     -webkit-user-drag: none;
     -khtml-user-drag: none;
-    -webkit-touch-callout: none; 
+    .textUnSelect();
+}
+
+.textUnSelect() {
+    -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none; 
+    -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none; 
     user-select: none;
@@ -58,7 +73,9 @@
 
 // 一行省略号
 .ellipsis-row{
-    .ellipsis(1);
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 
  // 两行省略号

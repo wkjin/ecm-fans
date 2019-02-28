@@ -4,20 +4,176 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=0.45,minimum-scale=0.45,maximum-scale=1.5,user-scalable=yes">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>杭州浩沅科技有限公司</title>
-    <link rel="stylesheet/less" href="./css/product-list.less?v=1.00">
+    <title>产品列表-杭州浩沅科技有限公司</title>
     <link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet/less" href="./less/common-index.less?v=1">
+    <link rel="stylesheet/less" href="./less/product-list.less">
     <script src="./assets/less.min.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="header"></div>
-        <div class="content-area"></div>
+        <div class="content-area">
+            <!-- banner图部分 -->
+            <div class="banner-area">
+                <div class="content-center js-category-banner-container">
+                    <script id="js-category-banner" type="text/html">
+                        <img src="{{categoryImgUrl}}">
+                    </script>
+                </div>
+            </div>
+            <!-- 二级导航部分 -->
+            <div class="website-local">
+                <div class="content-center js-second-category-container">
+                    <script id="js-second-category" type="text/html">
+                        <span>{{layoutData.youLocal}}：</span>
+                        <a class="no-event no-list">{{layoutData.productCenter}}</a> 
+                        <span class="fa fa-angle-right"></span>
+                        {{each categorysList it i}}
+                            <a href="{{it.url}}" data-index="{{i}}" >{{it.name}}</a>
+                        {{/each}}
+                     </script>
+                </div>
+            </div>
+            <!-- 产品搜索部分 -->
+            <div class="search-area">
+                <div class="content-center">
+                    <div class="fast-search js-product-category-container">
+                        <script id="js-product-category" type="text/html">
+                            <span class="title">{{layoutData.product_category}}</span>
+                            <div class="list-group">
+                                {{each categorysList it i}}
+                                    <a href="{{it.url}}">{{it.name}}</a>
+                                {{/each}}
+                            </div>
+                        </script>
+                    </div>
+                    <div class="category-search js-search-product-container">
+                        <script id="js-search-product" type="text/html">
+                            <div class="cs-item">
+                                <span>{{layoutData.impellerDiameter}}</span>
+                                <select>
+                                    {{each impellerDiameterArr it i}}
+                                    <option value="{{it.name}}">{{it.value}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="cs-item">
+                                <span>{{layoutData.airVolume}}</span>
+                                <select>
+                                    {{each airVolumeArr it i}}
+                                    <option value="{{it.name}}">{{it.value}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="cs-item">
+                                <span>{{layoutData.powerCategory}}</span>
+                                <select>
+                                    {{each powerCategoryArr it i}}
+                                    <option value="{{it.name}}">{{it.value}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="cs-item">
+                                <span>{{layoutData.voltage}}</span>
+                                <select>
+                                    {{each voltageArr it i}}
+                                    <option value="{{it.name}}">{{it.value}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="cs-item">
+                                <span>{{layoutData.frequency}}</span>
+                                <select>
+                                    {{each frequencyArr it i}}
+                                    <option value="{{it.name}}">{{it.value}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </script>
+                    </div>
+                    <div class="handle-bar">
+                        <a href="###">应用筛选</a>
+                        <a href="###">显示全部</a>
+                    </div>    
+                </div>
+            </div>
+            <!-- 产品列表部分 -->
+            <div class="product-list">
+                <div class="content-center">
+                    <a href="./product-detail.html">
+                        <div class="left">
+                            <img src="../../image/product-1.jpg" alt="">
+                        </div>
+                        <div class="right">
+                            <p>BAC12060-E230</p>
+                            <p>电压：AC-230V</p>
+                            <p>频率：50/60hz</p>
+                        </div>
+                    </a>
+                    <a href="./product-detail.html">
+                        <div class="left">
+                            <img src="../../image/product-1.jpg" alt="">
+                        </div>
+                        <div class="right">
+                            <p>BAC12060-E230</p>
+                            <p>电压：AC-230V</p>
+                            <p>频率：50/60hz</p>
+                        </div>
+                    </a>
+                    <a href="./product-detail.html">
+                        <div class="left">
+                            <img src="../../image/product-1.jpg" alt="">
+                        </div>
+                        <div class="right">
+                            <p>BAC12060-E230</p>
+                            <p>电压：AC-230V</p>
+                            <p>频率：50/60hz</p>
+                        </div>
+                    </a>
+                    <a href="###">
+                        <div class="left">
+                            <img src="../../image/product-1.jpg" alt="">
+                        </div>
+                        <div class="right">
+                            <p>BAC12060-E230</p>
+                            <p>电压：AC-230V</p>
+                            <p>频率：50/60hz</p>
+                        </div>
+                    </a>
+                    <a href="###">
+                        <div class="left">
+                            <img src="../../image/product-1.jpg" alt="">
+                        </div>
+                        <div class="right">
+                            <p>BAC12060-E230</p>
+                            <p>电压：AC-230V</p>
+                            <p>频率：50/60hz</p>
+                        </div>
+                    </a>
+                    <a href="###">
+                        <div class="left">
+                            <img src="../../image/product-1.jpg" alt="">
+                        </div>
+                        <div class="right">
+                            <p>BAC12060-E230</p>
+                            <p>电压：AC-230V</p>
+                            <p>频率：50/60hz</p>
+                        </div>
+                    </a>  
+                </div>              
+            </div>
+        </div>
         <div class="footer"></div>
     </div>
 </body>
+<script src="./js/common.js"></script>
+<script src="./js/server.js"></script>
+<script src="./js/storage.js"></script>
+<script src="./js/common-page.js"></script>
 <script src="./assets/jquery-3.3.1.min.js"></script>
-<script src="./js/common/header.js"></script>
-<script src="./js/product/list-content-area.js"></script>
-<script src="./js/common/footer.js"></script>
+<script src="./assets/template-web.js"></script>
+<script src="./js/common-header.js"></script>
+<script src="./js/common-footer.js"></script>
+<script src="./js/product-list.js"></script>
 </html>

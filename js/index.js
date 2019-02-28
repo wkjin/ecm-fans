@@ -3,10 +3,15 @@ var indexPage = {
         parentSelector: '.content-area',//父容器的选择器
 
         //banner图部分
-
+        bannerBodySelector: '.js-banner-swiper-body',//banner图body选择器
+        bannerContainerSelector: '.js-banner-swiper-container',//banner图swiper的容器选择器
+        bannerItemTemplateId: 'js-banner-swiper',//banner子项模板id
 
         //产品轮播图部分
-        productSelector: '.product-area .product-list',//产品展示图的容器
+        productCategoryTitleTemplateId: 'js-product-category-title',//产品栏目的标题模板id
+        productContainerSelector: '.js-product-list',//产品展示图的容器
+        productCategoryTitleContainer: '.js-product-category-title-container',//栏目标题容器
+        productCategoryTemplateId: 'js-product-category',//产品栏目的模板id
         productCanMoveClass: 'product-can-move',//产品展示图可以移动的class
         productMovingClass: 'product-moving',//产品正在移动的class
         productShowSelector: '.product-show',//产品展示图显示的选择器
@@ -14,12 +19,21 @@ var indexPage = {
         productShowNum: 4,// 产品展示的数量
         productShowItemTag: 'a',//产品显示子项的tag名
 
-        //新闻咨询
-        newsSelector: '.news-area',//新闻咨询容器
-        newsDirectionClass: 'disabled',//新闻咨询方向按钮禁止按钮的class
-        newsCanMoveSelector: '.news-can-move-area',//新闻可以移动容器的选择器
-        newsAnimateTime: 500,//新闻展示图的过渡动画时间（ms）
-        newsShowNum: 3,//新闻显示的条目 
+        //浩沅课堂
+        haoyuanClassroomTitleContainerSelector: '.js-haoyuan-classroom-title-container',
+        haoyuanClassroomTitleTemplateId: 'js-haoyuan-classroom-title',
+        haoyuanClassroomContainerSelector: '.js-haoyuan-classroom-container',
+        haoyuanClassroomTemplateId: 'js-haoyuan-classroom',
+
+        //新闻资讯
+        newsTitleContainerSelector: '.js-news-title-container',//新闻咨询标题容器选择器
+        newsTitleTemplateId: 'js-news-title',//新闻咨询标题模板id
+        newsListContainerSelector: '.js-news-list-container',//新闻列表容器选择器
+        newsListTemplateId:  'js-news-list',//新闻列表的模板id
+
+        //关于公司
+        aboutCompanyInfoContainerSelector: '.js-company-info-container',
+        aboutCompanyInfoTemplateId: 'js-company-info',//关于公司模板id
 
     },
 
@@ -29,22 +43,136 @@ var indexPage = {
     _productNum: 0,//产品的数量
     _showProductIndex: 0,//显示产品的索引
     _productTimer: null,//product动画的计时器
+    
+    _bannerSwiper: null,//保存banner图的swiper实例
+    
 
     _initData: function(){
         var self = this;
+
+        //检查依赖，并抛出异常（不需要在本类初始化的类）
+        if(typeof commonEnv !== 'object' || commonEnv === null){
+            throw new Error('commonEnv是index.js依赖的对象，环境类（从./common.js中导入）');
+        }
+        if(typeof storage !== 'object' || storage === null){
+            throw new Error('storage是index.js依赖的对象，仓库变量（从./storage.js中导入）');
+        }
+        if(typeof commonPage !== 'object' || commonPage === null){
+            throw new Error('commonPage是index.js依赖的对象，公共页面对象（./js/common-page.js导入）');
+        }
+        if((typeof template !== 'object' && typeof template !== 'function')|| template === null){
+            throw new Error('template是index.js依赖的对象，模板替代类（./assets/template-web.js导入）');
+        }
+        if((typeof Swiper !== 'object' && typeof Swiper !== 'function') || Swiper === null){
+            throw new Error('Swiper是index.js依赖的对象，轮播图类（./assets/swiper.min.js导入）');
+        }
+        if(typeof server !== 'object' || server === null){
+            throw new Error('server是index.js依赖的对象，服务类（从 ./server.js中导入）');
+        }
+
+        //初始基本对象
         self._parentObj = $(self._options.parentSelector);
 
+        //添加语言监控类（为了保持数据的最新，只有栏目、碎片数据做了缓存，其他数据根据语言变化获取最新的数据）
+        commonEnv.addListenLanguageChange(function(language){
+            self._fullHtmlGroup();
+        });
+
+        self._fullHtmlGroup();
+
+        //添加碎片监听事件（已经集成了语言变化）
+        commonPage.addListenFragment(function(fragmentValueData, version, layoutData, fragmentData){
+            /* console.log(fragmentValueData, version, layoutData, fragmentData, '碎片变化监听'); */
+            self._fullBanner();//banner图变化
+            self._fullAboutCompany(fragmentValueData);//填充关于公司
+        });
+
+
         //产品展示图
-        self._productParentObj = $(self._options.productSelector);
-        self._productNum =  self._parentObj.find(self._options.productSelector).find('> a').length;
-        //生产产品展示的轮播图
-        self._generateProductShow();
+        self._productParentObj = $(self._options.productContainerSelector);
+        self._productNum =  self._parentObj.find(self._options.productContainerSelector).find('> a').length;
     },
 
+    //填充html的组（语言变化，需要跟随变化）
+    _fullHtmlGroup: function(){
+        var self = this;
+        self._fullProduct();//填充产品数据
+        self._fullNewsList();//填充新闻资讯数据
+        self._fullHaoyuanClassroom();//填充浩沅课堂
+    },
+
+    //生成banner图
+    _fullBanner: function(){
+        var self = this;
+        self._parentObj.find(self._options.bannerContainerSelector).html(template(self._options.bannerItemTemplateId, {
+            bannerList: commonPage.splitFragment('home_broadcast', '|',  '', false)
+        }));
+        if(self._bannerSwiper !== null){
+            self._bannerSwiper.destroy();//如果已经初始化过的，先销毁在重新初始化
+        }
+        
+        self._bannerSwiper = new Swiper(self._options.bannerBodySelector, {
+            autoplay: {
+                delay: 5000,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'bullets',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            on: {
+                init: function () {
+                  /* console.log('swiper initialized'); */
+                },
+                click: function(index){
+                    /* console.log(arguments, index); */
+                },
+                slideChange: function(){
+                   /*  console.log('change'); */
+                }
+            },
+            speed: 1000,
+            spaceBetween: 0,
+            loop: true
+        });
+    },
+
+    //填充产品栏目的标题
+    _fullProductTitle: function(){
+        var self = this;
+        self._parentObj.find(self._options.productCategoryTitleContainer).html(template(self._options.productCategoryTitleTemplateId, {
+            layoutData: storage.get('layoutData')
+        }));
+    },
+    //生成产品轮播图
+    _fullProduct: function(){
+        var self = this;
+        server.getCategorysByCondition({pid: 6, is_index: 1}, function(res){
+            //填充标题
+            self._fullProductTitle();//填充产品标题
+            if(res.status === 1){//获取数据成功
+                var productCategoryName = 'productCategoryList';
+                storage.set(productCategoryName, res.data, false);
+                self._parentObj.find(self._options.productContainerSelector).html(template(self._options.productCategoryTemplateId, {
+                    productCategoryList: storage.get(productCategoryName)
+                }));
+                //记录条数
+                self._productNum =  self._parentObj.find(self._options.productContainerSelector).find('> a').length;
+                //生产产品展示的轮播图
+                self._generateProductShow();
+            }else{
+                console.error(res.message);
+            }
+        });
+    },
     //生成产品展示图的轮播
     _generateProductShow: function(){
         var self = this;
-        var parentObj = self._parentObj.find(self._options.productSelector);
+        var parentObj = self._parentObj.find(self._options.productContainerSelector);
         //根据数量放在不同的product-show进行待显示与显示
 
         //把前面四张产品图放在显示的div中
@@ -56,15 +184,76 @@ var indexPage = {
         parentObj.prepend(showObj);
         parentObj.addClass(self._options.productCanMoveClass);
     },
+
+    //新闻资讯标题
+    _fullNewsTitle: function(){
+        var self = this;
+        self._parentObj.find(self._options.newsTitleContainerSelector).html(template(self._options.newsTitleTemplateId, {
+            layoutData: storage.get('layoutData')
+        }));
+    },
+    //新闻资讯内容
+    _fullNewsList: function(){
+        var self = this;
+        server.getArticles({category_id: 13, pageSize: 8}, function(res){
+            self._fullNewsTitle();
+            if(res.status === 1){//获取数据成功
+                var newsListName = 'indexNewsList';
+                storage.set(newsListName, res.data, false);
+                var newsData = storage.get(newsListName);
+                self._parentObj.find(self._options.newsListContainerSelector).html(template(self._options.newsListTemplateId, {
+                    newsList1: newsData.slice(0, 4),
+                    newsList2: newsData.slice(4, 8),
+                    news_thumb: storage.get('fragmentData').news_thumb.value
+                }));  
+            }else{
+                console.error(res.message);
+            }
+        });
+    },
+
+    //浩沅课堂
+    _fullHaoyuanClassroomTitle: function(){
+        var self = this;
+        self._parentObj.find(self._options.haoyuanClassroomTitleContainerSelector).html(template(self._options.haoyuanClassroomTitleTemplateId, {
+            layoutData: storage.get('layoutData')
+        }));
+    }, 
+    _fullHaoyuanClassroom: function(){
+        var self = this;
+        server.getArticles({category_id: 14, pageSize: 9}, function(res){
+            self._fullHaoyuanClassroomTitle();
+            if(res.status === 1){//获取数据成功
+                var haoyuanClassroomName = 'indexHaoyuanClassroom';
+                storage.set(haoyuanClassroomName, res.data, false);
+                var haoyuanClassroom = storage.get(haoyuanClassroomName);
+                self._parentObj.find(self._options.haoyuanClassroomContainerSelector).html(template(self._options.haoyuanClassroomTemplateId, {
+                    haoyuanClassroom: haoyuanClassroom
+                }));  
+            }else{
+                console.error(res.message);
+            }
+        });
+    },
+
+    //填充关于公司
+    _fullAboutCompany: function(fragmentData){
+        var self = this;
+        setTimeout(function(){
+            self._parentObj.find(self._options.aboutCompanyInfoContainerSelector).html(template(self._options.aboutCompanyInfoTemplateId, {
+                fragmentData: fragmentData
+            }));
+        }, 500);
+    }, 
     
     _initEven: function(){
         var self = this;
 
         //产品图片展示
         //绑定产品图的点击事件
-        self._parentObj.find(self._options.productSelector).off('click').on('click', function(e){
+        self._parentObj.find(self._options.productContainerSelector).off('click').on('click', function(e){
             // var $this = $(this);
-            var $this = self._parentObj.find(self._options.productSelector);
+            var $this = self._parentObj.find(self._options.productContainerSelector);
             var tagName = e.target.tagName;
             if(tagName === 'IMG' || tagName === 'A'){
                 // alert('点击的是图片');
@@ -129,7 +318,7 @@ var indexPage = {
     //product切换
     _changeProduct: function(callback, isLeft){
         var self = this;
-        var productContainerObj = self._parentObj.find(self._options.productSelector);
+        var productContainerObj = self._parentObj.find(self._options.productContainerSelector);
         if(typeof isLeft !== 'boolean'){
             isLeft = !!isLeft;
         }
@@ -173,8 +362,3 @@ var indexPage = {
         self._initEnd();    
     }  
 };
-
-
-$(function(){
-    indexPage.init();
-});

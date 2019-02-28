@@ -20,7 +20,7 @@ var footerObj = {
         }
         self.commonPage = _commonPage;
 
-        //添加栏目监听事件
+        //添加碎片监听事件
         self.commonPage.addListenFragment(function(fragmentValueData, version, layoutData, fragmentData){
             self._fullHtml(fragmentValueData, layoutData);
         });

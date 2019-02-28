@@ -123,6 +123,13 @@ var commonTools = {
         }
     },
 
+    //获取请求参数
+    getRequestParam: function(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    },
+
     init: function(options){
         var self = this;
         Object.assign(self._options, options);
@@ -213,13 +220,6 @@ var commonEnv = {
           this.languageChangeCallBackArr.push(func);
           return true;
       }
-    },
-
-    //获取请求参数
-    getRequestParam: function(name){
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        if(r!=null)return  unescape(r[2]); return null;
     },
     
     init: function(options){

@@ -8,9 +8,10 @@ var server = {
         //获取信息的api定义
         getCategorysUrl: '/Home/category/getCategorys',//获取栏目列表
         getCategorysByConditionUrl: '/Home/category/getCategorysByCondition',//通过条件获取栏目信息
+        getCategorysByOrConditionUrl: '/Home/category/getCategorysByOrCondition',//通过条件获取栏目信息
         getFragmentsUrl: '/Home/fragment/getFragments',//获取碎片
         getArticlesUrl: '/Home/Article/getArticles',//获取文章列表
-        getArticleDetailUrl: '/Home/Product/getProductDetail',//获取文章详情
+        getArticleDetailUrl: '/Home/Article/getArticleDetail',//获取文章详情
         getProductsUrl: '/Home/Product/getProducts',//获取产品列表
         getProductDetailUrl: '/Home/Product/getProductDetail',//获取产品详情
     },
@@ -45,10 +46,13 @@ var server = {
     getCategorys: function(callback){
         this.requestAndCallBack(null, this._options.getCategorysUrl, callback);
     },
-
     //获取栏目信息通过条件
     getCategorysByCondition: function(condition, callback){
         this.requestAndCallBack(condition, this._options.getCategorysByConditionUrl, callback);
+    },
+    //获取栏目信息通过or条件
+    getCategorysByOrConditon: function(condition, callback){
+        this.requestAndCallBack(condition, this._options.getCategorysByOrConditionUrl, callback);
     },
 
     //获取碎片信息
@@ -68,7 +72,7 @@ var server = {
 
     //获取获取产品列表
     getProducts: function(search, callback){
-        this._requestAndCallBack(search, this._options.getProductsUrl, callback);
+        this.requestAndCallBack(search, this._options.getProductsUrl, callback);
     },
     
     //获取产品详情
@@ -88,7 +92,9 @@ var server = {
             url: url,
             data,
             callback: function(result){
-                callback(result);
+                if(typeof callback === 'function'){
+                    callback(result);
+                }
             }
         });
     },

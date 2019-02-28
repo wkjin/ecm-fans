@@ -83,7 +83,6 @@ var headerObj = {
         self._options.fragmentData = fragmentData;//保存数据最新
         if(typeof fragmentData === 'object' && fragmentData !== null){
             var html = template(self._options.headerLogoTemplateId, {logo: fragmentData.company_logo});
-            console.log(html);
             this._parentObj.find(self._options.navLogoContainerSelector).html(html);
         }
     },

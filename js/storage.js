@@ -219,7 +219,7 @@ var storage = {
                 };
                 for(var i=0,item=null;i<data.length;i++){
                     item = data[i];
-                    if(typeof item === 'object' && item !== null){
+                    if(typeof item === 'object' && item !== null ){
                         //对象（一般的对象与数组的时候需要递归接续）
                         var solveItem = self._classifyData(item);
                         _classifyData.cn.push(solveItem.cn);
@@ -253,9 +253,9 @@ var storage = {
                     }else{
                         cnItem = enItem = item;
                     }
-                    if(cnRe.test(i) && typeof cnItem !== 'undefined' && cnItem !== null){
+                    if(cnRe.test(i) && typeof cnItem !== 'undefined' && cnItem !== null && cnItem !== ''){
                         _classifyData.cn[i.replace(cnRe, "$1")] = cnItem;
-                    }else if(enRe.test(i) && typeof enItem !== 'undefined' && cnItem !== null){
+                    }else if(enRe.test(i) && typeof enItem !== 'undefined' && enItem !== null && enItem !== ''){
                         _classifyData.en[i.replace(enRe, "$1")] = enItem;
                     }else if(!enRe.test(i) && !cnRe.test(i)){//没有匹配的键名
                         if(typeof item === 'object'  && item !== null){

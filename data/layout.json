@@ -15,5 +15,31 @@
     "haoyuanClassroom_en": "Haoyuan Classroom",
     
     "newsAndInformation_cn": "新闻资讯",
-    "newsAndInformation_en": "News And Information"
+    "newsAndInformation_en": "News And Information",
+
+    "readMore_cn": "浏览更多",
+    "readMore_en": "More",
+
+    "youLocal_cn": "您的位置",
+    "youLocal_en": "Your position",
+
+    "product_category_cn": "产品类别",
+    "product_category_en": "Product Category",
+
+    "airVolume_cn": "风量[m³/h]",
+    "airVolume_en": "Air Volume",
+
+    "powerCategory_cn": "电源类别",
+    "powerCategory_en": "Power Category",
+
+    "voltage_cn": "电压[V]",
+    "voltage_en": "voltage",
+
+    "frequency_cn": "频率[Hz]",
+    "frequency_en": "frequency",
+
+    "impellerDiameter_cn": "叶轮直径",
+    "impellerDiameter_en": "Impeller Diameter"
+     
+     
 }

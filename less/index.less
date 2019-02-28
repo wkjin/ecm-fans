@@ -6,319 +6,322 @@
     background-color: @indexBackgroundGray;
 }
 
-//banner的样式
-.banner-area{
-    width: 100%;
-    height: 400px;
-    background: #f6f6f6;
-    .content-center{
-        height: 100%;
-        > div{
-            width: 100%;
+//内容部分
+.content-area{
+    //banner的样式
+    .banner-area{
+        width: 100%;
+        height: 400px;
+        background: #f6f6f6;
+        .content-center{
             height: 100%;
-            img {
+            > div{
+                width: 100%;
                 height: 100%;
-                position: relative;
-                max-width: 100%;
-                left: 50%;
-                *left: 0;
-                transform: translateX(-50%);
-            }
-        }    
+                img {
+                    height: 100%;
+                    position: relative;
+                    max-width: 100%;
+                    left: 50%;
+                    *left: 0;
+                    transform: translateX(-50%);
+                }
+            }    
+        }
     }
-}
 
-/* 标题栏 */
-.category-title {
-    display: block;
-    line-height: 2.8em;
-    height: 2.8em;
-    margin-top: 1.5em;
-    font-size: 16px;
-    border-bottom: 2px solid #c5e3f1;
-    border-top-left-radius: @defaultBorderRadus;
-    border-top-right-radius: @defaultBorderRadus;
-    &:after{
-        .clearfix;
-    }
-    > a{
+    /* 标题栏 */
+    .category-title {
         display: block;
-        letter-spacing: 1px;
-        font-weight: 600;
-        height: 100%;
-        padding: 0 1em;
-        color: @black6;
-        cursor: pointer;
+        line-height: 2.8em;
+        height: 2.8em;
+        margin-top: 1.5em;
+        font-size: 16px;
+        border-bottom: 2px solid #c5e3f1;
         border-top-left-radius: @defaultBorderRadus;
         border-top-right-radius: @defaultBorderRadus;
-        &.category-title-name{
-            float: left;
-            border-bottom: 4px solid #c5e3f1;
-            margin-top: 3px;
-            cursor: text;
+        &:after{
+            .clearfix;
         }
-        &.category-title-more{
-            float: right;
-            font-size: 14px;
-            &:hover{
-                color: @black3;
-            }
-        }
-    }
-}
-
-//产品部分
-.product-area{
-    background: #ffffff;
-    margin-top: 1em;
-    .content-center{
-        .product-list{
-            width: 100%;
-            height: 300px;
-            left: 0;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            &::before,
-            &::after{
-                .font-awesome-before-after;
-                font-size: 36px;
-            }
-            &::before{
-                .angle-left;
-                left: 0;
-            }
-            &::after{
-                .angle-right;
-                right: 0;
-            }
-            &:hover::before,
-            &:hover::after{
-                color: @black6;
-                background-color: rgba(250, 250, 250, .8);
-                display: block;
-            }
-            // 产品的连接已经填充到.product-show，已经可以移动的时候
-            &.product-can-move{
-                > div.product-show{
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    top: 0;
-                    &:first-child{
-                        left: 0;
-                    }
-                    &:not(:first-child){
-                        left: 100%;
-                    }
-                    > a {
-                        // 继承图片直接展示的样式，达到统一控制样式的作用
-                        &:extend(.product-area .content-center .product-list > a);
-                        &:last-child{
-                            &:extend(.product-area .content-center .product-list > a:nth-child(4));
-                        }
-                        &:hover{
-                            &:extend(.product-area .content-center .product-list > a:hover);
-                        }
-                        > img{
-                            &:extend(.product-area .content-center .product-list > a > img);
-                        }
-                        > p{
-                            &:extend(.product-area .content-center .product-list > a > p);
-                        }
-                    }
-                }
-                > a{
-                    display: none;
-                }
-            }
-            > div.product-show{
-                display: none;
-            }
-            > a{
-                height: 100%;
-                padding: 20px 0;
-                width: 25%;
-                float: left;
-                border-right: 2px solid @blackFb;
-                overflow: hidden;
-                color: @black6;
-                background: @defaultBackground;
-                &:nth-child(4){
-                    border-right-color: transparent;
-                }
-                &:hover{
-                    color: @aTagHoverColor;
-                }
-                > img{
-                    height: calc(~"100% - 2em");
-                    position: relative;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    .imgUnHandle;
-                }
-                > p{
-                    text-align: center;
-                    letter-spacing: 1px;
-                    height: 2em;
-                    line-height: calc(~"2em + 10px");
-                    /* border-top: 1px solid @black6; */
-                    .ellipsis-row;
-                    padding: 0 1em;
-                    display: block;
-                }
-            }
-        }
-    }
-}
-
-//新闻资讯
-.news-area{
-    background: @indexBackgroundGray;
-    padding-bottom: 1em;
-    .content-center{
-        .content-list{
-            width: 100%;
-            padding: 1em 0;
-            height: 12em;
-            display: flex;
-            justify-content: center;
-            align-content: space-between;
-            > div {
-                height: 100%;
-                line-height: 2em;
-                overflow: hidden;
-                &.thumb{
-                    width: 33.33%;
-                    padding: 0 0.5em;
-                    > img{
-                        width: 100%;
-                        position: relative;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        *top: 0;
-                        display: block;
-                        margin: 0 auto;
-                    }
-                }
-                &.classroom-item{
-                    flex-grow: 1;
-                    max-width: 33.33%;
-                    border-right: 2px solid @blackF5;
-                    padding-left: 1em;
-                    > a {
-                        display: block;
-                        .ellipsis-row;
-                        height: 2.5em;
-                        line-height: 2.5em;
-                        color: @black6;
-                        letter-spacing: 1px;
-                        &:hover{
-                            color: @aTagHoverColor;
-                        }
-                    }    
-                }
-            }
-        }    
-    }
-}
-
-//浩沅课堂
-.classroom-area{
-    background-color: @defaultBackground;
-    .content-center{
-        .content-list{
+        > a{
             display: block;
-            padding: 1em 0 2em 0;
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            .news-can-move-area{
-                min-width: 100%;
-                position: relative;
+            letter-spacing: 1px;
+            font-weight: 600;
+            height: 100%;
+            padding: 0 1em;
+            color: @black6;
+            cursor: pointer;
+            border-top-left-radius: @defaultBorderRadus;
+            border-top-right-radius: @defaultBorderRadus;
+            &.category-title-name{
+                float: left;
+                border-bottom: 4px solid #c5e3f1;
+                margin-top: 3px;
+                cursor: text;
+            }
+            &.category-title-more{
+                float: right;
                 font-size: 14px;
-                &::after{
-                    .clearfix;
+                &:hover{
+                    color: @black3;
                 }
-                .news-item{
+            }
+        }
+    }
+
+    //产品部分
+    .product-area{
+        background: #ffffff;
+        margin-top: 1em;
+        .content-center{
+            .product-list{
+                width: 100%;
+                height: 300px;
+                left: 0;
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+                &::before,
+                &::after{
+                    .font-awesome-before-after;
+                    font-size: 36px;
+                }
+                &::before{
+                    .angle-left;
+                    left: 0;
+                }
+                &::after{
+                    .angle-right;
+                    right: 0;
+                }
+                &:hover::before,
+                &:hover::after{
+                    color: @black6;
+                    background-color: rgba(250, 250, 250, .8);
                     display: block;
-                    float: left;
-                    width: 33.33%;
-                    border-right: 2px solid @blackF5;
-                    border-bottom: 2px solid @blackF5;
-                    padding: 0.5em;
-                    height: 22em;
-                    overflow: hidden;
-                    > img{
-                        border-radius: @defaultBorderRadus;
+                }
+                // 产品的连接已经填充到.product-show，已经可以移动的时候
+                &.product-can-move{
+                    > div.product-show{
                         display: block;
                         width: 100%;
-                        height: 12em;
-                    }
-                    > div{
-                        line-height: 2em;
-                        letter-spacing: 1px;
-                        padding: 0.5em 1em 0em 1em;
-                        > h4{
-                            font-size: 18px;
-                            color: @defaultFontColor;
-                            .ellipsis-row;
+                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                        &:first-child{
+                            left: 0;
                         }
-                        > p{
-                            padding-top: 0.5em;
-                            line-height: 2em;
-                            height: 6em;
-                            font-size: 14px;
-                            color: @black6;
-                            .ellipsis(3);
+                        &:not(:first-child){
+                            left: 100%;
+                        }
+                        > a {
+                            // 继承图片直接展示的样式，达到统一控制样式的作用
+                            &:extend(.content-area .product-area .content-center .product-list > a);
+                            &:last-child{
+                                &:extend(.content-area .product-area .content-center .product-list > a:nth-child(4));
+                            }
                             &:hover{
-                                color: @aTagHoverColor;
+                                &:extend(.content-area .product-area .content-center .product-list > a:hover);
+                            }
+                            > img{
+                                &:extend(.content-area .product-area .content-center .product-list > a > img);
+                            }
+                            > p{
+                                &:extend(.content-area .product-area .content-center .product-list > a > p);
                             }
                         }
                     }
-                }   
+                    > a{
+                        display: none;
+                    }
+                }
+                > div.product-show{
+                    display: none;
+                }
+                > a{
+                    height: 100%;
+                    padding: 20px 0;
+                    width: 25%;
+                    float: left;
+                    border-right: 2px solid @blackFb;
+                    overflow: hidden;
+                    color: @black6;
+                    background: @defaultBackground;
+                    &:nth-child(4){
+                        border-right-color: transparent;
+                    }
+                    &:hover{
+                        color: @aTagHoverColor;
+                    }
+                    > img{
+                        height: calc(~"100% - 2em");
+                        position: relative;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        .imgUnHandle;
+                    }
+                    > p{
+                        text-align: center;
+                        letter-spacing: 1px;
+                        height: 2em;
+                        line-height: calc(~"2em + 10px");
+                        /* border-top: 1px solid @black6; */
+                        .ellipsis-row;
+                        padding: 0 1em;
+                        display: block;
+                    }
+                }
             }
         }
     }
-}
 
-//公司信息区域
-.info-area{
-    background: @indexBackgroundGray;
-    padding: 1em  0;
-    .content-center{
-        @line: 5;
-        height: calc(~"2em + 1.8em * " @line);
-        padding: 1em 0;
-        margin: 1em 0;
-        display: flex;
-        overflow: hidden;
-        font-size: 15px;
-        border-top-left-radius: @defaultBorderRadus;
-        border-top-right-radius: @defaultBorderRadus;
-        > div{
-            display: block;
-        }
-        > div.left{
-            width: 33.33%;
-            padding: 0 0.5em;
-            > img{
+    //新闻资讯
+    .news-area{
+        background: @indexBackgroundGray;
+        padding-bottom: 1em;
+        .content-center{
+            .content-list{
                 width: 100%;
-                height: 100%;
-            }
-        }
-        > div.right{
-            .ellipsis(@line);
-            font-size: 17px;
-            height: calc(1.8em * @line);
-            width: 66.67%;
-            padding: 0 1em;
-            color: @black6;
-            letter-spacing: 1px;
-            text-indent: 2em;
-            line-height: 1.8em;
-            overflow: hidden;
+                padding: 1em 0;
+                height: 12em;
+                display: flex;
+                justify-content: center;
+                align-content: space-between;
+                > div {
+                    height: 100%;
+                    line-height: 2em;
+                    overflow: hidden;
+                    &.thumb{
+                        width: 33.33%;
+                        padding: 0 0.5em;
+                        > img{
+                            width: 100%;
+                            position: relative;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            *top: 0;
+                            display: block;
+                            margin: 0 auto;
+                        }
+                    }
+                    &.news-item{
+                        flex-grow: 1;
+                        max-width: 33.33%;
+                        border-right: 2px solid @blackF5;
+                        padding-left: 1em;
+                        > a {
+                            display: block;
+                            .ellipsis-row;
+                            height: 2.5em;
+                            line-height: 2.5em;
+                            color: @black6;
+                            letter-spacing: 1px;
+                            &:hover{
+                                color: @aTagHoverColor;
+                            }
+                        }    
+                    }
+                }
+            }    
         }
     }
+
+    //浩沅课堂
+    .classroom-area{
+        background-color: @defaultBackground;
+        .content-center{
+            .content-list{
+                display: block;
+                padding: 1em 0 2em 0;
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+                .classroom-list-area{
+                    min-width: 100%;
+                    position: relative;
+                    font-size: 14px;
+                    &::after{
+                        .clearfix;
+                    }
+                    .classroom-item{
+                        display: block;
+                        float: left;
+                        width: 33.33%;
+                        border-right: 2px solid @blackF5;
+                        border-bottom: 2px solid @blackF5;
+                        padding: 0.5em;
+                        height: 22em;
+                        overflow: hidden;
+                        > img{
+                            border-radius: @defaultBorderRadus;
+                            display: block;
+                            width: 100%;
+                            height: 12em;
+                        }
+                        > div{
+                            line-height: 2em;
+                            letter-spacing: 1px;
+                            padding: 0.5em 1em 0em 1em;
+                            > h4{
+                                font-size: 18px;
+                                color: @defaultFontColor;
+                                .ellipsis-row;
+                            }
+                            > p{
+                                padding-top: 0.5em;
+                                line-height: 2em;
+                                height: 6em;
+                                font-size: 14px;
+                                color: @black6;
+                                .ellipsis(3);
+                                &:hover{
+                                    color: @aTagHoverColor;
+                                }
+                            }
+                        }
+                    }   
+                }
+            }
+        }
+    }
+
+    //公司信息区域
+    .info-area{
+        background: @indexBackgroundGray;
+        padding: 1em  0;
+        .content-center{
+            @line: 5;
+            height: calc(~"2em + 1.8em * " @line);
+            padding: 1em 0;
+            margin: 1em 0;
+            display: flex;
+            overflow: hidden;
+            font-size: 15px;
+            border-top-left-radius: @defaultBorderRadus;
+            border-top-right-radius: @defaultBorderRadus;
+            > div{
+                display: block;
+            }
+            > div.left{
+                width: 33.33%;
+                padding: 0 0.5em;
+                > img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            > div.right{
+                .ellipsis(@line);
+                font-size: 17px;
+                height: calc(1.8em * @line);
+                width: 66.67%;
+                padding: 0 1em;
+                color: @black6;
+                letter-spacing: 1px;
+                text-indent: 2em;
+                line-height: 1.8em;
+                overflow: hidden;
+            }
+        }
+    }    
 }

@@ -1,6 +1,11 @@
 /* 页面公共类 */
 var commonPage = {
     _options: {
+        //引入类
+        commonEnv: null,//环境类（从./common.js中导入）
+        server: null,//服务类（从 ./server.js中导入）
+        storage: null,//使用的仓库（从./storage.js中引入）
+
         layoutDataName: 'layoutData',//布局数据名字
         layoutVersionName: 'layoutDataVersion',//布局数据变化版本变化（用于监控）
 
@@ -9,11 +14,6 @@ var commonPage = {
 
         fragmentDataName: 'fragmentData',//碎片数据保存名字
         fragmentVersionName: 'fragmentDataVesion',//碎片数据版本变化（用于监控）
-        
-        //引入类
-        commonEnv: null,//环境类（从./common.js中导入）
-        server: null,//服务类（从 ./server.js中导入）
-        storage: null,//使用的仓库（从./storage.js中引入）
         
         //内部使用配置
         isCache: true,//是否缓存
@@ -67,9 +67,9 @@ var commonPage = {
             //通知所有的数据进行改变
             console.log('这是commonPage添加监听语言变化', language);
             //通知数据变化
-            storage.set(self._options.layoutVersionName, '++');
-            storage.set(self._options.categoryVersionName, '++');
-            storage.set(self._options.fragmentVersionName, '++');
+            self.storage.set(self._options.layoutVersionName, '++');
+            self.storage.set(self._options.categoryVersionName, '++');
+            self.storage.set(self._options.fragmentVersionName, '++');
         });
 
         //添加监控
@@ -85,32 +85,32 @@ var commonPage = {
         var watch = {};
         watch[self._options.layoutVersionName] = function(value){//布局变化监听
             var listenList = self._listenQueueLayout;
-            var data = storage.get(self._options.layoutDataName);
+            var data = self.storage.get(self._options.layoutDataName);
             for(var i = 0; i< listenList.length; i++){
                 listenList[i](data, value);
             }
         };
         watch[self._options.categoryVersionName] = function(value){//栏目变化监听
             var listenList = self._listenQueueCategory;
-            var data = storage.get(self._options.categoryDataName);
+            var data = self.storage.get(self._options.categoryDataName);
             for(var i = 0; i< listenList.length; i++){
                 listenList[i](data, value);
             }
         };
         watch[self._options.fragmentVersionName] = function(value){//碎片变化监听
             var listenList = self._listenQueueFragment;
-            var fragmentData = storage.get(self._options.fragmentDataName);
+            var fragmentData = self.storage.get(self._options.fragmentDataName);
             var _fragmentData = {};//去掉多余的信息
             Object.keys(fragmentData).forEach(function(key){
                 _fragmentData[key] = fragmentData[key].value;
             });
-            var layoutData = storage.get(self._options.layoutDataName);
+            var layoutData = self.storage.get(self._options.layoutDataName);
             for(var i = 0; i< listenList.length; i++){
                 listenList[i](_fragmentData, value, layoutData, fragmentData);
             }
         };
         //添加仓库监控
-        storage.init({
+        self.storage.init({
             saveKeyList: saveKeyList,
             initData: initData,
             watch: watch
@@ -128,15 +128,15 @@ var commonPage = {
     getLayoutData: function(){
         var self = this;
         var layoutDataName = self._options.layoutDataName;
-        var layoutData = storage.get(layoutDataName);
+        var layoutData = self.storage.get(layoutDataName);
         if(typeof layoutData !== 'object' || layoutData === null){
             $.getJSON('../data/layout.json',function(data){
-                storage.set(layoutDataName, data, true).set(self._options.layoutVersionName, '++');
+                self.storage.set(layoutDataName, data, true).set(self._options.layoutVersionName, '++');
             });
         }else{
             //如果已经有值就可以通知布局数据修改
             setTimeout(function(){//等待主线程加载完毕
-                storage.set(self._options.layoutVersionName, '++');
+                self.storage.set(self._options.layoutVersionName, '++');
             }, 0);
         }
     },
@@ -155,12 +155,12 @@ var commonPage = {
     getCategoryData: function(){//如果没有保存数据，那么就获取，如果有就直接获取缓存
         var self = this;
         var categoryName = self._options.categoryDataName;
-        var categoryData = storage.get(categoryName);
+        var categoryData = self.storage.get(categoryName);
         if(!Array.isArray(categoryData)){
             self.server.init().getCategorys(function(res){
                 if(res.status === 1){//获取数据成功
                     //设置数据到仓库，并通知改变数据
-                    storage.set(categoryName, res.data, true).set(self._options.categoryVersionName, '++');
+                    self.storage.set(categoryName, res.data, true).set(self._options.categoryVersionName, '++');
                 }else{
                     console.error(res.message);
                 }
@@ -168,7 +168,7 @@ var commonPage = {
         }else{
             //如果已经有值就可以通知栏目修改
             setTimeout(function(){//等待主线程加载完毕
-                storage.set(self._options.categoryVersionName, '++');
+                self.storage.set(self._options.categoryVersionName, '++');
             }, 0);
         }
     },
@@ -188,19 +188,19 @@ var commonPage = {
         var self = this;
         //查看碎片是否加载
         var fragmentDataName = self._options.fragmentDataName;
-        var fragmentData = storage.get(fragmentDataName);
+        var fragmentData = self.storage.get(fragmentDataName);
         if(typeof fragmentData !== 'object' || fragmentData === null){
             server.getFragments(function(res){
                 if(res.status === 1){//获取数据成功
                     //设置数据到仓库，并通知改变数据
-                    storage.set(fragmentDataName, res.data, true).set(self._options.fragmentVersionName, '++');
+                    self.storage.set(fragmentDataName, res.data, true).set(self._options.fragmentVersionName, '++');
                 }else{
                     console.error(res.message);
                 }
             });
         }else{
             setTimeout(function(){//等待主线程加载完毕
-                storage.set(self._options.fragmentVersionName, '++');
+                self.storage.set(self._options.fragmentVersionName, '++');
             }, 0);
         }
     },
@@ -212,6 +212,36 @@ var commonPage = {
             return true;
         }else{
             return false;
+        }
+    },
+    //把碎片数据分隔
+    splitFragment: function(name, delimiter, fullIndex, isInsertBefore){
+        var self = this;
+        fullIndex = typeof fullIndex !== 'string'?'请选择':fullIndex;
+        isInsertBefore = typeof isInsertBefore === 'undefined'?true: !!isInsertBefore;
+        delimiter = typeof delimiter === 'string'?delimiter: '|';
+        var fragmentData = self.storage.get(self._options.fragmentDataName);
+        if(typeof fragmentData !== 'object' || fragmentData === null){
+            console.error('碎片获取失败');
+            return null;
+        }
+        var v = fragmentData[name];
+        if(typeof v === 'object' && v !== null){
+            vv = v.value;
+            var res = vv.split(delimiter);
+            var va = [];
+            for(var i=0,item=null;i<res.length;i++){
+                item = res[i];
+                va.push({name: item, value: item});
+            }
+            if(va[0].name === ''){
+                va[0].value = fullIndex;
+            }else if(isInsertBefore){
+                va.splice(0, 0, {name: '', value: fullIndex});
+            }
+            return va;
+        }else{
+            return null;
         }
     },
 
