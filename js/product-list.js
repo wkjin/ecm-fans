@@ -13,20 +13,30 @@ var pageContentArea={
         productCategoryContainerSelector: '.js-product-category-container',//产品类别的容器
         productCategoryTemplagteId: 'js-product-category',//产品类别的模板id
 
-        searchProductContainerSelector: '.js-search-product-container',//产品搜索的容器
-        searchProductTemplagteId: 'js-search-product',//产品搜索的模板id
+        //产品搜索条件
+        searchProductContainerSelector: '.js-search-product-container',//容器
+        searchProductTemplagteId: 'js-search-product',//模板id
+
+        //搜索操作栏
+        searchBarContainerSelector: '.js-search-product-handlebar-container',//容器
+        searchBarTemplateId: 'js-search-product-handlebar',//模板id
+        
 
         //二级导航的内容
         secondCategoryContentContainerSelector: '.js-second-category-content-container',//二级导航内容的容器
         secondCategoryContentTemplagteId: 'js-second-category-content',//二级导航的模板id
 
         aboutCategoryDataName: 'aboutCategoryData',//保持栏目数据的名字（用在仓库中）
-        aboutCategoryArticleDataName: 'aboutCategoryArticleData',//保持栏目文章数据的名字（用在仓库中）
+        productListDataName: 'productListData',//保持栏目产品列表数据的名字（用在仓库中）
     },
 
     $parent: null,//父类 jquery对象
     showCategoryData: null,//显示的栏目数据
     showCategoryIndex: 0,//显示的栏目的索引
+
+    //搜索条件
+    searchCondition: {},//搜索的条件
+    
 
     _mergeOptions: function(options){
         var self = this;
@@ -53,6 +63,28 @@ var pageContentArea={
 
         //初始基本对象
         self.$parent = $(self._options.parentSelector);
+
+        //获取url中的搜索条件
+        var frequency = commonTools.getRequestParam('frequency'), 
+        voltage = commonTools.getRequestParam('voltage'),   
+        power_category = commonTools.getRequestParam('power_category'),  
+        air_volume = commonTools.getRequestParam('air_volume'),  
+        impeller_diameter = commonTools.getRequestParam('impeller_diameter');
+        if(frequency !== null){
+            self.searchCondition['frequency'] = frequency;
+        }
+        if(voltage !== null){
+            self.searchCondition['voltage'] = voltage;
+        }
+        if(power_category !== null){
+            self.searchCondition['power_category'] = power_category;
+        }
+        if(air_volume !== null){
+            self.searchCondition['air_volume'] = air_volume;
+        }
+        if(frequency !== null){
+            self.searchCondition['impeller_diameter'] = impeller_diameter;
+        }
 
         //获取所选栏目
         var c = window.location.href.replace(/.*?#c=(\d+)$/, '$1');
@@ -119,17 +151,23 @@ var pageContentArea={
         var self = this;
         //填充产品类别
         self.$parent.find(self._options.searchProductContainerSelector).html(template(self._options.searchProductTemplagteId, {
-            impellerDiameterArr: commonPage.splitFragment('impeller_diameter'),
-            airVolumeArr: commonPage.splitFragment('air_volume'),
-            powerCategoryArr: commonPage.splitFragment('power_category'),
-            voltageArr: commonPage.splitFragment('voltage'),
-            frequencyArr: commonPage.splitFragment('frequency'),
-            atmosphericPressureArr: commonPage.splitFragment('atmospheric_pressure'),
-            speedArr: commonPage.splitFragment('speed'),
-            phaseNumberArr: commonPage.splitFragment('phase_number'),
-            specificationsArr: commonPage.splitFragment('specifications'),
+            impellerDiameterArr: commonPage.splitFragment('impeller_diameter', '|', layoutData.pleaseSelect),
+            airVolumeArr: commonPage.splitFragment('air_volume', '|', layoutData.pleaseSelect),
+            powerCategoryArr: commonPage.splitFragment('power_category', '|', layoutData.pleaseSelect),
+            voltageArr: commonPage.splitFragment('voltage', '|', layoutData.pleaseSelect),
+            frequencyArr: commonPage.splitFragment('frequency', '|', layoutData.pleaseSelect),
+            atmosphericPressureArr: commonPage.splitFragment('atmospheric_pressure', '|', layoutData.pleaseSelect),
+            speedArr: commonPage.splitFragment('speed', '|', layoutData.pleaseSelect),
+            phaseNumberArr: commonPage.splitFragment('phase_number', '|', layoutData.pleaseSelect),
+            specificationsArr: commonPage.splitFragment('specifications', '|', layoutData.pleaseSelect),
+            layoutData: layoutData,
+            condition: self.searchCondition
+        }));
+        //搜索栏
+        self.$parent.find(self._options.searchBarContainerSelector).html(template(self._options.searchBarTemplateId, {
             layoutData: layoutData
         }));
+
     },
 
     _initEven: function(){
@@ -139,6 +177,20 @@ var pageContentArea={
         self.$parent.find(self._options.secondCategoryContainerSelector).off('click').on('click', 'span', function(){
             var $this = $(this);
             self._selectSecondCategory($this.data('index'));
+        });
+
+        //搜素按钮
+        self.$parent.find(self._options.searchBarContainerSelector).off('click').on('click', 'a[data-handle]',function(e){
+            e.preventDefault();
+            var $this = $(this);
+            var handle = $this.data('handle');
+            if(handle === 'search'){
+
+            }else if(handle === 'searchAll'){
+                window.location.href = self.showCategoryData.url;
+            }else{
+                console.log('没有绑定处理');
+            }
         });
 
     },
@@ -159,24 +211,32 @@ var pageContentArea={
                 //修改栏目显示数据
                 self.showCategoryData = storage.get(self._options.aboutCategoryDataName)._child[index];
                 //通过栏目数据，获取所在栏目的文章
-                server.getArticleDetail({category_id: self.showCategoryData['id']},function(res){
+                server.getProducts(Object.assign({
+                    category_id: self.showCategoryData['id']}, 
+                    self.searchCondition
+                ),function(res){
                     if(res.status === 1){
-                        storage.set(self._options.aboutCategoryArticleDataName, res.data);
+                        console.log('获取的产品列表是： ' , res);
+                        storage.set(self._options.productListDataName, res.data);
                         //设置文章
-                        self._fullArticle();
+                        self._fullProductList();
                     }else{
-                        console.log('获取文章失败，请检查');
+                        console.log('获取产品列表失败，请检查');
                     }
                 });
             }
         });
     },
     /* 填充内容 */
-    _fullArticle: function(){
+    _fullProductList: function(){
         var self = this;
-        var data =  storage.get(self._options.aboutCategoryArticleDataName);
-        console.log(self.showCategoryData['id'], data);
-        self.$parent.find(self._options.secondCategoryContentContainerSelector).html(template(self._options.secondCategoryContentTemplagteId, {content: data.content}));
+        var data =  storage.get(self._options.productListDataName);
+        self.$parent.find(self._options.secondCategoryContentContainerSelector).html(template(
+            self._options.secondCategoryContentTemplagteId, {
+                data: data,
+                layoutData: storage.get('layoutData')
+            })
+        );
     },
 
     _initEnd: function(){

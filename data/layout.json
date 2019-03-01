@@ -39,7 +39,20 @@
     "frequency_en": "frequency",
 
     "impellerDiameter_cn": "叶轮直径",
-    "impellerDiameter_en": "Impeller Diameter"
+    "impellerDiameter_en": "Impeller Diameter",
+
+    "pleaseSelect_cn": "请选择",
+    "pleaseSelect_en": "please select",
+    
+    "applyCondition_cn": "应用筛选",
+    "applyCondition_en": "Appy Condition",
+
+    "showAll_cn": "显示全部",
+    "showAll_en": "Show All",
+
+    "noDataText_cn": "查询不到没有任何产品",
+    "noDataText_en": "Query Without Data"
+
      
      
 }

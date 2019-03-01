@@ -12,6 +12,7 @@ var server = {
         getFragmentsUrl: '/Home/fragment/getFragments',//获取碎片
         getArticlesUrl: '/Home/Article/getArticles',//获取文章列表
         getArticleDetailUrl: '/Home/Article/getArticleDetail',//获取文章详情
+        
         getProductsUrl: '/Home/Product/getProducts',//获取产品列表
         getProductDetailUrl: '/Home/Product/getProductDetail',//获取产品详情
     },

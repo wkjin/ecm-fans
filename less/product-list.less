@@ -131,6 +131,11 @@
                 text-align: right;
                 > a{
                     &:extend(.content-area .search-area .content-center .fast-search .list-group a);
+                    button{
+                        border: 0;
+                        background: transparent;
+                        color: inherit;
+                    }
                 }
             }    
         }
@@ -152,10 +157,12 @@
                 height: 200px;
                 float: left;
                 overflow: hidden;
+                border: 1px solid @blackF5;
                 .left{
                     width: 50%;
                     height: 100%;
                     float: left;
+                    background-color: @blackF5;
                     > img{
                         width: 100%;
                         height: auto;
