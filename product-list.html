@@ -108,7 +108,7 @@
                     <script id="js-second-category-content" type="text/html">
                         {{if data !== null && data.length > 0}}
                         {{each data it i}}
-                        <a href="./product-detail.html">
+                        <a href="./product-detail.html?id={{it.id}}">
                             <div class="left">
                                 <img src="{{it.thumb}}">
                             </div>
