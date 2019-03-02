@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=0.45,minimum-scale=0.45,maximum-scale=1.5,user-scalable=yes">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>产品详情-杭州浩沅科技有限公司</title>
+    <title>招聘-杭州浩沅科技有限公司</title>
     <link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet/less" href="./less/common-index.less">
-    <link rel="stylesheet/less" href="./less/product.less">
+    <link rel="stylesheet/less" href="./less/second.less">
     <script src="./assets/less.min.js"></script>
 </head>
 <body>
@@ -23,29 +23,20 @@
                 </div>
             </div>
             <!-- 二级导航部分 -->
-            <div class="website-local">
+            <div class="second-category">
                 <div class="content-center js-second-category-container">
                     <script id="js-second-category" type="text/html">
-                        <span>{{layoutData.youLocal}}：</span>
-                        <a class="no-event no-list">{{layoutData.productCenter}}</a> 
-                        <span class="fa fa-angle-right"></span>
                         {{each categorysList it i}}
-                            <a href="{{it.url}}" data-index="{{i}}" >{{it.name}}</a>
+                            <span data-index="{{i}}" data-target="">{{it.name}}</span>
                         {{/each}}
-                        <span class="fa fa-angle-right"></span>
-                        <span class="js-product-name"></span>
-                        </script>
+                    </script>
                 </div>
             </div>
             <!-- 二级页面内容部分 -->
-            <div class="product-detail">
+            <div class="second-content">
                 <div class="content-center js-second-category-content-container">
                     <script id="js-second-category-content" type="text/html">
-                        <h3 class="p-title">{{data.title}}</h3>
-                        <p class="p-subtitle">{{data.update_time}}</p>
-                        <div class="p-content">
-                            {{#data.content}} 
-                        </div>    
+                        {{#content}}
                     </script>
                 </div>
             </div>
@@ -61,5 +52,5 @@
 <script src="./assets/template-web.js"></script>
 <script src="./js/common-header.js"></script>
 <script src="./js/common-footer.js"></script>
-<script src="./js/product-detail.js"></script>
+<script src="./js/contact.js"></script>
 </html>

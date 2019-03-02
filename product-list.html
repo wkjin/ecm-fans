@@ -7,7 +7,7 @@
     <title>产品列表-杭州浩沅科技有限公司</title>
     <link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet/less" href="./less/common-index.less?v=1">
-    <link rel="stylesheet/less" href="./less/product-list.less">
+    <link rel="stylesheet/less" href="./less/product.less">
     <script src="./assets/less.min.js"></script>
 </head>
 <body>
@@ -108,7 +108,7 @@
                     <script id="js-second-category-content" type="text/html">
                         {{if data !== null && data.length > 0}}
                         {{each data it i}}
-                        <a href="./product-detail.html?id={{it.id}}">
+                        <a href="./product-detail.html?c={{categoryIndex}}&id={{it.id}}">
                             <div class="left">
                                 <img src="{{it.thumb}}">
                             </div>

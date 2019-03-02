@@ -8,20 +8,17 @@ var pageContentArea={
         secondCategoryContainerSelector: '.js-second-category-container',//二级导航的容器
         secondCategoryTemplagteId: 'js-second-category',//二级导航的模板id
         secondCategorySelectedClass: 'second-selected',//二级菜单被选中的class
-        productNameSelector: '.js-product-name',//产品名称标题选择器
-
         //二级导航的内容
         secondCategoryContentContainerSelector: '.js-second-category-content-container',//二级导航内容的容器
         secondCategoryContentTemplagteId: 'js-second-category-content',//二级导航的模板id
 
         aboutCategoryDataName: 'aboutCategoryData',//保持栏目数据的名字（用在仓库中）
-        contentAreaDetailDataName: 'contentAreaData',//保持栏目文章数据的名字（用在仓库中）
+        aboutCategoryArticleDataName: 'aboutCategoryArticleData',//保持栏目文章数据的名字（用在仓库中）
     },
 
     $parent: null,//父类 jquery对象
     showCategoryData: null,//显示的栏目数据
     showCategoryIndex: 0,//显示的栏目的索引
-    productId: 0,//产品id
 
     _mergeOptions: function(options){
         var self = this;
@@ -57,14 +54,6 @@ var pageContentArea={
             c = parseInt(c);
         }
         self.showCategoryIndex = isNaN(c)?0:c;
-        //产品id
-        var productId =  commonTools.getRequestParam('id');
-        productId = parseInt(productId);
-        if(isNaN(productId)){
-            window.history.go(-1);
-        }else{
-           self.productId = productId; 
-        }
 
         //添加语言监控类（为了保持数据的最新，只有栏目、碎片数据做了缓存，其他数据根据语言变化获取最新的数据）
         commonEnv.addListenLanguageChange(function(language){
@@ -74,8 +63,8 @@ var pageContentArea={
 
         //获取栏目数据（按照兄弟节点获取）
         server.getCategorysByOrConditon({
-            pid: 6,
-            id: 6
+            pid: 21,
+            id: 21
         }, function(res){
             if(res.status === 1){
                 storage.set(self._options.aboutCategoryDataName, res.data[0]);
@@ -94,11 +83,8 @@ var pageContentArea={
             //填充栏目图
             self.$parent.find(self._options.categoryBannerContainerSelector).html(template(self._options.categoryBannerTemplateId, {categoryImgUrl: categoryData.thumb}));
 
-            //填充二级导航（地址栏）
-            self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {
-                categorysList: categoryData._child, 
-                layoutData: storage.get('layoutData')
-            }));
+            //填充二级导航
+            self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {categorysList: categoryData._child}));
 
             //模拟点击栏目进行选中
             self._selectSecondCategory(self.showCategoryIndex);
@@ -122,7 +108,7 @@ var pageContentArea={
         var self = this;
         var selectedClass = self._options.secondCategorySelectedClass;
         index = parseInt(index);
-        var secondCategoryList = self.$parent.find(self._options.secondCategoryContainerSelector).find('> a');
+        var secondCategoryList = self.$parent.find(self._options.secondCategoryContainerSelector).find('> span');
         if(isNaN(index) || index >= secondCategoryList.length || index < 0){
             index = 0;
         }
@@ -134,14 +120,13 @@ var pageContentArea={
                 //修改栏目显示数据
                 self.showCategoryData = storage.get(self._options.aboutCategoryDataName)._child[index];
                 //通过栏目数据，获取所在栏目的文章
-                server.getProductDetail({product_id: self.productId},function(res){
+                server.getArticleDetail({category_id: self.showCategoryData['id']},function(res){
                     if(res.status === 1){
-                        storage.set(self._options.contentAreaDetailDataName, res.data);
+                        storage.set(self._options.aboutCategoryArticleDataName, res.data);
                         //设置文章
                         self._fullArticle();
                     }else{
-                        //window.history.go(-1);//id不存在
-                        console.log('获取产品失败，请检查');
+                        console.log('获取文章失败，请检查');
                     }
                 });
             }
@@ -150,13 +135,9 @@ var pageContentArea={
     /* 填充内容 */
     _fullArticle: function(){
         var self = this;
-        var data =  storage.get(self._options.contentAreaDetailDataName);
-        self.$parent.find(self._options.productNameSelector).html(data.title);
-        self.$parent.find(self._options.secondCategoryContentContainerSelector).html(template(
-            self._options.secondCategoryContentTemplagteId,{
-                data: data
-            })
-        );
+        var data =  storage.get(self._options.aboutCategoryArticleDataName);
+        console.log(self.showCategoryData['id'], data);
+        self.$parent.find(self._options.secondCategoryContentContainerSelector).html(template(self._options.secondCategoryContentTemplagteId, {content: data.content}));
     },
 
     _initEnd: function(){

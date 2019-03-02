@@ -206,6 +206,7 @@ var pageContentArea={
         secondCategoryList.each(function(){
             var $this = $(this);
             if(parseInt($this.data('index')) === index){
+                self.showCategoryIndex = index;//保存使用的栏目索引
                 $this.addClass(selectedClass).siblings().removeClass(selectedClass);
                 window.location.href = (window.location.href.replace(/#c=\d*/, '') + '#c=' + index);
                 //修改栏目显示数据
@@ -216,7 +217,6 @@ var pageContentArea={
                     self.searchCondition
                 ),function(res){
                     if(res.status === 1){
-                        console.log('获取的产品列表是： ' , res);
                         storage.set(self._options.productListDataName, res.data);
                         //设置文章
                         self._fullProductList();
@@ -234,7 +234,8 @@ var pageContentArea={
         self.$parent.find(self._options.secondCategoryContentContainerSelector).html(template(
             self._options.secondCategoryContentTemplagteId, {
                 data: data,
-                layoutData: storage.get('layoutData')
+                layoutData: storage.get('layoutData'),
+                categoryIndex: self.showCategoryIndex
             })
         );
     },
