@@ -237,6 +237,7 @@
   min-height: 50vh;
 }
 .content-area .second-content .content-center {
+  min-height: 50vh;
   background-color: #ffffff;
 }
 .content-area .second-content .content-center .rich-html {
