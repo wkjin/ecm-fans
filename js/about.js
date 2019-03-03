@@ -136,7 +136,6 @@ var pageContentArea={
     _fullArticle: function(){
         var self = this;
         var data =  storage.get(self._options.aboutCategoryArticleDataName);
-        console.log(self.showCategoryData['id'], data);
         self.$parent.find(self._options.secondCategoryContentContainerSelector).html(template(self._options.secondCategoryContentTemplagteId, {content: data.content}));
     },
 
