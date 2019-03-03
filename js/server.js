@@ -12,9 +12,12 @@ var server = {
         getFragmentsUrl: '/Home/fragment/getFragments',//获取碎片
         getArticlesUrl: '/Home/Article/getArticles',//获取文章列表
         getArticleDetailUrl: '/Home/Article/getArticleDetail',//获取文章详情
-        
+
         getProductsUrl: '/Home/Product/getProducts',//获取产品列表
         getProductDetailUrl: '/Home/Product/getProductDetail',//获取产品详情
+
+        //发送在线留言
+        sendOnlineMessageUrl: '/Home/User/onlineMessage',//发送在线留言的url
     },
 
     commonEnv: null,//公共方法
@@ -80,18 +83,26 @@ var server = {
     getProductDetail: function(search, callback){
         this.requestAndCallBack(search, this._options.getProductDetailUrl, callback);
     },
+
+    //发送留言
+    sendOnlineMessage: function(data, callback){
+        this.requestAndCallBack(data, this._options.sendOnlineMessageUrl, callback, 'post');
+    },
     
     //请求并回调
-    requestAndCallBack: function(search, url, callback){
+    requestAndCallBack: function(search, url, callback, type){
         var self = this;
         var data = {};
         if(typeof search === 'object'){
             Object.assign(data, search);
+        }else if(typeof search === 'string'){
+            data = search;
         }
         //发送请求
         self.requestUrl({
             url: url,
-            data,
+            data: data,
+            type: (typeof type === undefined)?'get':type,
             callback: function(result){
                 if(typeof callback === 'function'){
                     callback(result);
@@ -106,8 +117,7 @@ var server = {
         var self = this;
         var type = requestObj.type;
         type = type?type: 'get';//请求的方式
-        //发送请求
-        $.ajax({
+        var sendOptions = {
             data: requestObj.data,
             url: self._options.host + requestObj.url,
             type: type,
@@ -119,7 +129,18 @@ var server = {
             error: function(XMLHttpRequest){
                 console.log('网络错误！！！！');
             }
-        });
+        };
+        if(sendOptions.type.toUpperCase() === 'POST'){
+            Object.assign(sendOptions, {
+                crossDomain: true,
+                xhrFields:{
+                    withCredentials: true
+                }//携带身份验证
+            });
+        }
+
+        //发送请求
+        $.ajax(sendOptions);
     },
 
     //初始化方法

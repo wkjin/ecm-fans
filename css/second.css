@@ -300,6 +300,7 @@
 .content-area .second-content .content-center .information-detail > form > div {
   display: block;
   margin: 0.5em 0;
+  position: relative;
 }
 .content-area .second-content .content-center .information-detail > form > div:not(.handle-bar) {
   display: flex;
@@ -317,7 +318,6 @@
 .content-area .second-content .content-center .information-detail > form > div:not(.handle-bar) input {
   flex-grow: 1;
   display: block;
-  width: 100%;
   line-height: 1em;
   border-radius: 0.2em;
   padding: 0.5em 1em;
@@ -327,6 +327,15 @@
   background-color: #ffffff;
   border: 1px solid #cccccc;
   outline: none;
+}
+.content-area .second-content .content-center .information-detail > form > div:not(.handle-bar) img {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  width: 8em;
+  height: 2em;
+  border-radius: 2px;
+  cursor: pointer;
 }
 .content-area .second-content .content-center .information-detail > form > div.handle-bar {
   line-height: 3em;

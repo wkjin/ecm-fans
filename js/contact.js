@@ -16,6 +16,8 @@ var pageContentArea={
         pageCategoryArticleDataName: 'pageCategoryArticleData',//保持栏目文章数据的名字（用在仓库中）
 
         mapContainerID: 'map-content',//地图容器的id
+
+        onlineMessageFormSelector: '#online-message-form',//留言form选择器
     },
 
     $parent: null,//父类 jquery对象
@@ -138,6 +140,14 @@ var pageContentArea={
                     self.isInformation = false;//是否联系方式页面
                     setTimeout(function(){
                         self._fullSecondContent();
+                        //绑定事件
+                        self.$parent.find(self._options.onlineMessageFormSelector).off('submit').on('submit', function(e){
+                            e.preventDefault();
+                            var data = $(this).serialize();
+                            server.sendOnlineMessage(data, function(res){
+                                alert(res.message);
+                            });
+                        });
                     }, 200);
                 }
             }

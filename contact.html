@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/common-index.css">
     <link rel="stylesheet" href="./css/second.css">
-    <!-- <link rel="stylesheet/less" href="./less/common-index.less">
+ <!--    <link rel="stylesheet/less" href="./less/common-index.less">
     <link rel="stylesheet/less" href="./less/second.less">
     <script src="./assets/less.min.js"></script> -->
     <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
@@ -62,26 +62,27 @@
                                     <div class="map-content" id="map-content"></div>
                                 </div>
                             {{else/}}
-                                <form action="###" method="post">
+                                <form action="###" method="post" id="online-message-form">
                                     <div>
                                         <label for="username">{{layoutData.form_username}}：</label>
-                                        <input type="text" id="username" name="username">
+                                        <input type="text" id="username" name="username" placeholder="请输入您的名字" required>
                                     </div>
                                     <div>
                                         <label for="telphone">{{layoutData.form_telphone}}：</label>
-                                        <input type="text" id="telphone" name="telphone">
+                                        <input type="text" id="telphone" name="telphone" placeholder="请输入联系方式" required>
                                     </div>
                                     <div>
                                         <label for="email">{{layoutData.form_email}}：</label>
-                                        <input type="text" id="email" name="email">
+                                        <input type="text" id="email" name="email" placeholder="请输入联系的邮箱" required>
                                     </div>
                                     <div>
                                         <label for="company-name">{{layoutData.form_companyName}}：</label>
-                                        <input type="text" id="company-name" name="companyName">
+                                        <input type="text" id="company-name" name="companyName" placeholder="请输入您公司的名字" required>
                                     </div>
                                     <div>
                                         <label for="check-code">{{layoutData.form_checkCode}}：</label>
-                                        <input type="text" id="check-code" name="checkCode">
+                                        <input type="text" id="check-code" name="code" placeholder="请输入验证码" required>
+                                        <img src="//api.ecm-fans.com.test/Home/User/createCheckCode" onclick="this.src='//api.ecm-fans.com.test/Home/User/createCheckCode?id='+Math.random()" >
                                     </div>
                                     <div class="handle-bar">
                                         <button type="submit">{{layoutData.form_submit}}</button>
