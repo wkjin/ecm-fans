@@ -6,9 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>招聘-杭州浩沅科技有限公司</title>
     <link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet/less" href="./less/common-index.less">
+    <link rel="stylesheet" href="./css/common-index.css">
+    <link rel="stylesheet" href="./css/second.css">
+    <!-- <link rel="stylesheet/less" href="./less/common-index.less">
     <link rel="stylesheet/less" href="./less/second.less">
-    <script src="./assets/less.min.js"></script>
+    <script src="./assets/less.min.js"></script> -->
     <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
     <style>
         html,body{margin:0;padding:0;}
@@ -52,9 +54,8 @@
                                     <p>电话/Tel：{{fragmentData.telephone.value}}</p>
                                     <p>传真/Fax：{{fragmentData.fax.value}}</p>
                                     <p>邮箱/Email: {{fragmentData.email.value}}</p>
-                                    <div class="agent-area">
-                                        <!-- 这里是代理的信息 -->
-                                        {{#agent.content}}
+                                    <div class="agent-area rich-html">
+                                        {{#agent.content}} <!-- 这里是代理的信息 -->
                                     </div>
                                 </div>
                                 <div class="right">

@@ -1,9 +1,6 @@
 @import './common-common.less';
 
 //定义使用的两种背景
-@background1: #ffffff;
-@background2:  #f6f6f6;
-
 @backgroundGray: #f6f6f6;//灰色背景
 @backgroundWhite: #ffffff;
 
@@ -73,7 +70,7 @@
     .website-local{
         background: @backgroundWhite;
         .content-center{
-            background: @background1;
+            background: @backgroundWhite;
             width: 100%;
             line-height: 3em;
             height: 3em;
@@ -106,35 +103,127 @@
         }
     }
 
+    //搜索栏
+    .search-area {
+        .content-center{
+            background-color: @backgroundWhite;
+            border: 1px solid #eee;
+            margin: 0.5em 0;
+            border-left-width: 0;
+            border-right-width: 0;
+            .fast-search{
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                padding: 0.5em 0;
+                border-bottom: 1px solid @blackF5;
+                span.title{
+                    font-size: 16px;
+                    width: 7em;
+                    .ellipsis-row();
+                    height: 1.5em;
+                    padding: 0 1em;
+                    display: block;
+                }
+                .list-group {
+                    flex-grow: 1;
+                    text-align: right;
+                    a {
+                        font-size: 14px;
+                        display: inline-block;
+                        background: @primaryColor;
+                        padding: 0 1em;
+                        max-width: 12em;
+                        margin: 0.2em 0.5em;
+                        line-height: 1.8em;
+                        .ellipsis-row();
+                        height: 1.8em;
+                        border-radius: 0.2em;
+                        color: #ffffff;
+                    }
+                }
+            }
+            .category-search{
+                padding: 0.5em 0;
+                &:after{
+                    .clearfix;
+                }
+                .cs-item{
+                    display: inline-block;
+                    width: 33%;
+                    float: left;
+                    line-height: 2.5em;
+                    color: @black3;
+                    span{
+                        width: 6em;
+                        display: inline-block;
+                        text-align: right;
+                        .ellipsis-row();
+                        height: 1;
+                        line-height: 1em;
+                        padding-right: 0.5em;
+                    }
+                    select{
+                        padding: 0.4em 0.5em;
+                        border-radius: 0.1em;
+                        width: 15em;
+                        color: @black6;
+                        background: #ffffff;
+                        border: 1px solid @blackC;
+                        height: 2.5em;
+                        line-height: 2.5em;
+                    }
+                    
+                }
+            }
+            .handle-bar{
+                line-height: 1em;
+                padding: 0.5em 0;
+                text-align: right;
+                > a{
+                    &:extend(.content-area .search-area .content-center .fast-search .list-group a);
+                    button{
+                        border: 0;
+                        background: transparent;
+                        color: inherit;
+                    }
+                }
+            }    
+        }
+        
+    }
+
     //二级栏目内容
     .second-content{
         min-height: 50vh;
         .content-center{
             background-color: @backgroundWhite;
-            padding: 2em 1em;
-            span,
-            div,
-            img,
-            input,
-            textarea,
-            label,
-            p,
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6,
-            table{
-                float: initial;
-                position: initial;
-                box-sizing: initial;
+            //在富文本编辑器出来的html才重置格式
+            .rich-html{
+                padding: 2em 1em;
+                span,
+                div,
+                img,
+                input,
+                textarea,
+                label,
+                p,
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                table{
+                    float: initial;
+                    position: initial;
+                    box-sizing: initial;
+                }    
             }
 
-            
             //联系方式页面
             .information-detail{
-                background: @background1;
+                background: @backgroundWhite;
                 display: flex;
                 justify-items: stretch; 
                 color: @black3;
@@ -284,62 +373,83 @@
                     }
                 }
             }
-        }
-    }
 
-    //文章详情
-    .article-detail{
-        .content-center{
-            background-color: @backgroundGray;
-            padding: 1em 0;
-            .p-title{
-                padding-top: 1em;
-                font-size: 24px;
-                font-weight: normal;
-                letter-spacing: 1;
-                color: #333333;
-                text-align: center;
-                line-height: 1.8em;
-                margin: 0;
-                padding: 0;
-            }
-            .p-subtitle{
-                font-size: 14px;
-                font-weight: normal;
-                color: #666666;
-                text-align: center;
-                line-height: 2em;
-                padding-bottom: 0.5em;
-                border-bottom: 1px solid #eee;
-                &::before{
-                    content: '';
-                    width: 10em;
-                    height: 1em;
-                    display: inline-block;
+            //文章列表
+            .product-list{
+                &:after{
+                    .clearfix;
                 }
+                > a{
+                    width: 33.33%;
+                    padding: 1em;
+                    display: block;
+                    height: 200px;
+                    float: left;
+                    overflow: hidden;
+                    border: 1px solid @blackF5;
+                    .left{
+                        width: 50%;
+                        height: 100%;
+                        float: left;
+                        background-color: @blackF5;
+                        > img{
+                            width: 100%;
+                            height: auto;
+                            max-height: 100%;
+                            position: relative;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            *top: 0;
+                        }
+                    }
+                    .right{
+                        float: left;
+                        width: 50%;
+                        height: 100%;
+                        padding: 0.5em;
+                        p{
+                            line-height: 2em;
+                            &:first-child{
+                                line-height: 2.5em;
+                                height: 2.5em;
+                                .ellipsis-row();
+                                margin-bottom: 0.5em;
+                            }
+                        }
+                    }
+                } 
             }
-            .p-content{
+
+            //文章详情
+            .article-detail{
                 padding: 1em 0;
-                span,
-                div,
-                img,
-                input,
-                textarea,
-                label,
-                p,
-                h1,
-                h2,
-                h3,
-                h4,
-                h5,
-                h6,
-                table{
-                    max-width: 100%!important;
-                    float: initial;
-                    position: initial;
-                    box-sizing: initial;
+                .p-title{
+                    padding-top: 1em;
+                    font-size: 24px;
+                    font-weight: normal;
+                    letter-spacing: 1;
+                    color: #333333;
+                    text-align: center;
+                    line-height: 1.8em;
+                    margin: 0;
+                    padding: 0;
+                }
+                .p-subtitle{
+                    font-size: 14px;
+                    font-weight: normal;
+                    color: #666666;
+                    text-align: center;
+                    line-height: 2em;
+                    padding-bottom: 0.5em;
+                    border-bottom: 1px solid #eee;
+                    &::before{
+                        content: '';
+                        width: 10em;
+                        height: 1em;
+                        display: inline-block;
+                    }
                 }
             }
         }
-    }
+    }   
 }

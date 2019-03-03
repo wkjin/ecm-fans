@@ -3,6 +3,39 @@
 @indexBackgroundGray: #f6f6f6;//灰色背景
 @backgroundWhite: #ffffff;
 
+ //before、after的统一样式
+ .before-after{
+    content: '';
+    display: block;
+}
+
+//after 或者before使用fontawesome填充（使用定位）
+.font-awesome-before-after{
+    content: '';
+    display: block;;
+    position: absolute;
+    font-family: FontAwesome;
+    font-size: 48px;
+    height: 1em;
+    width: 1em;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: @black9;
+    cursor: pointer;
+    display: none;
+    border-radius: 1em;
+}
+// 左箭头
+.angle-left{
+    content: "\f104";
+}
+// 右箭头
+.angle-right{
+   content: "\f105";
+}
+
 .container{
     background-color: @indexBackgroundGray;
 }

@@ -1,0 +1,303 @@
+/**
+    @function: 批量定义样式已经头部与尾部页面
+    @author: wkj
+    @time: 2019.1.17
+*/
+.clearfix {
+  content: '';
+  width: 0;
+  height: 0;
+  display: block;
+  clear: both;
+}
+.imgUnHandle {
+  user-drag: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.scrollbarNoColor {
+  scrollbar-3dlight-color: transparent;
+  scrollbar-darkshadow-color: transparent;
+  scrollbar-highlight-color: transparent;
+  scrollbar-shadow-color: transparent;
+  scrollbar-arrow-color: transparent;
+  scrollbar-face-color: transparent;
+  scrollbar-track-color: transparent;
+  scrollbar-base-color: transparent;
+  scroll-behavior: smooth;
+}
+.ellipsis-row {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ellipsis-row-two {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+/* 多行省略 */
+html,
+body,
+div,
+h1,
+h2,
+h2,
+h4,
+h5,
+h6,
+span,
+ul,
+li,
+p,
+footer,
+header,
+img,
+a {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Microsoft Yahei UI", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, SimSun, SimHei, "宋体", simsun, sans-serif;
+}
+a {
+  text-decoration: none;
+  color: #333333;
+  background-color: transparent;
+}
+.bottom-loadding {
+  display: none;
+  width: 100%;
+  height: 2em;
+  margin-top: 1em;
+  text-align: center;
+  line-height: 2em;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  color: #aaaaaa;
+}
+img {
+  border-width: 0;
+  user-drag: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.hide {
+  display: none!important;
+}
+.no-event {
+  pointer-events: none;
+  cursor: default;
+}
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
+}
+/* 自定义滚动条的样式 */
+::-webkit-scrollbar {
+  max-width: 10px;
+  max-height: 10px;
+}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  background-color: #c5e3f1;
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  background: #fffff5;
+}
+body {
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+.container {
+  min-width: 1200px;
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0 auto;
+  overflow-y: scroll;
+}
+.container > div {
+  width: 100%;
+}
+.container > div.content-area {
+  padding-bottom: 3em;
+}
+.container > div.content-area > div {
+  width: 100%;
+}
+.container .content-center,
+.container > div.content-area > div > div.content-center {
+  width: 1200px;
+  margin: 0 auto;
+}
+.header {
+  width: 100%;
+  min-width: 1200px;
+  height: 80px;
+  background-color: #c5e3f1;
+}
+.header .content-center {
+  display: flex;
+  height: 100%;
+}
+.header .content-center > div.header-left {
+  width: 18em;
+  height: 100%;
+}
+.header .content-center > div.header-left .logo-area {
+  height: 100%;
+  overflow: hidden;
+  display: block;
+  margin: 0;
+  padding: 0;
+  float: left;
+  cursor: pointer;
+}
+.header .content-center > div.header-left .logo-area img {
+  width: 100%;
+  display: block;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  *top: 0;
+  _top: 0;
+}
+.header .content-center > div.header-right {
+  flex-grow: 1;
+  height: 100%;
+}
+.header .content-center > div.header-right > div.nav-top {
+  width: 100%;
+  height: 30px;
+  text-align: right;
+}
+.header .content-center > div.header-right > div.nav-top > button {
+  outline: none;
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 16px;
+  padding: 0 6px;
+  margin: 7px 0;
+  cursor: pointer;
+  letter-spacing: 1px;
+  position: relative;
+  color: #333333;
+  transition: transform 0.5s;
+}
+.header .content-center > div.header-right > div.nav-top > button:last-child {
+  padding-right: 20px;
+}
+.header .content-center > div.header-right > div.nav-top > button:not(:last-child):after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: -2px;
+  height: 12px;
+  width: 1px;
+  background-color: #cccccc;
+  border: none;
+  display: inline-block;
+}
+.header .content-center > div.header-right > div.nav-top > button:hover {
+  color: #4395ff;
+  transform: scale(1.1);
+}
+.header .content-center > div.header-right > div.nav-bottom {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+}
+.header .content-center > div.header-right > div.nav-bottom > ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+}
+.header .content-center > div.header-right > div.nav-bottom > ul > li {
+  display: block;
+  padding: 0 20px;
+  width: 6.5em;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+.header .content-center > div.header-right > div.nav-bottom > ul > li > .nav-drop-down {
+  display: block;
+  font-size: 15px;
+  background: #c5e3f1;
+  line-height: 2em;
+  padding-bottom: 0.5em;
+  width: 100%;
+  padding: 0 0.25em 0.5em 0.25em;
+  left: 0;
+  position: absolute;
+  display: none;
+}
+.header .content-center > div.header-right > div.nav-bottom > ul > li > .nav-drop-down > a {
+  display: block;
+}
+.header .content-center > div.header-right > div.nav-bottom > ul > li > .nav-drop-down > a:hover {
+  text-decoration: underline;
+}
+.header .content-center > div.header-right > div.nav-bottom > ul > li a {
+  color: #333333;
+  height: 2em;
+  overflow: hidden;
+  background-color: transparent;
+}
+.header .content-center > div.header-right > div.nav-bottom > ul > li a:hover {
+  color: #4395ff;
+}
+.header .content-center > div.header-right > div.nav-bottom > ul > li.nav-selected > .nav-drop-down {
+  border-bottom: 3px solid green;
+}
+.footer {
+  background-color: #087042;
+  font-size: 12px;
+  height: 4em;
+  line-height: 4em;
+}
+.footer .content-center {
+  height: 100%;
+}
+.footer .content-center:after {
+  clear: both;
+  width: 0;
+  height: 0;
+  content: '';
+  display: block;
+}
+.footer .content-center > div {
+  float: left;
+  color: #ffffff;
+}
+.footer .content-center > div:first-child {
+  width: 40%;
+  text-align: left;
+}
+.footer .content-center > div:last-child {
+  width: 60%;
+  text-align: right;
+}
+@media screen and (max-width: 1200px) {
+  body {
+    overflow-x: auto;
+  }
+}
