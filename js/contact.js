@@ -142,12 +142,19 @@ var pageContentArea={
                         self._fullSecondContent();
                         //绑定事件
                         self.$parent.find(self._options.onlineMessageFormSelector).off('submit').on('submit', function(e){
-                            $(this).attr('action', (server._options.host + server._options.sendOnlineMessageUrl));
-                            /* e.preventDefault();
-                            var data = $(this).serialize();
+                            e.preventDefault();
+                            var $this = $(this);
+                            var data = $this.serialize();
                             server.sendOnlineMessage(data, function(res){
-                                alert(res.message);
-                            }); */
+                                if(res.status !== 1){
+                                    //刷新页面
+                                    alert(res.message); 
+                                    $this.find('img').trigger('click');  
+                                }else{
+                                   alert(res.message); 
+                                   $this.find('input').val('');  
+                                }
+                            });
                         });
                     }, 200);
                 }
@@ -162,7 +169,8 @@ var pageContentArea={
             agent: data,
             layoutData: storage.get('layoutData'),
             fragmentData: storage.get('fragmentData'),
-            isInformation: self.isInformation
+            isInformation: self.isInformation,
+            host: server._options.host
         }));
         if(self.isInformation){
             self.loadBaiduMap();

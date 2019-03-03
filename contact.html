@@ -82,7 +82,7 @@
                                     <div>
                                         <label for="check-code">{{layoutData.form_checkCode}}：</label>
                                         <input type="text" id="check-code" name="code" placeholder="请输入验证码" required>
-                                        <img src="//api.ecm-fans.com.test/Home/User/createCheckCode" onclick="this.src='//api.ecm-fans.com.test/Home/User/createCheckCode?id='+Math.random()" >
+                                        <img src="{{host}}/Home/User/createCheckCode" onclick="this.src='{{host}}/Home/User/createCheckCode?id='+Math.random()" >
                                     </div>
                                     <div class="handle-bar">
                                         <button type="submit">{{layoutData.form_submit}}</button>
