@@ -117,15 +117,10 @@ var server = {
         var self = this;
         var type = requestObj.type;
         type = type?type: 'get';//请求的方式
-        //发送请求
-        $.ajax({
+        var sendOptions = {
             data: requestObj.data,
             url: self._options.host + requestObj.url,
             type: type,
-            crossDomain: true,
-            xhrFields:{
-                withCredentials: true
-            },//携带身份验证
             success: function(data){
                 if(typeof requestObj.callback === 'function'){
                     requestObj.callback(data);
@@ -134,7 +129,18 @@ var server = {
             error: function(XMLHttpRequest){
                 console.log('网络错误！！！！');
             }
-        });
+        };
+        if(sendOptions.type.toUpperCase() === 'POST'){
+            Object.assign(sendOptions, {
+                crossDomain: true,
+                xhrFields:{
+                    withCredentials: true
+                }//携带身份验证
+            });
+        }
+
+        //发送请求
+        $.ajax(sendOptions);
     },
 
     //初始化方法
