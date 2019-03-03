@@ -130,7 +130,7 @@ var commonPage = {
         var layoutDataName = self._options.layoutDataName;
         var layoutData = self.storage.get(layoutDataName);
         if(typeof layoutData !== 'object' || layoutData === null){
-            $.getJSON('../data/layout.json',function(data){
+            $.getJSON('../data/layout.json?id=' + Math.random(),function(data){
                 self.storage.set(layoutDataName, data, true).set(self._options.layoutVersionName, '++');
             });
         }else{
