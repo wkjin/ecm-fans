@@ -150,6 +150,7 @@ var pageContentArea={
                                     //刷新页面
                                     alert(res.message); 
                                     $this.find('img').trigger('click');  
+                                    $this.find('input[name=code]').val('');
                                 }else{
                                    alert(res.message); 
                                    $this.find('input').val('');  
