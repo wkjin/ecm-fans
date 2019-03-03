@@ -12,16 +12,13 @@ var pageContentArea={
         secondCategoryContentContainerSelector: '.js-second-category-content-container',//二级导航内容的容器
         secondCategoryContentTemplagteId: 'js-second-category-content',//二级导航的模板id
 
-        pageCategoryDataName: 'aboutCategoryData',//保持栏目数据的名字（用在仓库中）
+        pageCategoryDataName: 'pageCategoryData',//保持栏目数据的名字（用在仓库中）
         pageCategoryArticleDataName: 'pageCategoryArticleData',//保持栏目文章数据的名字（用在仓库中）
-
-        mapContainerID: 'map-content',//地图容器的id
     },
 
     $parent: null,//父类 jquery对象
     showCategoryData: null,//显示的栏目数据
     showCategoryIndex: 0,//显示的栏目的索引
-    isInformation: true,//是否是联系方式栏目
 
     _mergeOptions: function(options){
         var self = this;
@@ -66,8 +63,8 @@ var pageContentArea={
 
         //获取栏目数据（按照兄弟节点获取）
         server.getCategorysByOrConditon({
-            pid: 21,
-            id: 21
+            pid: 12,
+            id: 12
         }, function(res){
             if(res.status === 1){
                 storage.set(self._options.pageCategoryDataName, res.data[0]);
@@ -118,121 +115,32 @@ var pageContentArea={
         secondCategoryList.each(function(){
             var $this = $(this);
             if(parseInt($this.data('index')) === index){
+                self.showCategoryIndex = index;
                 $this.addClass(selectedClass).siblings().removeClass(selectedClass);
                 window.location.href = (window.location.href.replace(/#c=\d*/, '') + '#c=' + index);
                 //修改栏目显示数据
                 self.showCategoryData = storage.get(self._options.pageCategoryDataName)._child[index];
                 //通过栏目数据，获取所在栏目的文章
-                if(index === 0){//是获取联系方式时候才获取栏目下面的文章
-                    self.isInformation = true;//是否联系方式页面
-                    server.getArticleDetail({category_id: self.showCategoryData['id']},function(res){
-                        if(res.status === 1){
-                            storage.set(self._options.pageCategoryArticleDataName, res.data);
-                            //设置文章
-                            self._fullSecondContent();
-                        }else{
-                            console.log('获取栏目文章失败，请检查');
-                        }
-                    });
-                }else{
-                    self.isInformation = false;//是否联系方式页面
-                    setTimeout(function(){
-                        self._fullSecondContent();
-                    }, 200);
-                }
+                server.getArticles({category_id: self.showCategoryData['id']},function(res){
+                    if(res.status === 1){
+                        storage.set(self._options.pageCategoryArticleDataName, res.data);
+                        //设置文章
+                        self._fullArticleList();
+                    }else{
+                        console.log('获取文章失败，请检查');
+                    }
+                });
             }
         });
     },
     /* 填充内容 */
-    _fullSecondContent: function(){
+    _fullArticleList: function(){
         var self = this;
         var data =  storage.get(self._options.pageCategoryArticleDataName);
         self.$parent.find(self._options.secondCategoryContentContainerSelector).html(template(self._options.secondCategoryContentTemplagteId, {
-            agent: data,
-            layoutData: storage.get('layoutData'),
-            fragmentData: storage.get('fragmentData'),
-            isInformation: self.isInformation
+            data: data,
+            c: self.showCategoryIndex
         }));
-        if(self.isInformation){
-            self.loadBaiduMap();
-        }
-    },
-    //调用地图进行初始化地图，并设置地图
-    loadBaiduMap: function(){
-        var self = this;
-        var layoutData = storage.get('layoutData');
-        var fragmentData = storage.get('fragmentData');
-        var mapContainerID = self._options.mapContainerID;
-        var zoom = 18;
-        var points = fragmentData.company_latitude_longitude.value;
-    	var markerArr = [
-	    	{
-	    		title: fragmentData.company_name.value,
-	    		content: layoutData.telephone + "：" + fragmentData.telephone.value,
-	    		point: points,
-	    		isOpen:0,
-	    		icon:{w:21,h:21,l:0,t:0,x:6,lb:5}
-	    	}
-		];//标注点数组
-        var map = new BMap.Map(mapContainerID);//在百度地图容器中创建一个地图
-        var point = new BMap.Point(...points.split('|'));//定义一个中心点坐标
-        map.centerAndZoom(point, zoom);//设定地图的中心点和坐标并将地图显示在地图容器中
-
-        //地图控件添加函数：
-        map.addControl(new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE}));
-		map.addControl(new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1}));
-		map.addControl(new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT}));
-
-		//地图事件设置函数：
-	    map.enableDragging();
-	    map.enableScrollWheelZoom();
-	    map.enableDoubleClickZoom();
-	    map.enableKeyboard();
-
-	    //向地图中添加marker
-	    var createInfoWindow = function(i){//创建InfoWindow
-	        var json = markerArr[i];
-	        return new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
-	    }
-	    var createIcon = function(json){//创建一个Icon
-	        return new BMap.Icon("http://map.baidu.com/image/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
-	    }
-	    //变量生成标注
-	    for(var i=0;i<markerArr.length;i++){
-            var json = markerArr[i];
-            var p0 = json.point.split("|")[0];
-            var p1 = json.point.split("|")[1];
-            var point = new BMap.Point(p0,p1);
-			var iconImg = createIcon(json.icon);
-            var marker = new BMap.Marker(point,{icon:iconImg});
-			var iw = createInfoWindow(i);
-			var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
-			marker.setLabel(label);
-            map.addOverlay(marker);
-            label.setStyle({
-                borderColor:"#808080",
-                color:"#333",
-                cursor:"pointer"
-            });
-				
-			var _iw = createInfoWindow(i);
-			marker.addEventListener("click",function(){
-			    this.openInfoWindow(_iw);
-		    });
-		    _iw.addEventListener("open",function(){
-			    marker.getLabel().hide();
-		    })
-		    _iw.addEventListener("close",function(){
-			    marker.getLabel().show();
-		    })
-			label.addEventListener("click",function(){
-			    marker.openInfoWindow(_iw);
-		    })
-			if(!!json.isOpen){
-				label.hide();
-				marker.openInfoWindow(_iw);
-			}
-        }
     },
 
     _initEnd: function(){

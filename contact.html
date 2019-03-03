@@ -9,6 +9,12 @@
     <link rel="stylesheet/less" href="./less/common-index.less">
     <link rel="stylesheet/less" href="./less/second.less">
     <script src="./assets/less.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+    <style>
+        html,body{margin:0;padding:0;}
+        .iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
+        .iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
+    </style>
 </head>
 <body>
     <div class="container">
@@ -34,9 +40,55 @@
             </div>
             <!-- 二级页面内容部分 -->
             <div class="second-content">
-                <div class="content-center js-second-category-content-container">
+                <div class="content-center  js-second-category-content-container">
                     <script id="js-second-category-content" type="text/html">
-                        {{#content}}
+                        <div class="information-detail">
+                            {{if isInformation}}
+                                <div class="left">
+                                    <p class="information-title">{{layoutData.contactMe}}</p>
+                                    <p>杭州浩沅科技有限责任公司</p>
+                                    <p>Hangzhou haoyuan Technology Co ., Ltd</p>
+                                    <p>{{layoutData.address}}：{{fragmentData.company_address.value}}</p>
+                                    <p>电话/Tel：{{fragmentData.telephone.value}}</p>
+                                    <p>传真/Fax：{{fragmentData.fax.value}}</p>
+                                    <p>邮箱/Email: {{fragmentData.email.value}}</p>
+                                    <div class="agent-area">
+                                        <!-- 这里是代理的信息 -->
+                                        {{#agent.content}}
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="map-content" id="map-content"></div>
+                                </div>
+                            {{else/}}
+                                <form action="###" method="post">
+                                    <div>
+                                        <label for="username">姓名：</label>
+                                        <input type="text" id="username" name="username">
+                                    </div>
+                                    <div>
+                                        <label for="telphone">手机：</label>
+                                        <input type="text" id="telphone" name="telphone">
+                                    </div>
+                                    <div>
+                                        <label for="email">邮箱：</label>
+                                        <input type="text" id="email" name="email">
+                                    </div>
+                                    <div>
+                                        <label for="company-name">企业名称：</label>
+                                        <input type="text" id="company-name" name="companyName">
+                                    </div>
+                                    <div>
+                                        <label for="check-code">验证码：</label>
+                                        <input type="text" id="check-code" name="checkCode">
+                                    </div>
+                                    <div class="handle-bar">
+                                        <button type="submit">提交</button>
+                                        <button type="reset">重置</button>
+                                    </div>  
+                                </form> 
+                            {{/if}}
+                        </div>
                     </script>
                 </div>
             </div>

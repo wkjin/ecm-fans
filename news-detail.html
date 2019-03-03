@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=0.45,minimum-scale=0.45,maximum-scale=1.5,user-scalable=yes">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>新闻-杭州浩沅科技有限公司</title>
+    <title>新闻详情-杭州浩沅科技有限公司</title>
     <link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet/less" href="./less/common-index.less">
     <link rel="stylesheet/less" href="./less/second.less">
@@ -23,32 +23,29 @@
                 </div>
             </div>
             <!-- 二级导航部分 -->
-            <div class="second-category">
+            <div class="website-local">
                 <div class="content-center js-second-category-container">
                     <script id="js-second-category" type="text/html">
+                        <span>{{layoutData.youLocal}}：</span>
+                        <a class="no-event no-list">{{layoutData.productCenter}}</a> 
+                        <span class="fa fa-angle-right"></span>
                         {{each categorysList it i}}
-                            <span data-index="{{i}}" data-target="">{{it.name}}</span>
+                            <a href="{{it.url}}" data-index="{{i}}" >{{it.name}}</a>
                         {{/each}}
+                        <span class="fa fa-angle-right"></span>
+                        <span class="js-news-name"></span>
                     </script>
                 </div>
             </div>
             <!-- 二级页面内容部分 -->
-            <div class="second-content">
+            <div class="article-detail">
                 <div class="content-center js-second-category-content-container">
                     <script id="js-second-category-content" type="text/html">
-                        <div class="article-list">
-                            {{each data it i}}
-                            <a class="item-img-text" href="news-detail.html?c={{c}}&id={{it.id}}">
-                                <div class="img-section">
-                                    <img src="{{it.thumb}}">
-                                </div>
-                                <div class="text-section">
-                                    <h4>{{it.title}}</h4>
-                                    <p>{{it.abstract}}</p>
-                                </div>
-                            </a>
-                            {{/each}}
-                        </div>
+                        <h3 class="p-title">{{data.title}}</h3>
+                        <p class="p-subtitle">{{data.update_time}}</p>
+                        <div class="p-content">
+                            {{#data.content}} 
+                        </div>    
                     </script>
                 </div>
             </div>
@@ -64,5 +61,5 @@
 <script src="./assets/template-web.js"></script>
 <script src="./js/common-header.js"></script>
 <script src="./js/common-footer.js"></script>
-<script src="./js/news.js"></script>
+<script src="./js/news-detail.js"></script>
 </html>

@@ -51,8 +51,8 @@
     "showAll_en": "Show All",
 
     "noDataText_cn": "查询不到没有任何产品",
-    "noDataText_en": "Query Without Data"
+    "noDataText_en": "Query Without Data",
 
-     
-     
+    "contactMe_cn": "联系我们",
+    "contactMe_en": "Call me"
 }
