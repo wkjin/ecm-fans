@@ -142,11 +142,12 @@ var pageContentArea={
                         self._fullSecondContent();
                         //绑定事件
                         self.$parent.find(self._options.onlineMessageFormSelector).off('submit').on('submit', function(e){
-                            e.preventDefault();
+                            $(this).attr('action', (server._options.host + server._options.sendOnlineMessageUrl));
+                            /* e.preventDefault();
                             var data = $(this).serialize();
                             server.sendOnlineMessage(data, function(res){
                                 alert(res.message);
-                            });
+                            }); */
                         });
                     }, 200);
                 }
