@@ -54,5 +54,27 @@
     "noDataText_en": "Query Without Data",
 
     "contactMe_cn": "联系我们",
-    "contactMe_en": "Call me"
+    "contactMe_en": "Call me",
+
+    "form_username_cn": "姓名",
+    "form_username_en": "Username",
+
+    "form_telphone_cn": "手机",
+    "form_telphone_en": "Telphone",
+
+    "form_email_cn": "邮箱",
+    "form_email_en": "Email",
+
+    "form_companyName_cn": "企业名称",
+    "form_companyName_en": "Company Name",
+
+    "form_checkCode_cn": "验证码",
+    "form_checkCode_en": "Check Code",
+
+    "form_submit_cn": "提交",
+    "form_submit_en": "Submit",
+
+    "form_reset_cn": "重置",
+    "form_reset_en": "Reset"
+
 }

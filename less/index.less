@@ -1,6 +1,7 @@
 @import './common-common.less';//引入公共的less文件
 
 @indexBackgroundGray: #f6f6f6;//灰色背景
+@backgroundWhite: #ffffff;
 
 .container{
     background-color: @indexBackgroundGray;
@@ -12,8 +13,10 @@
     .banner-area{
         width: 100%;
         height: 400px;
-        background: #f6f6f6;
+        background: @backgroundWhite;
         .content-center{
+            width: 100%!important;
+            max-width: 1920px!important;
             height: 100%;
             > div{
                 width: 100%;
@@ -71,9 +74,11 @@
 
     //产品部分
     .product-area{
-        background: #ffffff;
         margin-top: 1em;
         .content-center{
+            background: @backgroundWhite;
+            border-radius: 2px;
+            padding: 0 0.5em;
             .product-list{
                 width: 100%;
                 height: 300px;
@@ -177,9 +182,10 @@
 
     //新闻资讯
     .news-area{
-        background: @indexBackgroundGray;
-        padding-bottom: 1em;
         .content-center{
+            background: @backgroundWhite;
+            border-radius: 2px;
+            padding: 0 0.5em;
             .content-list{
                 width: 100%;
                 padding: 1em 0;
@@ -228,8 +234,10 @@
 
     //浩沅课堂
     .classroom-area{
-        background-color: @defaultBackground;
         .content-center{
+            background: @backgroundWhite;
+            border-radius: 2px;
+            padding: 0 0.5em;
             .content-list{
                 display: block;
                 padding: 1em 0 2em 0;
@@ -287,12 +295,13 @@
 
     //公司信息区域
     .info-area{
-        background: @indexBackgroundGray;
         padding: 1em  0;
         .content-center{
+            background: @backgroundWhite;
+            border-radius: 2px;
             @line: 5;
-            height: calc(~"2em + 1.8em * " @line);
-            padding: 1em 0;
+            height: calc(~"3em + 1.8em * " @line);
+            padding: 1em 0.5em;
             margin: 1em 0;
             display: flex;
             overflow: hidden;

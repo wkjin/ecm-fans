@@ -7,6 +7,14 @@
     height: 4em;
     line-height: 4em;
     .content-center{
+        height: 100%;
+        &:after{
+            clear: both;
+            width: 0;
+            height: 0;
+            content: '';
+            display: block;
+        }
         > div{
             float: left;
             color: #ffffff;

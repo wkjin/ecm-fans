@@ -63,28 +63,28 @@
                             {{else/}}
                                 <form action="###" method="post">
                                     <div>
-                                        <label for="username">姓名：</label>
+                                        <label for="username">{{layoutData.form_username}}：</label>
                                         <input type="text" id="username" name="username">
                                     </div>
                                     <div>
-                                        <label for="telphone">手机：</label>
+                                        <label for="telphone">{{layoutData.form_telphone}}：</label>
                                         <input type="text" id="telphone" name="telphone">
                                     </div>
                                     <div>
-                                        <label for="email">邮箱：</label>
+                                        <label for="email">{{layoutData.form_email}}：</label>
                                         <input type="text" id="email" name="email">
                                     </div>
                                     <div>
-                                        <label for="company-name">企业名称：</label>
+                                        <label for="company-name">{{layoutData.form_companyName}}：</label>
                                         <input type="text" id="company-name" name="companyName">
                                     </div>
                                     <div>
-                                        <label for="check-code">验证码：</label>
+                                        <label for="check-code">{{layoutData.form_checkCode}}：</label>
                                         <input type="text" id="check-code" name="checkCode">
                                     </div>
                                     <div class="handle-bar">
-                                        <button type="submit">提交</button>
-                                        <button type="reset">重置</button>
+                                        <button type="submit">{{layoutData.form_submit}}</button>
+                                        <button type="reset">{{layoutData.form_reset}}</button>
                                     </div>  
                                 </form> 
                             {{/if}}
