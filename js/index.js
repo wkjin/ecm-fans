@@ -48,6 +48,9 @@ var indexPage = {
     _productTimer: null,//product动画的计时器
     
     _bannerSwiper: null,//保存banner图的swiper实例
+
+    lazyloadTimer: null,//懒加载
+    lazyLoadNum: 0,//懒加载次数
     
 
     _initData: function(){
@@ -359,7 +362,19 @@ var indexPage = {
     
     _initEnd: function(){
         var self = this;
-        /* self.$parent.find(self._options.imgSelector).lazyload();  */
+        self.lazyloadTimer = setInterval(function(){
+            if(self.lazyLoadNum > 2){
+                clearInterval(self.lazyloadTimer);
+            }else{
+                $("img.lazy-load").lazyload({
+                    skip_invisible : false,
+                    failure_limit : 20,
+                    /* effect : "fadeIn", */
+                    threshold : 18000, //预加载，在图片距离屏幕180px时提前载入
+                });
+                self.lazyLoadNum ++;
+            }
+        }, 1000);
     },
 
     init: function(){
