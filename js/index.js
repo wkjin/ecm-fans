@@ -163,7 +163,9 @@ var indexPage = {
                 //记录条数
                 self._productNum =  self._parentObj.find(self._options.productContainerSelector).find('> a').length;
                 //生产产品展示的轮播图
-                self._generateProductShow();
+                setTimeout(function(){
+                    self._generateProductShow();
+                }, 500);
             }else{
                 console.error(res.message);
             }
