@@ -195,7 +195,8 @@ var pageContentArea={
 	    	}
 		];//标注点数组
         var map = new BMap.Map(mapContainerID);//在百度地图容器中创建一个地图
-        var point = new BMap.Point(...points.split('|'));//定义一个中心点坐标
+        var p = points.split('|');
+        var point = new BMap.Point(p[0],p[1]);//定义一个中心点坐标
         map.centerAndZoom(point, zoom);//设定地图的中心点和坐标并将地图显示在地图容器中
 
         //地图控件添加函数：
