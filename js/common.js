@@ -18,6 +18,18 @@ if(typeof(Object.assign) != 'function'){
     }
 }
 
+if(typeof(Array.prototype.includes) !== 'function'){
+    Array.prototype.includes = function(item){
+        var arr = this;
+        for(var i=0;i< arr.length;i++){
+            if(arr[i] === item){
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
 //common工具类
 var commonTools = {
     _options: {
