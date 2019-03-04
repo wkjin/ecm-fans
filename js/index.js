@@ -359,7 +359,7 @@ var indexPage = {
     
     _initEnd: function(){
         var self = this;
-        self.$parent.find(self._options.imgSelector).lazyload(); 
+        /* self.$parent.find(self._options.imgSelector).lazyload();  */
     },
 
     init: function(){
