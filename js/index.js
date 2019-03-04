@@ -35,9 +35,12 @@ var indexPage = {
         aboutCompanyInfoContainerSelector: '.js-company-info-container',
         aboutCompanyInfoTemplateId: 'js-company-info',//关于公司模板id
 
+        imgSelector: 'img.lazy-load',//图片选择器
+
     },
 
     _parentObj: null,//父容器的对象
+    $parent: null,//
 
     //产品展示图
     _productNum: 0,//产品的数量
@@ -72,6 +75,7 @@ var indexPage = {
 
         //初始基本对象
         self._parentObj = $(self._options.parentSelector);
+        self.$parent = $(self._options.parentSelector);
 
         //添加语言监控类（为了保持数据的最新，只有栏目、碎片数据做了缓存，其他数据根据语言变化获取最新的数据）
         commonEnv.addListenLanguageChange(function(language){
@@ -354,7 +358,8 @@ var indexPage = {
     },
     
     _initEnd: function(){
-        
+        var self = this;
+        self.$parent.find(self._options.imgSelector).lazyload(); 
     },
 
     init: function(){

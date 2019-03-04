@@ -24,7 +24,7 @@
                         <div class="swiper-wrapper js-banner-swiper-container">
                             <script id="js-banner-swiper" type="text/html">
                                 {{each bannerList it i}}
-                                <div class="swiper-slide"><img src="{{it.value}}" data-url="{{it.name}}">
+                                <div class="swiper-slide"><img class="lazy-load" src="{{it.value}}" data-url="{{it.name}}">
                                 </div>
                                 {{/each}}
                             </script>
@@ -50,7 +50,7 @@
                         <script id="js-product-category" type="text/html">
                             {{each productCategoryList it i}}
                                 <a href="{{it.url}}">
-                                    <img src="{{it.thumb}}" alt="{{it.name}}">
+                                    <img  class="lazy-load" src="{{it.thumb}}" alt="{{it.name}}">
                                     <p>{{it.name}}</p>
                                 </a>    
                             {{/each}}
@@ -71,7 +71,7 @@
                     <div class="content-list js-news-list-container">
                         <script id="js-news-list" type="text/html">
                             <div class="thumb">
-                                <img src="{{news_thumb}}">
+                                <img  class="lazy-load" src="{{news_thumb}}">
                             </div>
                             <div class="news-item">
                                 {{each newsList1  it i}}
@@ -102,7 +102,7 @@
                             <script id="js-haoyuan-classroom" type="text/html">
                                 {{each haoyuanClassroom it i}}
                                 <a class="classroom-item" href="news-detail.html?c=1&id={{it.id}}">
-                                    <img src="{{it.thumb}}">
+                                    <img  class="lazy-load" src="{{it.thumb}}">
                                     <div>
                                         <h4>{{it.title}}</h4>
                                         <p>{{it.abstract}}</p>
@@ -120,7 +120,7 @@
                 <div class="content-center js-company-info-container">
                     <script id="js-company-info" type="text/html">
                         <div class="left">
-                            <img src="{{fragmentData.about_company_img}}">
+                            <img  class="lazy-load" src="{{fragmentData.about_company_img}}">
                         </div>
                         <div class="right">{{fragmentData.company_description}}</div> 
                     </script>   
@@ -140,6 +140,7 @@
 <script src="./js/common-footer.js"></script>
 <script src="./assets/swiper.min.js"></script>
 <script src="./js/index.js"></script>
+<script src="./assets/jquery.lazyload.js"></script>
 <script>
     $(function(){
         indexPage.init();
