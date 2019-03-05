@@ -69,11 +69,11 @@
                                     </div>
                                     <div>
                                         <label for="telphone">{{layoutData.form_telphone}}：</label>
-                                        <input type="text" id="telphone" name="telphone" placeholder="请输入联系方式" required>
+                                        <input type="text" id="telphone" name="telphone" placeholder="请输入联系方式" maxlength="11" oninput="value=value.replace(/[^\d]/g,'')" required>
                                     </div>
-                                    <div>
+                                    <div> 
                                         <label for="email">{{layoutData.form_email}}：</label>
-                                        <input type="text" id="email" name="email" placeholder="请输入联系的邮箱" required>
+                                        <input type="email" id="email" name="email" placeholder="请输入联系的邮箱" required>
                                     </div>
                                     <div>
                                         <label for="company-name">{{layoutData.form_companyName}}：</label>
