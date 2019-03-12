@@ -25,11 +25,11 @@
                             <script id="js-banner-swiper" type="text/html">
                                 {{each bannerList it i}}
                                 <div class="swiper-slide">
-                                    {{if i ===  0}}
-                                    <img class="lazy-load" src="{{it.value}}" data-url="{{it.name}}">
-                                    {{else/}}
-                                    <img class="lazy-load" data-original="{{it.value}}" data-url="{{it.name}}"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=">
-                                    {{/if}}
+                                    <!-- {{if i ===  0}}
+                                    <img src="{{it.value}}">
+                                    {{else/}} -->
+                                    <img class="lazy-load" data-original="{{it.value}}"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=">
+                                    <!-- {{/if}} -->
                                 </div>
                                 {{/each}}
                             </script>
@@ -55,7 +55,7 @@
                         <script id="js-product-category" type="text/html">
                             {{each productCategoryList it i}}
                                 <a href="{{it.url}}">
-                                    <img  class="lazy-load" data-original="{{it.thumb}}" alt="{{it.name}}"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=">
+                                    <img  class="lazy-load" data-original="{{it.thumb}}"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=">
                                     <p>{{it.name}}</p>
                                 </a>    
                             {{/each}}
@@ -76,7 +76,7 @@
                     <div class="content-list js-news-list-container">
                         <script id="js-news-list" type="text/html">
                             <div class="thumb">
-                                <img class="lazy-load" data-original="{{news_thumb}}">
+                                <img class="lazy-load" data-original="{{news_thumb}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=">
                             </div>
                             <div class="news-item">
                                 {{each newsList1  it i}}
@@ -125,7 +125,7 @@
                 <div class="content-center js-company-info-container">
                     <script id="js-company-info" type="text/html">
                         <div class="left">
-                            <img class="lazy-load" data-original="{{fragmentData.about_company_img}}">
+                            <img class="lazy-load" data-original="{{fragmentData.about_company_img}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=">
                         </div>
                         <div class="right">{{fragmentData.company_description}}</div> 
                     </script>   

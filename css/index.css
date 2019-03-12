@@ -226,6 +226,7 @@
 .content-area .product-area .content-center .product-list > a > img,
 .content-area .product-area .content-center .product-list.product-can-move > div.product-show > a > img {
   height: calc(100% - 2em);
+  display: block;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -311,6 +312,7 @@
   display: block;
   padding: 1em 0 2em 0;
   width: 100%;
+  min-height: 920px;
   overflow: hidden;
   position: relative;
 }
@@ -341,6 +343,7 @@
   display: block;
   width: 100%;
   height: 12em;
+  border: 1px solid #f6f6f6;
 }
 .content-area .classroom-area .content-center .content-list .classroom-list-area .classroom-item > div {
   line-height: 2em;

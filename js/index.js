@@ -39,8 +39,7 @@ var indexPage = {
 
     },
 
-    _parentObj: null,//父容器的对象
-    $parent: null,//
+    $parent: null,//父容器的对象
 
     //产品展示图
     _productNum: 0,//产品的数量
@@ -49,6 +48,9 @@ var indexPage = {
     
     _bannerSwiper: null,//保存banner图的swiper实例
 
+    loadingNum: 0,//正在加载的数量
+
+    canLoadingTimer: null,//是否可以加载Timer
     lazyloadTimer: null,//懒加载
     lazyLoadNum: 0,//懒加载次数
     
@@ -77,7 +79,6 @@ var indexPage = {
         }
 
         //初始基本对象
-        self._parentObj = $(self._options.parentSelector);
         self.$parent = $(self._options.parentSelector);
 
         //添加语言监控类（为了保持数据的最新，只有栏目、碎片数据做了缓存，其他数据根据语言变化获取最新的数据）
@@ -97,7 +98,7 @@ var indexPage = {
 
         //产品展示图
         self._productParentObj = $(self._options.productContainerSelector);
-        self._productNum =  self._parentObj.find(self._options.productContainerSelector).find('> a').length;
+        self._productNum =  self.$parent.find(self._options.productContainerSelector).find('> a').length;
     },
 
     //填充html的组（语言变化，需要跟随变化）
@@ -111,7 +112,7 @@ var indexPage = {
     //生成banner图
     _fullBanner: function(){
         var self = this;
-        self._parentObj.find(self._options.bannerContainerSelector).html(template(self._options.bannerItemTemplateId, {
+        self.$parent.find(self._options.bannerContainerSelector).html(template(self._options.bannerItemTemplateId, {
             bannerList: commonPage.splitFragment('home_broadcast', '|',  '', false)
         }));
         if(self._bannerSwiper !== null){
@@ -120,7 +121,7 @@ var indexPage = {
         
         self._bannerSwiper = new Swiper(self._options.bannerBodySelector, {
             autoplay: {
-                delay: 5000,
+                delay: 10 * 1000,
             },
             pagination: {
                 el: '.swiper-pagination',
@@ -151,24 +152,26 @@ var indexPage = {
     //填充产品栏目的标题
     _fullProductTitle: function(){
         var self = this;
-        self._parentObj.find(self._options.productCategoryTitleContainer).html(template(self._options.productCategoryTitleTemplateId, {
+        self.$parent.find(self._options.productCategoryTitleContainer).html(template(self._options.productCategoryTitleTemplateId, {
             layoutData: storage.get('layoutData')
         }));
     },
     //生成产品轮播图
     _fullProduct: function(){
         var self = this;
+        self.loadingNum ++;
         server.getCategorysByCondition({pid: 6, is_index: 1}, function(res){
+            self.loadingNum --;
             //填充标题
             self._fullProductTitle();//填充产品标题
             if(res.status === 1){//获取数据成功
                 var productCategoryName = 'productCategoryList';
                 storage.set(productCategoryName, res.data, false);
-                self._parentObj.find(self._options.productContainerSelector).html(template(self._options.productCategoryTemplateId, {
+                self.$parent.find(self._options.productContainerSelector).html(template(self._options.productCategoryTemplateId, {
                     productCategoryList: storage.get(productCategoryName)
                 }));
                 //记录条数
-                self._productNum =  self._parentObj.find(self._options.productContainerSelector).find('> a').length;
+                self._productNum =  self.$parent.find(self._options.productContainerSelector).find('> a').length;
                 //生产产品展示的轮播图
                 setTimeout(function(){
                     self._generateProductShow();
@@ -181,7 +184,7 @@ var indexPage = {
     //生成产品展示图的轮播
     _generateProductShow: function(){
         var self = this;
-        var parentObj = self._parentObj.find(self._options.productContainerSelector);
+        var parentObj = self.$parent.find(self._options.productContainerSelector);
         //根据数量放在不同的product-show进行待显示与显示
 
         //把前面四张产品图放在显示的div中
@@ -197,20 +200,22 @@ var indexPage = {
     //新闻资讯标题
     _fullNewsTitle: function(){
         var self = this;
-        self._parentObj.find(self._options.newsTitleContainerSelector).html(template(self._options.newsTitleTemplateId, {
+        self.$parent.find(self._options.newsTitleContainerSelector).html(template(self._options.newsTitleTemplateId, {
             layoutData: storage.get('layoutData')
         }));
     },
     //新闻资讯内容
     _fullNewsList: function(){
         var self = this;
+        self.loadingNum ++;
         server.getArticles({category_id: 13, pageSize: 8}, function(res){
+            self.loadingNum --;
             self._fullNewsTitle();
             if(res.status === 1){//获取数据成功
                 var newsListName = 'indexNewsList';
                 storage.set(newsListName, res.data, false);
                 var newsData = storage.get(newsListName);
-                self._parentObj.find(self._options.newsListContainerSelector).html(template(self._options.newsListTemplateId, {
+                self.$parent.find(self._options.newsListContainerSelector).html(template(self._options.newsListTemplateId, {
                     newsList1: newsData.slice(0, 4),
                     newsList2: newsData.slice(4, 8),
                     news_thumb: storage.get('fragmentData').news_thumb.value
@@ -224,19 +229,21 @@ var indexPage = {
     //浩沅课堂
     _fullHaoyuanClassroomTitle: function(){
         var self = this;
-        self._parentObj.find(self._options.haoyuanClassroomTitleContainerSelector).html(template(self._options.haoyuanClassroomTitleTemplateId, {
+        self.$parent.find(self._options.haoyuanClassroomTitleContainerSelector).html(template(self._options.haoyuanClassroomTitleTemplateId, {
             layoutData: storage.get('layoutData')
         }));
     }, 
     _fullHaoyuanClassroom: function(){
         var self = this;
+        self.loadingNum ++;
         server.getArticles({category_id: 14, pageSize: 9}, function(res){
+            self.loadingNum --;
             self._fullHaoyuanClassroomTitle();
             if(res.status === 1){//获取数据成功
                 var haoyuanClassroomName = 'indexHaoyuanClassroom';
                 storage.set(haoyuanClassroomName, res.data, false);
                 var haoyuanClassroom = storage.get(haoyuanClassroomName);
-                self._parentObj.find(self._options.haoyuanClassroomContainerSelector).html(template(self._options.haoyuanClassroomTemplateId, {
+                self.$parent.find(self._options.haoyuanClassroomContainerSelector).html(template(self._options.haoyuanClassroomTemplateId, {
                     haoyuanClassroom: haoyuanClassroom
                 }));  
             }else{
@@ -249,7 +256,7 @@ var indexPage = {
     _fullAboutCompany: function(fragmentData){
         var self = this;
         setTimeout(function(){
-            self._parentObj.find(self._options.aboutCompanyInfoContainerSelector).html(template(self._options.aboutCompanyInfoTemplateId, {
+            self.$parent.find(self._options.aboutCompanyInfoContainerSelector).html(template(self._options.aboutCompanyInfoTemplateId, {
                 fragmentData: fragmentData
             }));
         }, 500);
@@ -260,9 +267,9 @@ var indexPage = {
 
         //产品图片展示
         //绑定产品图的点击事件
-        self._parentObj.find(self._options.productContainerSelector).off('click').on('click', function(e){
+        self.$parent.find(self._options.productContainerSelector).off('click').on('click', function(e){
             // var $this = $(this);
-            var $this = self._parentObj.find(self._options.productContainerSelector);
+            var $this = self.$parent.find(self._options.productContainerSelector);
             var tagName = e.target.tagName;
             if(tagName === 'IMG' || tagName === 'A'){
                 // alert('点击的是图片');
@@ -281,10 +288,10 @@ var indexPage = {
                     // 查找到产品正在显示的div
                     var productShowSelector = self._options.productShowSelector;
                     var productShowNum = self._options.productShowNum;
-                    var productShowObj = self._parentObj.find(productShowSelector).not(':hidden');
+                    var productShowObj = self.$parent.find(productShowSelector).not(':hidden');
                     
                     //查看是否已经生成等待显示的div（如果没有，就创建，如果有了以后就直接改变图片的地址）
-                    var productHiddenObj = self._parentObj.find(productShowSelector + ':hidden');
+                    var productHiddenObj = self.$parent.find(productShowSelector + ':hidden');
                     //开始移动
                     if(productShowObj.is(":animated")){    //判断元素是否正处于动画状态
                         //如果当前没有进行动画，则添加新动画
@@ -292,7 +299,7 @@ var indexPage = {
                     }
                     if(typeof productHiddenObj === 'undefined' || productHiddenObj.length <= 0){//如果不存在，那么就创建
                         productShowObj.after(productShowObj.clone().hide());
-                        productHiddenObj = self._parentObj.find(productShowSelector + ':hidden');
+                        productHiddenObj = self.$parent.find(productShowSelector + ':hidden');
                     }
                     var startIndex = self._productNum * 4 + self._showProductIndex;
                     var isLeft = true;//是否先左边
@@ -327,17 +334,17 @@ var indexPage = {
     //product切换
     _changeProduct: function(callback, isLeft){
         var self = this;
-        var productContainerObj = self._parentObj.find(self._options.productContainerSelector);
+        var productContainerObj = self.$parent.find(self._options.productContainerSelector);
         if(typeof isLeft !== 'boolean'){
             isLeft = !!isLeft;
         }
         var animateTime = self._options.productAnimateTime;
         var productShowSelector = self._options.productShowSelector;
         //查看显示图片的div
-        var productShowObj = self._parentObj.find(productShowSelector).not(':hidden');
+        var productShowObj = self.$parent.find(productShowSelector).not(':hidden');
 
         //查看不显示图片的div
-        var productHiddenObj = self._parentObj.find(productShowSelector + ':hidden');
+        var productHiddenObj = self.$parent.find(productShowSelector + ':hidden');
         if(isLeft){
             productHiddenObj.css({left: '100%'}).show().animate({ left: '0%'}, animateTime, function(){
                 if(typeof callback === 'function'){
@@ -362,19 +369,36 @@ var indexPage = {
     
     _initEnd: function(){
         var self = this;
-        self.lazyloadTimer = setInterval(function(){
-            if(self.lazyLoadNum > 2){
-                clearInterval(self.lazyloadTimer);
-            }else{
-                $("img.lazy-load").lazyload({
-                    skip_invisible : false,
-                    failure_limit : 20,
-                    /* effect : "fadeIn", */
-                    threshold : 18000, //预加载，在图片距离屏幕180px时提前载入
-                });
-                self.lazyLoadNum ++;
+        var lazyLoadClass = 'lazy-load';
+        var lazyLoadImgDataAttr = 'original';//懒加载图片的data属性
+        var emptyImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=';
+        self.canLoadingTimer =setInterval(function(){
+            if(self.loadingNum <= 0){
+                startLazyLoadImg();
+                clearInterval(self.canLoadingTimer);
+                self.canLoadingTimer = null;
             }
-        }, 1000);
+        }, 500);
+        //开始懒加载图片
+        function startLazyLoadImg(){
+            self.lazyloadTimer = setInterval(function(){
+                if(self.lazyLoadNum > 100){
+                    clearInterval(self.lazyloadTimer);
+                }else{
+                    $('.' + lazyLoadClass + '[data-' + lazyLoadImgDataAttr + ']:lt(10)').off('error').on('error',function(){
+                        $(this).attr('src', emptyImg);//如果懒加载错误就使用空白图片
+                    }).each(function(){
+                        var $this = $(this);
+                        var src = $this.data(lazyLoadImgDataAttr);
+                        if(typeof src === 'string' && src.replace(/\s+/, '') !== ''){
+                            $this.attr('src', src).removeClass(lazyLoadClass);
+                        }
+                    });
+                    console.log('懒加载次数：', self.lazyLoadNum);
+                    self.lazyLoadNum ++;
+                }
+            }, 1000);
+        }
     },
 
     init: function(){
