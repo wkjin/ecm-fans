@@ -53,6 +53,7 @@ var indexPage = {
     canLoadingTimer: null,//是否可以加载Timer
     lazyloadTimer: null,//懒加载
     lazyLoadNum: 0,//懒加载次数
+    loadingImgNum: 0, //正在加载图片的数量
     
 
     _initData: function(){
@@ -371,6 +372,7 @@ var indexPage = {
         var self = this;
         var lazyLoadClass = 'lazy-load';
         var lazyLoadImgDataAttr = 'original';//懒加载图片的data属性
+        var indexBannerImgClass = 'js-index-banner';//首页banner轮播图
         var emptyImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=';
         self.canLoadingTimer =setInterval(function(){
             if(self.loadingNum <= 0){
@@ -385,17 +387,32 @@ var indexPage = {
                 if(self.lazyLoadNum > 100){
                     clearInterval(self.lazyloadTimer);
                 }else{
-                    $('.' + lazyLoadClass + '[data-' + lazyLoadImgDataAttr + ']:lt(10)').off('error').on('error',function(){
-                        $(this).attr('src', emptyImg);//如果懒加载错误就使用空白图片
-                    }).each(function(){
-                        var $this = $(this);
-                        var src = $this.data(lazyLoadImgDataAttr);
-                        if(typeof src === 'string' && src.replace(/\s+/, '') !== ''){
-                            $this.attr('src', src).removeClass(lazyLoadClass);
-                        }
-                    });
-                    console.log('懒加载次数：', self.lazyLoadNum);
                     self.lazyLoadNum ++;
+                    //对首页的banner图进行优先处理
+                    var $indexBanner = $('.' + indexBannerImgClass);
+                    if($indexBanner.length > 0 ){//banner图优秀加载
+                        $indexBanner.off('error').on('error',function(){
+                            $(this).removeClass(indexBannerImgClass).attr('src', emptyImg);//如果懒加载错误就使用空白图片
+                        }).on('load', function(){
+                            $(this).removeClass(indexBannerImgClass);
+                        });
+                        return;//如果在加载banner图时候停止加载其他的图片
+                    }
+                    if(self.loadingImgNum <= 0){
+                        $('.' + lazyLoadClass + '[data-' + lazyLoadImgDataAttr + ']:lt(10)').off('error').on('error',function(){
+                            $(this).off('load').attr('src', emptyImg);//如果懒加载错误就使用空白图片
+                            self.loadingImgNum --;
+                        }).off('load').on('load', function(){
+                            self.loadingImgNum --;//加载图片成功
+                        }).each(function(){
+                            var $this = $(this);
+                            self.loadingImgNum ++;
+                            var src = $this.data(lazyLoadImgDataAttr);
+                            if(typeof src === 'string' && src.replace(/\s+/, '') !== ''){
+                                $this.attr('src', src).removeClass(lazyLoadClass);
+                            }
+                        });    
+                    }
                 }
             }, 1000);
         }
