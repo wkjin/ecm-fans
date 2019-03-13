@@ -119,7 +119,7 @@ var indexPage = {
         if(self._bannerSwiper !== null){
             self._bannerSwiper.destroy();//如果已经初始化过的，先销毁在重新初始化
         }
-        
+
         self._bannerSwiper = new Swiper(self._options.bannerBodySelector, {
             autoplay: {
                 delay: 10 * 1000,
@@ -135,19 +135,25 @@ var indexPage = {
             },
             on: {
                 init: function () {
-                  /* console.log('swiper initialized'); */
+                    //图片加载事件
+                    self.$parent.find(self._options.bannerContainerSelector).find('img').off('load').on('load', function(){
+                        $(this).attr('ready', true);//添加图片加载标记
+                    }).off('error').on('error', function(){
+                        $(this).attr('error', true);
+                    });
                 },
                 click: function(index){
                     /* console.log(arguments, index); */
                 },
                 slideChange: function(){
-                   /*  console.log('change'); */
+                /*  console.log('change'); */
                 }
             },
             speed: 1000,
             spaceBetween: 0,
             loop: true
         });
+        
     },
 
     //填充产品栏目的标题
@@ -265,13 +271,6 @@ var indexPage = {
     
     _initEven: function(){
         var self = this;
-
-        //图片加载事件
-        $('img').off('load').on('load', function(){
-            $(this).attr('ready', true);//添加图片加载标记
-        }).off('error').on('error', function(){
-            $(this).attr('error', true);
-        });
 
         //产品图片展示
         //绑定产品图的点击事件
@@ -398,28 +397,23 @@ var indexPage = {
                     self.lazyLoadNum ++;
                     //对首页的banner图进行优先处理
                     var $indexBanner = $('.' + indexBannerImgClass + ':not([ready])');
-                    console.log('懒加载次数：', self.lazyLoadNum, '正在加载图片数量：', self.loadingImgNum ,'banner数量', $indexBanner.length);
                     if($indexBanner.length > 0 ){//banner图优秀加载
-                       /*  $indexBanner.off('error').on('error',function(){
+                        $indexBanner.off('error').on('error',function(){
                             $(this).removeClass(indexBannerImgClass).attr('src', emptyImg);//如果懒加载错误就使用空白图片
-                            console.log('加载banner图失败');
                         }).on('load', function(){
                             $(this).removeClass(indexBannerImgClass);
-                            console.log('加载banner图成功');
-                        }); */
+                        });
                         return;//如果在加载banner图时候停止加载其他的图片
                     }
                     if(self.loadingImgNum <= 0){
                         $('.' + lazyLoadClass + '[data-' + lazyLoadImgDataAttr + ']:lt(10)').off('error').on('error',function(){
                             $(this).off('load').attr('src', emptyImg);//如果懒加载错误就使用空白图片
                             self.loadingImgNum --;
-                            console.log('加载图片失败', self.loadingImgNum);
                         }).off('load').on('load', function(){
                             self.loadingImgNum --;//加载图片成功
                         }).each(function(){
                             var $this = $(this);
                             self.loadingImgNum ++;
-                            console.log('正在加载图片', self.loadingImgNum);
                             var src = $this.data(lazyLoadImgDataAttr);
                             if(typeof src === 'string' && src.replace(/\s+/, '') !== ''){
                                 $this.attr('src', src).removeClass(lazyLoadClass);
