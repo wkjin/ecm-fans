@@ -400,13 +400,13 @@ var indexPage = {
                     var $indexBanner = $('.' + indexBannerImgClass + ':not([ready])');
                     console.log('懒加载次数：', self.lazyLoadNum, '正在加载图片数量：', self.loadingImgNum ,'banner数量', $indexBanner.length);
                     if($indexBanner.length > 0 ){//banner图优秀加载
-                        $indexBanner.off('error').on('error',function(){
+                       /*  $indexBanner.off('error').on('error',function(){
                             $(this).removeClass(indexBannerImgClass).attr('src', emptyImg);//如果懒加载错误就使用空白图片
                             console.log('加载banner图失败');
                         }).on('load', function(){
                             $(this).removeClass(indexBannerImgClass);
                             console.log('加载banner图成功');
-                        });
+                        }); */
                         return;//如果在加载banner图时候停止加载其他的图片
                     }
                     if(self.loadingImgNum <= 0){
