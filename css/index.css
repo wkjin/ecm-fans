@@ -80,6 +80,7 @@
 .content-area .banner-area .content-center {
   width: 100%!important;
   max-width: 1600px!important;
+  margin: 0 auto;
   background: #ffffff;
   height: 100%;
 }
