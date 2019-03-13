@@ -266,6 +266,13 @@ var indexPage = {
     _initEven: function(){
         var self = this;
 
+        //图片加载事件
+        $('img').off('load').on('load', function(){
+            $(this).attr('ready', true);//添加图片加载标记
+        }).off('error').on('error', function(){
+            $(this).attr('error', true);
+        });
+
         //产品图片展示
         //绑定产品图的点击事件
         self.$parent.find(self._options.productContainerSelector).off('click').on('click', function(e){
@@ -381,6 +388,7 @@ var indexPage = {
                 self.canLoadingTimer = null;
             }
         }, 500);
+        
         //开始懒加载图片
         function startLazyLoadImg(){
             self.lazyloadTimer = setInterval(function(){
@@ -389,7 +397,7 @@ var indexPage = {
                 }else{
                     self.lazyLoadNum ++;
                     //对首页的banner图进行优先处理
-                    var $indexBanner = $('.' + indexBannerImgClass);
+                    var $indexBanner = $('.' + indexBannerImgClass + ':not([ready])');
                     console.log('懒加载次数：', self.lazyLoadNum, '正在加载图片数量：', self.loadingImgNum ,'banner数量', $indexBanner.length);
                     if($indexBanner.length > 0 ){//banner图优秀加载
                         $indexBanner.off('error').on('error',function(){
