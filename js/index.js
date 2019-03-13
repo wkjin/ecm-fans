@@ -89,13 +89,19 @@ var indexPage = {
 
         self._fullHtmlGroup();
 
+        //添加布局监控
+        commonPage.addListenLayout(function(layoutData, version){
+            self._fullProductTitle();//填充产品标题
+            self._fullNewsTitle();//填充新闻资讯标题
+            self._fullHaoyuanClassroomTitle();//填充浩沅课堂标题
+        });
+
         //添加碎片监听事件（已经集成了语言变化）
         commonPage.addListenFragment(function(fragmentValueData, version, layoutData, fragmentData){
             /* console.log(fragmentValueData, version, layoutData, fragmentData, '碎片变化监听'); */
             self._fullBanner();//banner图变化
             self._fullAboutCompany(fragmentValueData);//填充关于公司
         });
-
 
         //产品展示图
         self._productParentObj = $(self._options.productContainerSelector);
@@ -169,8 +175,6 @@ var indexPage = {
         self.loadingNum ++;
         server.getCategorysByCondition({pid: 6, is_index: 1}, function(res){
             self.loadingNum --;
-            //填充标题
-            self._fullProductTitle();//填充产品标题
             if(res.status === 1){//获取数据成功
                 var productCategoryName = 'productCategoryList';
                 storage.set(productCategoryName, res.data, false);
@@ -217,7 +221,6 @@ var indexPage = {
         self.loadingNum ++;
         server.getArticles({category_id: 13, pageSize: 8}, function(res){
             self.loadingNum --;
-            self._fullNewsTitle();
             if(res.status === 1){//获取数据成功
                 var newsListName = 'indexNewsList';
                 storage.set(newsListName, res.data, false);
@@ -245,7 +248,6 @@ var indexPage = {
         self.loadingNum ++;
         server.getArticles({category_id: 14, pageSize: 9}, function(res){
             self.loadingNum --;
-            self._fullHaoyuanClassroomTitle();
             if(res.status === 1){//获取数据成功
                 var haoyuanClassroomName = 'indexHaoyuanClassroom';
                 storage.set(haoyuanClassroomName, res.data, false);
