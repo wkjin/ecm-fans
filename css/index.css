@@ -76,11 +76,11 @@
 .content-area .banner-area {
   width: 100%;
   height: 400px;
-  background: #ffffff;
 }
 .content-area .banner-area .content-center {
   width: 100%!important;
   max-width: 1920px!important;
+  background: #ffffff;
   height: 100%;
 }
 .content-area .banner-area .content-center > div {
