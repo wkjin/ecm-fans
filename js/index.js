@@ -388,9 +388,9 @@ var indexPage = {
                     clearInterval(self.lazyloadTimer);
                 }else{
                     self.lazyLoadNum ++;
-                    console.log('懒加载次数：', self.lazyLoadNum, '正在加载图片数量：', self.loadingImgNum );
                     //对首页的banner图进行优先处理
                     var $indexBanner = $('.' + indexBannerImgClass);
+                    console.log('懒加载次数：', self.lazyLoadNum, '正在加载图片数量：', self.loadingImgNum , $indexBanner.length);
                     if($indexBanner.length > 0 ){//banner图优秀加载
                         $indexBanner.off('error').on('error',function(){
                             $(this).removeClass(indexBannerImgClass).attr('src', emptyImg);//如果懒加载错误就使用空白图片
