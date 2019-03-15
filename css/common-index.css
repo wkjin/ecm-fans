@@ -291,7 +291,7 @@ body {
 }
 .footer .content-center > div {
   float: left;
-  color: #ffffff;
+  color: #333333;
 }
 .footer .content-center > div:first-child {
   width: 40%;
