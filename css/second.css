@@ -167,7 +167,8 @@
 }
 .content-area .search-area .content-center .fast-search .list-group {
   flex-grow: 1;
-  text-align: right;
+  padding-left: 1em;
+  text-align: left;
 }
 .content-area .search-area .content-center .fast-search .list-group a,
 .content-area .search-area .content-center .handle-bar > a {
