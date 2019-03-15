@@ -80,6 +80,10 @@
                                         <input type="text" id="company-name" name="companyName" placeholder="请输入您公司的名字" required>
                                     </div>
                                     <div>
+                                        <label for="form-message">{{layoutData.form_message}}：</label>
+                                        <textarea type="text" id="form-message" name="message" placeholder="请输入留言内容"></textarea>
+                                    </div>
+                                    <div>
                                         <label for="check-code">{{layoutData.form_checkCode}}：</label>
                                         <input type="text" id="check-code" name="code" placeholder="请输入验证码" required>
                                         <img src="{{host}}/Home/User/createCheckCode" onclick="this.src='{{host}}/Home/User/createCheckCode?id='+Math.random()" >

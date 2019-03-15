@@ -68,6 +68,9 @@
     "form_companyName_cn": "企业名称",
     "form_companyName_en": "Company Name",
 
+    "form_message_cn": "留言内容",
+    "form_message_en": "Message",
+
     "form_checkCode_cn": "验证码",
     "form_checkCode_en": "Check Code",
 

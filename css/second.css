@@ -315,7 +315,8 @@
   font-size: 18px;
   color: #333333;
 }
-.content-area .second-content .content-center .information-detail > form > div:not(.handle-bar) input {
+.content-area .second-content .content-center .information-detail > form > div:not(.handle-bar) input,
+.content-area .second-content .content-center .information-detail > form > div:not(.handle-bar) textarea {
   flex-grow: 1;
   display: block;
   line-height: 1em;
@@ -324,9 +325,14 @@
   font-size: 16px;
   letter-spacing: 1px;
   color: #666666;
+  font-weight: normal;
   background-color: #ffffff;
   border: 1px solid #cccccc;
   outline: none;
+}
+.content-area .second-content .content-center .information-detail > form > div:not(.handle-bar) textarea {
+  min-height: 3em;
+  resize: vertical;
 }
 .content-area .second-content .content-center .information-detail > form > div:not(.handle-bar) img {
   position: absolute;
