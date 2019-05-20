@@ -212,7 +212,7 @@ body {
   content: '';
   position: absolute;
   top: 2px;
-  right: -2px;
+  left: -2px;
   height: 12px;
   width: 1px;
   background-color: #cccccc;
