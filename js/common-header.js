@@ -95,10 +95,13 @@ var headerObj = {
         self._options.fragmentData = fragmentData;//保存数据最新
         if(typeof fragmentData === 'object' && fragmentData !== null){
             var $enBtn = self._parentObj.find(self._options.enButtonSelector);
-            if(parseInt(fragmentData.show_english) === 0){
+            var $cnBtn = self._parentObj.find(self._options.cnButtonSelector);
+            if(parseInt(fragmentData.show_language) === 0){
                 $enBtn.hide();
+                $cnBtn.hide();
             }else{
                 $enBtn.show();
+                $cnBtn.show();
             }
         }
     },
