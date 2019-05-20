@@ -208,7 +208,7 @@ body {
 .header .content-center > div.header-right > div.nav-top > button:last-child {
   padding-right: 20px;
 }
-.header .content-center > div.header-right > div.nav-top > button:not(:last-child):after {
+.header .content-center > div.header-right > div.nav-top > button:not(:first-child):before {
   content: '';
   position: absolute;
   top: 2px;
