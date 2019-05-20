@@ -41,6 +41,7 @@ var headerObj = {
         //添加碎片监听事件
         self.commonPage.addListenFragment(function(data){
             self._fullLogoHtml(data);
+            self._languageShowControl(data);
         });
 
         //============== 对页面初始化 ======================
@@ -50,6 +51,7 @@ var headerObj = {
     //填充html
     _fullHtml: function(data){
         var self = this;
+        self._languageShowControl();
         self._fullNavListHtml();
         self._fullLogoHtml();
     },
@@ -84,6 +86,20 @@ var headerObj = {
         if(typeof fragmentData === 'object' && fragmentData !== null){
             var html = template(self._options.headerLogoTemplateId, {logo: fragmentData.company_logo});
             this._parentObj.find(self._options.navLogoContainerSelector).html(html);
+        }
+    },
+    //显示语言
+    _languageShowControl: function(fragmentData){
+        var self = this;
+        var fragmentData = (typeof fragmentData === 'object' && fragmentData !== null) ? fragmentData: self._options.fragmentData;
+        self._options.fragmentData = fragmentData;//保存数据最新
+        if(typeof fragmentData === 'object' && fragmentData !== null){
+            var $enBtn = self._parentObj.find(self._options.enButtonSelector);
+            if(parseInt(fragmentData.show_english) === 0){
+                $enBtn.hide();
+            }else{
+                $enBtn.show();
+            }
         }
     },
 
