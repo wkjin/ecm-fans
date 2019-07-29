@@ -286,7 +286,6 @@
   transform: translateX(-50%);
   height: 12em;
   display: block;
-  margin: 0 auto;
 }
 .content-area .news-area .content-center .content-list > div.news-item {
   flex-grow: 1;
@@ -349,7 +348,6 @@
   left: 50%;
   transform: translateX(-50%);
   height: 12em;
-  margin: 0 auto;
 }
 .content-area .classroom-area .content-center .content-list .classroom-list-area .classroom-item > div {
   line-height: 2em;
