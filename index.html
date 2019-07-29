@@ -103,7 +103,9 @@
                             <script id="js-haoyuan-classroom" type="text/html">
                                 {{each haoyuanClassroom it i}}
                                 <a class="classroom-item" href="news-detail.html?cid=14&id={{it.id}}">
-                                    <img class="lazy-load" data-original="{{it.thumb}}"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=">
+                                    <div class="thumb-img">
+                                        <img class="lazy-load" data-original="{{it.thumb}}"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=">
+                                    </div>                                    
                                     <div>
                                         <h4>{{it.title}}</h4>
                                         <p>{{it.abstract}}</p>

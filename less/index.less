@@ -300,20 +300,24 @@
                         padding: 0.5em;
                         height: 22em;
                         overflow: hidden;
-                        > img{
-                            border-radius: @defaultBorderRadus;
-                            display: block;
-                            // width: 100%;
-                            position: relative;
-                            left: 50%;
-                            transform: translateX(-50%);
-                            height: 12em;
-                            // border: 1px solid #f6f6f6;
-                        }
+                        
                         > div{
                             line-height: 2em;
                             letter-spacing: 1px;
                             padding: 0.5em 1em 0em 1em;
+                            &.thumb-img{
+                                padding: 0.5em;
+                                > img{
+                                    border-radius: @defaultBorderRadus;
+                                    display: block;
+                                    // width: 100%;
+                                    position: relative;
+                                    left: 50%;
+                                    transform: translateX(-50%);
+                                    height: 12em;
+                                    // border: 1px solid #f6f6f6;
+                                }
+                            }
                             > h4{
                                 font-size: 18px;
                                 color: @defaultFontColor;

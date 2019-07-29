@@ -341,18 +341,21 @@
   height: 22em;
   overflow: hidden;
 }
-.content-area .classroom-area .content-center .content-list .classroom-list-area .classroom-item > img {
+.content-area .classroom-area .content-center .content-list .classroom-list-area .classroom-item > div {
+  line-height: 2em;
+  letter-spacing: 1px;
+  padding: 0.5em 1em 0em 1em;
+}
+.content-area .classroom-area .content-center .content-list .classroom-list-area .classroom-item > div.thumb-img {
+  padding: 0.5em;
+}
+.content-area .classroom-area .content-center .content-list .classroom-list-area .classroom-item > div.thumb-img > img {
   border-radius: 3px;
   display: block;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   height: 12em;
-}
-.content-area .classroom-area .content-center .content-list .classroom-list-area .classroom-item > div {
-  line-height: 2em;
-  letter-spacing: 1px;
-  padding: 0.5em 1em 0em 1em;
 }
 .content-area .classroom-area .content-center .content-list .classroom-list-area .classroom-item > div > h4 {
   font-size: 18px;
