@@ -113,6 +113,7 @@ var pageContentArea={
             if($secondCategory.length > 0){
                 $secondCategory.addClass(selectedClass).siblings().removeClass(selectedClass);
                 window.location.href = (window.location.href.replace(/#cid=\d*/, '') + '#cid=' + cid);
+                self.showCategoryId = cid;
                 //通过栏目数据，获取所在栏目的文章
                 server.getArticles({category_id: cid},function(res){
                     if(res.status === 1){
