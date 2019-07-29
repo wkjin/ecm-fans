@@ -374,6 +374,9 @@
 .content-area .classroom-area .content-center .content-list .classroom-list-area .classroom-item > div > p:hover {
   color: #4395ff;
 }
+.content-area .js-category-block[c-id][p-c-id] {
+  display: none;
+}
 .content-area .info-area {
   padding: 1em  0;
 }
