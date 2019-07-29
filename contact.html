@@ -65,27 +65,27 @@
                                 <form action="###" method="post" id="online-message-form">
                                     <div>
                                         <label for="username">{{layoutData.form_username}}：</label>
-                                        <input type="text" id="username" name="username" placeholder="请输入您的名字" required>
+                                        <input type="text" id="username" name="username" placeholder="{{layoutData.form_placeholder_username}}" required>
                                     </div>
                                     <div>
                                         <label for="telphone">{{layoutData.form_telphone}}：</label>
-                                        <input type="text" id="telphone" name="telphone" placeholder="请输入联系方式" maxlength="11" oninput="value=value.replace(/[^\d]/g,'')" required>
+                                        <input type="text" id="telphone" name="telphone" placeholder="{{layoutData.form_placeholder_telphone}}" maxlength="11" oninput="value=value.replace(/[^\d]/g,'')" required>
                                     </div>
                                     <div> 
                                         <label for="email">{{layoutData.form_email}}：</label>
-                                        <input type="email" id="email" name="email" placeholder="请输入联系的邮箱" required>
+                                        <input type="email" id="email" name="email" placeholder="{{layoutData.form_placeholder_email}}" required>
                                     </div>
                                     <div>
                                         <label for="company-name">{{layoutData.form_companyName}}：</label>
-                                        <input type="text" id="company-name" name="companyName" placeholder="请输入您公司的名字" required>
+                                        <input type="text" id="company-name" name="companyName" placeholder="{{layoutData.form_placeholder_companyName}}" required>
                                     </div>
                                     <div>
                                         <label for="form-message">{{layoutData.form_message}}：</label>
-                                        <textarea type="text" id="form-message" name="message" placeholder="请输入留言内容"></textarea>
+                                        <textarea type="text" id="form-message" name="message" placeholder="{{layoutData.form_placeholder_message}}"></textarea>
                                     </div>
                                     <div>
                                         <label for="check-code">{{layoutData.form_checkCode}}：</label>
-                                        <input type="text" id="check-code" name="code" placeholder="请输入验证码" required>
+                                        <input type="text" id="check-code" name="code" placeholder="{{layoutData.form_placeholder_checkCode}}" required>
                                         <img src="{{host}}/Home/User/createCheckCode" onclick="this.src='{{host}}/Home/User/createCheckCode?id='+Math.random()" >
                                     </div>
                                     <div class="handle-bar">

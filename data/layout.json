@@ -1,7 +1,7 @@
 {
     "home_cn": "首页",
     "home_en": "Home",
-    
+
     "address_cn": "地址",
     "address_en": "Address",
 
@@ -81,6 +81,23 @@
     "form_submit_en": "Submit",
 
     "form_reset_cn": "重置",
-    "form_reset_en": "Reset"
+    "form_reset_en": "Reset",
+    
+    "form_placeholder_username_cn": "请输入您的名字",
+    "form_placeholder_username_en": "please input you Username",
 
+    "form_placeholder_telphone_cn": "请输入联系方式",
+    "form_placeholder_telphone_en": "please input you Telphone",
+
+    "form_placeholder_email_cn": "请输入联系的邮箱",
+    "form_placeholder_email_en": "please input you Email",
+
+    "form_placeholder_companyName_cn": "请输入您公司的名字",
+    "form_placeholder_companyName_en": "please input you Company Name",
+
+    "form_placeholder_message_cn": "请输入留言内容",
+    "form_placeholder_message_en": "please input Message",
+
+    "form_placeholder_checkCode_cn": "请输入验证码",
+    "form_placeholder_checkCode_en": "please input Check Code"
 }
