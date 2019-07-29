@@ -347,7 +347,8 @@
   padding: 0.5em 1em 0em 1em;
 }
 .content-area .classroom-area .content-center .content-list .classroom-list-area .classroom-item > div.thumb-img {
-  padding: 0.5em;
+  margin: 0 0.5em;
+  overflow: hidden;
 }
 .content-area .classroom-area .content-center .content-list .classroom-list-area .classroom-item > div.thumb-img > img {
   border-radius: 3px;
