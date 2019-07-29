@@ -18,7 +18,7 @@ var pageContentArea={
 
     $parent: null,//父类 jquery对象
     showCategoryData: null,//显示的栏目数据
-    showCategoryIndex: 0,//显示的栏目的索引
+    showCategoryId: 0,//显示的栏目的索引
 
     _mergeOptions: function(options){
         var self = this;
@@ -47,13 +47,13 @@ var pageContentArea={
         self.$parent = $(self._options.parentSelector);
 
         //获取所选栏目
-        var c = window.location.href.replace(/.*?#c=(\d+)$/, '$1');
-        c = parseInt(c);
-        if(isNaN(c)){
-            c = commonTools.getRequestParam('c');
-            c = parseInt(c);
+        var cid = window.location.href.replace(/.*?#cid=(\d+)$/, '$1');
+        cid = parseInt(cid);
+        if(isNaN(cid)){
+            cid = commonTools.getRequestParam('cid');
+            cid = parseInt(cid);
         }
-        self.showCategoryIndex = isNaN(c)?0:c;
+        self.showCategoryId = isNaN(cid)?0:cid;
 
         //添加语言监控类（为了保持数据的最新，只有栏目、碎片数据做了缓存，其他数据根据语言变化获取最新的数据）
         commonEnv.addListenLanguageChange(function(language){
@@ -87,7 +87,7 @@ var pageContentArea={
             self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {categorysList: categoryData._child}));
 
             //模拟点击栏目进行选中
-            self._selectSecondCategory(self.showCategoryIndex);
+            self._selectSecondCategory(self.showCategoryId);
         }else{
             console.log(self._options.pageCategoryDataName + '栏目信息读取失败');
         }
@@ -99,29 +99,22 @@ var pageContentArea={
         //从地址栏获取选中的栏目
         self.$parent.find(self._options.secondCategoryContainerSelector).off('click').on('click', 'span', function(){
             var $this = $(this);
-            self._selectSecondCategory($this.data('index'));
+            self._selectSecondCategory($this.data('id'));
         });
 
     },
     //选中二级栏目
-    _selectSecondCategory: function(index){
+    _selectSecondCategory: function(cid){
         var self = this;
         var selectedClass = self._options.secondCategorySelectedClass;
-        index = parseInt(index);
-        var secondCategoryList = self.$parent.find(self._options.secondCategoryContainerSelector).find('> span');
-        if(isNaN(index) || index >= secondCategoryList.length || index < 0){
-            index = 0;
-        }
-        secondCategoryList.each(function(){
-            var $this = $(this);
-            if(parseInt($this.data('index')) === index){
-                self.showCategoryIndex = index;
-                $this.addClass(selectedClass).siblings().removeClass(selectedClass);
-                window.location.href = (window.location.href.replace(/#c=\d*/, '') + '#c=' + index);
-                //修改栏目显示数据
-                self.showCategoryData = storage.get(self._options.pageCategoryDataName)._child[index];
+        cid = parseInt(cid);
+        if(!isNaN(cid) && cid > 0){
+            var $secondCategory = self.$parent.find(self._options.secondCategoryContainerSelector).find('> span[data-id="'+cid+'"]');
+            if($secondCategory.length > 0){
+                $secondCategory.addClass(selectedClass).siblings().removeClass(selectedClass);
+                window.location.href = (window.location.href.replace(/#cid=\d*/, '') + '#cid=' + cid);
                 //通过栏目数据，获取所在栏目的文章
-                server.getArticles({category_id: self.showCategoryData['id']},function(res){
+                server.getArticles({category_id: cid},function(res){
                     if(res.status === 1){
                         storage.set(self._options.pageCategoryArticleDataName, res.data);
                         //设置文章
@@ -130,8 +123,13 @@ var pageContentArea={
                         console.log('获取文章失败，请检查');
                     }
                 });
+                return;
             }
-        });
+        }
+        alert('栏目错误');
+        setTimeout(function(){
+            window.history.go(-1);
+        }, 1500);
     },
     /* 填充内容 */
     _fullArticleList: function(){
@@ -139,7 +137,7 @@ var pageContentArea={
         var data =  storage.get(self._options.pageCategoryArticleDataName);
         self.$parent.find(self._options.secondCategoryContentContainerSelector).html(template(self._options.secondCategoryContentTemplagteId, {
             data: data,
-            c: self.showCategoryIndex
+            c: self.showCategoryId
         }));
     },
 

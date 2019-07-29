@@ -29,13 +29,13 @@
                 <div class="content-center js-second-category-container">
                     <script id="js-second-category" type="text/html">
                         <span>{{layoutData.youLocal}}：</span>
-                        <a class="no-event no-list">{{layoutData.productCenter}}</a> 
+                        <a class="no-list" href="/">{{layoutData.home}}</a>
                         <span class="fa fa-angle-right"></span>
                         {{each categorysList it i}}
-                            <a href="{{it.url}}" data-index="{{i}}" >{{it.name}}</a>
+                            <a href="{{it.url}}" data-index="{{i}}" data-id="{{it.id}}">{{it.name}}</a>
                         {{/each}}
                         <span class="fa fa-angle-right"></span>
-                        <span class="js-news-name"></span>
+                        <span class="js-news-name no-event"></span>
                     </script>
                 </div>
             </div>

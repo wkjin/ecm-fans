@@ -20,7 +20,7 @@ var pageContentArea={
 
     $parent: null,//父类 jquery对象
     showCategoryData: null,//显示的栏目数据
-    showCategoryIndex: 0,//显示的栏目的索引
+    showCategoryId: 0,//显示的栏目的索引
     newsId: 0,//新闻id
 
     _mergeOptions: function(options){
@@ -50,13 +50,13 @@ var pageContentArea={
         self.$parent = $(self._options.parentSelector);
 
         //获取所选栏目
-        var c = window.location.href.replace(/.*?#c=(\d+)$/, '$1');
-        c = parseInt(c);
-        if(isNaN(c)){
-            c = commonTools.getRequestParam('c');
-            c = parseInt(c);
+        var cid = window.location.href.replace(/.*?#cid=(\d+)$/, '$1');
+        cid = parseInt(cid);
+        if(isNaN(cid)){
+            cid = commonTools.getRequestParam('cid');
+            cid = parseInt(cid);
         }
-        self.showCategoryIndex = isNaN(c)?0:c;
+        self.showCategoryId = isNaN(cid)?0:cid;
         //新闻id
         var newsId =  commonTools.getRequestParam('id');
         newsId = parseInt(newsId);
@@ -101,7 +101,7 @@ var pageContentArea={
             }));
 
             //模拟点击栏目进行选中
-            self._selectSecondCategory(self.showCategoryIndex);
+            self._selectSecondCategory(self.showCategoryId);
         }else{
             console.log(self._options.aboutCategoryDataName + '栏目信息读取失败');
         }
@@ -113,26 +113,25 @@ var pageContentArea={
         //从地址栏获取选中的栏目
         self.$parent.find(self._options.secondCategoryContainerSelector).off('click').on('click', 'span', function(){
             var $this = $(this);
-            self._selectSecondCategory($this.data('index'));
+            self._selectSecondCategory($this.data('id'));
         });
 
     },
     //选中二级栏目
-    _selectSecondCategory: function(index){
+    _selectSecondCategory: function(cid){
         var self = this;
         var selectedClass = self._options.secondCategorySelectedClass;
-        index = parseInt(index);
-        var secondCategoryList = self.$parent.find(self._options.secondCategoryContainerSelector).find('> a');
-        if(isNaN(index) || index >= secondCategoryList.length || index < 0){
-            index = 0;
-        }
-        secondCategoryList.each(function(){
-            var $this = $(this);
-            if(parseInt($this.data('index')) === index){
-                $this.addClass(selectedClass).siblings().removeClass(selectedClass);
-                window.location.href = (window.location.href.replace(/#c=\d*/, '') + '#c=' + index);
-                //修改栏目显示数据
-                self.showCategoryData = storage.get(self._options.aboutCategoryDataName)._child[index];
+        cid = parseInt(cid);
+        if(isNaN(cid) || cid <= 0){
+            alert('获取栏目失败');
+            setTimeout(function(){
+                window.history.go(-1);
+            }, 1500);
+        }else{
+            var $secondCategory = self.$parent.find(self._options.secondCategoryContainerSelector).find('> a[data-id="'+cid+'"]');
+            if($secondCategory.length > 0){
+                $secondCategory.addClass(selectedClass).siblings().removeClass(selectedClass);
+                window.location.href = (window.location.href.replace(/#cid=\d*/, '') + '#cid=' + cid);
                 //通过栏目数据，获取所在栏目的文章
                 server.getArticleDetail({article_id: self.newsId},function(res){
                     if(res.status === 1){
@@ -140,12 +139,19 @@ var pageContentArea={
                         //设置文章
                         self._fullArticle();
                     }else{
-                        //window.history.go(-1);//id不存在
-                        console.log('获取新闻失败，请检查');
+                        alert('获取栏目失败');
+                        setTimeout(function(){
+                            window.history.go(-1);
+                        }, 1500);
                     }
                 });
+            }else{
+                alert('获取栏目失败');
+                setTimeout(function(){
+                    window.history.go(-1);
+                }, 1500);
             }
-        });
+        }
     },
     /* 填充内容 */
     _fullArticle: function(){

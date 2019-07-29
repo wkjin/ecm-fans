@@ -66,7 +66,7 @@
                     <div class="category-title js-news-title-container">
                         <script id="js-news-title" type="text/html">
                             <a class="category-title-name">{{layoutData.newsAndInformation}}</a>
-                            <a href="news-list.html?c=0" class="category-title-more">{{layoutData.readMore}}</a>
+                            <a href="news-list.html?cid=13" class="category-title-more">{{layoutData.readMore}}</a>
                         </script>
                     </div>
                     <div class="content-list js-news-list-container">
@@ -76,12 +76,12 @@
                             </div>
                             <div class="news-item">
                                 {{each newsList1  it i}}
-                                <a href="news-detail.html?c=0&id={{it.id}}">{{it.title}}</a>
+                                <a href="news-detail.html?c=13&id={{it.id}}">{{it.title}}</a>
                                 {{/each}}
                             </div>
                             <div class="news-item">
                                 {{each newsList2  it i}}
-                                <a href="news-detail.html?c=0&id={{it.id}}">{{it.title}}</a>
+                                <a href="news-detail.html?c=13&id={{it.id}}">{{it.title}}</a>
                                 {{/each}}
                             </div>
                         </script>
@@ -95,14 +95,14 @@
                     <div class="category-title js-haoyuan-classroom-title-container">
                         <script id="js-haoyuan-classroom-title" type="text/html">
                             <a class="category-title-name">{{layoutData.haoyuanClassroom}}</a>
-                            <a href="news-list.html?c=1" class="category-title-more">{{layoutData.readMore}}</a>
+                            <a href="news-list.html?cid=14" class="category-title-more">{{layoutData.readMore}}</a>
                         </script>
                     </div>
                     <div class="content-list">
                         <div class="classroom-list-area js-haoyuan-classroom-container">
                             <script id="js-haoyuan-classroom" type="text/html">
                                 {{each haoyuanClassroom it i}}
-                                <a class="classroom-item" href="news-detail.html?c=1&id={{it.id}}">
+                                <a class="classroom-item" href="news-detail.html?cid=14&id={{it.id}}">
                                     <img class="lazy-load" data-original="{{it.thumb}}"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=">
                                     <div>
                                         <h4>{{it.title}}</h4>
