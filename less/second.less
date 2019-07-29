@@ -80,6 +80,7 @@
             border-bottom: 1px solid @blackE;
             display: flex;
             flex-wrap: nowrap;
+            color: #333333;
             > span{
                 display: inline-block;
                 padding: 0 0.5em;
@@ -124,23 +125,30 @@
                     height: 1.5em;
                     padding: 0 1em;
                     display: block;
+                    color: #333333;
+                    vertical-align: middle;
                 }
                 .list-group {
                     flex-grow: 1;
                     padding-left: 1em;
                     text-align: left;
                     a {
+                        vertical-align: middle;
                         font-size: 14px;
                         display: inline-block;
-                        background: @primaryColor;
-                        padding: 0 1em;
+                        background: #eeeeee;
+                        color: #666666;
+                        padding: 0 1.5em;
                         max-width: 12em;
                         margin: 0.2em 0.5em;
-                        line-height: 1.8em;
+                        line-height: 2em;
                         .ellipsis-row();
-                        height: 1.8em;
-                        border-radius: 0.2em;
-                        color: #ffffff;
+                        height: 2em;
+                        border-radius: 2em;
+                        &[selected]{
+                            background-color: @primaryColor;
+                            color: #ffffff;
+                        }
                     }
                 }
             }
@@ -165,13 +173,14 @@
                         padding-right: 0.5em;
                     }
                     select{
-                        padding: 0.4em 0.5em;
-                        border-radius: 0.1em;
+                        padding: 0.4em 1.5em;
+                        border-radius: 1.25em;
                         width: 15em;
                         color: @black6;
                         background: #ffffff;
                         border: 1px solid @blackC;
                         height: 2.5em;
+                        outline: none;
                         line-height: 2.5em;
                     }
                     
@@ -182,7 +191,17 @@
                 padding: 0.5em 0;
                 text-align: right;
                 > a{
-                    &:extend(.content-area .search-area .content-center .fast-search .list-group a);
+                    font-size: 14px;
+                    display: inline-block;
+                    background: @primaryColor;
+                    padding: 0 1.5em;
+                    max-width: 12em;
+                    margin: 0.2em 0.5em;
+                    line-height: 2em;
+                    .ellipsis-row();
+                    height: 2em;
+                    border-radius: 1em;
+                    color: #ffffff;
                     button{
                         border: 0;
                         background: transparent;
@@ -407,6 +426,8 @@
                         height: 100%;
                         float: left;
                         background-color: @blackF5;
+                        border-radius: 1em;
+                        overflow: hidden;
                         > img{
                             width: 100%;
                             height: auto;

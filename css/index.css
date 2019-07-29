@@ -241,6 +241,8 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  border-radius: 1em;
+  overflow: hidden;
 }
 .content-area .product-area .content-center .product-list > a > p,
 .content-area .product-area .content-center .product-list.product-can-move > div.product-show > a > p {

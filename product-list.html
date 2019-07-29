@@ -30,8 +30,10 @@
                 <div class="content-center js-second-category-container">
                     <script id="js-second-category" type="text/html">
                         <span>{{layoutData.youLocal}}：</span>
-                        <a class="no-event no-list">{{layoutData.productCenter}}</a> 
+                        <a class="no-list" href="/">首页</a>
                         <span class="fa fa-angle-right"></span>
+                        <a class="no-list" href="./product-list.html?c=-1">{{layoutData.productCenter}}</a>
+                        <span class="fa fa-angle-right js-last-angle"></span>
                         {{each categorysList it i}}
                             <a href="{{it.url}}" data-index="{{i}}" >{{it.name}}</a>
                         {{/each}}
@@ -47,7 +49,7 @@
                             <span class="title">{{layoutData.product_category}}</span>
                             <div class="list-group">
                                 {{each categorysList it i}}
-                                    <a href="{{it.url}}">{{it.name}}</a>
+                                    <a href="{{it.url}}" class="js-category-item" data-id="{{it.id}}">{{it.name}}</a>
                                 {{/each}}
                             </div>
                         </script>
@@ -126,7 +128,7 @@
                             </a>
                             {{/each}}
                         {{else/}}
-                            <h4 style="color: #666;line-height: 4em;padding-left: 1em;">{{layoutData.noDataText}}</h4>
+                            <h4 style="color: #999;line-height: 5em;padding-left: 1em;font-weight: normal;text-align: center;">{{layoutData.noDataText}}</h4>
                         {{/if}}
                         </div>
                     </script>

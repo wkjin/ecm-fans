@@ -117,6 +117,7 @@
   border-bottom: 1px solid #eeeeee;
   display: flex;
   flex-wrap: nowrap;
+  color: #333333;
 }
 .content-area .website-local .content-center > span {
   display: inline-block;
@@ -164,26 +165,32 @@
   height: 1.5em;
   padding: 0 1em;
   display: block;
+  color: #333333;
+  vertical-align: middle;
 }
 .content-area .search-area .content-center .fast-search .list-group {
   flex-grow: 1;
   padding-left: 1em;
   text-align: left;
 }
-.content-area .search-area .content-center .fast-search .list-group a,
-.content-area .search-area .content-center .handle-bar > a {
+.content-area .search-area .content-center .fast-search .list-group a {
+  vertical-align: middle;
   font-size: 14px;
   display: inline-block;
-  background: #4395ff;
-  padding: 0 1em;
+  background: #eeeeee;
+  color: #666666;
+  padding: 0 1.5em;
   max-width: 12em;
   margin: 0.2em 0.5em;
-  line-height: 1.8em;
+  line-height: 2em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  height: 1.8em;
-  border-radius: 0.2em;
+  height: 2em;
+  border-radius: 2em;
+}
+.content-area .search-area .content-center .fast-search .list-group a[selected] {
+  background-color: #4395ff;
   color: #ffffff;
 }
 .content-area .search-area .content-center .category-search {
@@ -215,19 +222,35 @@
   padding-right: 0.5em;
 }
 .content-area .search-area .content-center .category-search .cs-item select {
-  padding: 0.4em 0.5em;
-  border-radius: 0.1em;
+  padding: 0.4em 1.5em;
+  border-radius: 1.25em;
   width: 15em;
   color: #666666;
   background: #ffffff;
   border: 1px solid #cccccc;
   height: 2.5em;
+  outline: none;
   line-height: 2.5em;
 }
 .content-area .search-area .content-center .handle-bar {
   line-height: 1em;
   padding: 0.5em 0;
   text-align: right;
+}
+.content-area .search-area .content-center .handle-bar > a {
+  font-size: 14px;
+  display: inline-block;
+  background: #4395ff;
+  padding: 0 1.5em;
+  max-width: 12em;
+  margin: 0.2em 0.5em;
+  line-height: 2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 2em;
+  border-radius: 1em;
+  color: #ffffff;
 }
 .content-area .search-area .content-center .handle-bar > a button {
   border: 0;
@@ -451,6 +474,8 @@
   height: 100%;
   float: left;
   background-color: #F5F5F5;
+  border-radius: 1em;
+  overflow: hidden;
 }
 .content-area .second-content .content-center .product-list > a .left > img {
   width: 100%;
