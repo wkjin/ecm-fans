@@ -222,15 +222,15 @@
   padding-right: 0.5em;
 }
 .content-area .search-area .content-center .category-search .cs-item select {
-  padding: 0.4em 1.5em;
-  border-radius: 1.25em;
+  padding: 0 1em;
+  border-radius: 1.1em;
   width: 15em;
   color: #666666;
   background: #ffffff;
   border: 1px solid #cccccc;
-  height: 2.5em;
+  height: 2.2em;
   outline: none;
-  line-height: 2.5em;
+  line-height: 1em;
 }
 .content-area .search-area .content-center .handle-bar {
   line-height: 1em;
@@ -263,9 +263,6 @@
 .content-area .second-content .content-center {
   min-height: 50vh;
   background-color: #ffffff;
-}
-.content-area .second-content .content-center .rich-html {
-  padding: 2em 1em;
 }
 .content-area .second-content .content-center .rich-html span,
 .content-area .second-content .content-center .rich-html div,
@@ -306,7 +303,7 @@
 }
 .content-area .second-content .content-center .information-detail > div.left > div.agent-area {
   display: block;
-  padding: 0.5em 0;
+  padding: 0;
 }
 .content-area .second-content .content-center .information-detail > div.right {
   padding: 0;
