@@ -209,6 +209,17 @@ var commonPage = {
         var self = this;
         if(typeof func === 'function'){
             self._listenQueueFragment.push(func);
+            //添加到监听队列，先调用一次保证内容更新
+            setTimeout(function(){
+                var fragmentData = self.storage.get(self._options.fragmentDataName);
+                if(typeof fragmentData === 'object' && fragmentData !== null){
+                    var _fragmentData = {};//去掉多余的信息
+                    Object.keys(fragmentData).forEach(function(key){
+                        _fragmentData[key] = fragmentData[key].value;
+                    });
+                    func(_fragmentData, -1, self.storage.get(self._options.layoutDataName), -1);
+                }
+            }, 100);
             return true;
         }else{
             return false;

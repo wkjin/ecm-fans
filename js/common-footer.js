@@ -45,7 +45,7 @@ var footerObj = {
             return self;
         }
         var html = template(self._options.footerInfoTemplateId, {
-            year: '2019',
+            year: new Date().getFullYear(),
             company_name: fragmentData['company_name'],
             company_copyright: fragmentData['company_copyright'],
             company_address: fragmentData['company_address'],
