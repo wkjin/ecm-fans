@@ -205,6 +205,7 @@ body {
   position: relative;
   color: #333333;
   transition: transform 0.5s;
+  display: none;
 }
 .header .content-center > div.header-right > div.nav-top > button:not(:first-child):before {
   content: '';
