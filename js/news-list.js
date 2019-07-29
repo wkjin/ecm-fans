@@ -137,7 +137,7 @@ var pageContentArea={
         var data =  storage.get(self._options.pageCategoryArticleDataName);
         self.$parent.find(self._options.secondCategoryContentContainerSelector).html(template(self._options.secondCategoryContentTemplagteId, {
             data: data,
-            c: self.showCategoryId
+            cid: self.showCategoryId
         }));
     },
 
