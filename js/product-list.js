@@ -161,6 +161,7 @@ var pageContentArea = {
             phaseNumberArr: commonPage.splitFragment('phase_number', '|', layoutData.pleaseSelect),
             specificationsArr: commonPage.splitFragment('specifications', '|', layoutData.pleaseSelect),
             layoutData: layoutData,
+            fragmentData: storage.get('fragmentData'),
             condition: self.searchCondition
         }));
         //搜索栏
