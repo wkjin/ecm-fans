@@ -29,11 +29,11 @@
     "product_category_cn": "产品类别",
     "product_category_en": "Product Category",
 
-    "airVolume_cn": "风量[m³/h]",
-    "airVolume_en": "Air Volume",
+    "air_volume_cn": "风量[m³/h]",
+    "air_volume_en": "Air Volume",
 
-    "powerCategory_cn": "电源类别",
-    "powerCategory_en": "Power Category",
+    "power_category_cn": "电源类别",
+    "power_category_en": "Power Category",
 
     "voltage_cn": "电压[V]",
     "voltage_en": "voltage",
@@ -41,8 +41,20 @@
     "frequency_cn": "频率[Hz]",
     "frequency_en": "frequency",
 
-    "impellerDiameter_cn": "叶轮直径",
-    "impellerDiameter_en": "Impeller Diameter",
+    "impeller_diameter_cn": "叶轮直径",
+    "impeller_diameter_en": "Impeller Diameter",
+    
+    "speed_cn": "转速[rpm]",
+    "speed_en": "speed[rpm]",
+
+    "atmospheric_pressure_cn": "功率范围",
+    "atmospheric_pressure_en": "pressure",
+
+    "specifications_cn": "最大静压",
+    "specifications_en": "specifications",
+
+    "phase_number_cn": "相数",
+    "phase_number_en": "phase",
 
     "pleaseSelect_cn": "请选择",
     "pleaseSelect_en": "please select",

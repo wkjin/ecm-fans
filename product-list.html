@@ -57,56 +57,18 @@
                     <form action="">
                         <div class="category-search js-search-product-container">
                             <script id="js-search-product" type="text/html">
-                                {{if fragmentData.impeller_diameter && fragmentData.impeller_diameter.status === "1"}}
-                                <div class="cs-item">
-                                    <span>{{layoutData.impellerDiameter}}</span>
-                                    <select name="impeller_diameter">
-                                        {{each impellerDiameterArr it i}}
-                                        <option value="{{it.name}}" {{if it.name === condition.impeller_diameter}}selected{{/if}}>{{it.value}}</option>
-                                        {{/each}}
-                                    </select>
-                                </div>
-                                {{/if}}
-                                {{if fragmentData.air_volume && fragmentData.air_volume.status === "1"}}
-                                <div class="cs-item">
-                                    <span>{{layoutData.airVolume}}</span>
-                                    <select name="air_volume">
-                                        {{each airVolumeArr it i}}
-                                        <option value="{{it.name}}" {{if it.name === condition.air_volume}}selected{{/if}}>{{it.value}}</option>
-                                        {{/each}}
-                                    </select>
-                                </div>
-                                {{/if}}
-                                {{if fragmentData.power_category && fragmentData.power_category.status === "1"}}
-                                <div class="cs-item">
-                                    <span>{{layoutData.powerCategory}}</span>
-                                    <select name="power_category">
-                                        {{each powerCategoryArr it i}}
-                                        <option value="{{it.name}}" {{if it.name === condition.power_category}}selected{{/if}}>{{it.value}}</option>
-                                        {{/each}}
-                                    </select>
-                                </div>
-                                {{/if}}
-                                {{if fragmentData.voltage && fragmentData.voltage.status === "1"}}
-                                <div class="cs-item">
-                                    <span>{{layoutData.voltage}}</span>
-                                    <select name="voltage">
-                                        {{each voltageArr it i}}
-                                        <option value="{{it.name}}" {{if it.name === condition.voltage}}selected{{/if}}>{{it.value}}</option>
-                                        {{/each}}
-                                    </select>
-                                </div>
-                                {{/if}}
-                                {{if fragmentData.frequency && fragmentData.frequency.status === "1"}}
-                                <div class="cs-item">
-                                    <span>{{layoutData.frequency}}</span>
-                                    <select name="frequency">
-                                        {{each frequencyArr it i}}
-                                        <option value="{{it.name}}" {{if it.name === condition.frequency}}selected{{/if}}>{{it.value}}</option>
-                                        {{/each}}
-                                    </select>
-                                </div>
-                                {{/if}}
+                                {{each formSelectOptions fit i}}
+                                    {{if fragmentData[i] && fragmentData[i].status === "1"}}
+                                    <div class="cs-item">
+                                        <span>{{layoutData[i]}}</span>
+                                        <select name="impeller_diameter">
+                                            {{each fit it i}}
+                                            <option value="{{it.name}}" {{if it.name === condition[i]}}selected{{/if}}>{{it.value}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    {{/if}}
+                                {{/each}}
                             </script>
                         </div>
                         <div class="handle-bar js-search-product-handlebar-container">

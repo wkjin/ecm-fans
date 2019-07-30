@@ -150,16 +150,24 @@ var pageContentArea = {
     _fullSearchArea: function (fragmentValueData, layoutData) {
         var self = this;
         //填充产品类别
+        if(typeof layoutData !== 'object' || layoutData === null){
+            setTimeout(function(){
+                self._fullSearchArea(fragmentValueData, storage.get('layoutData'));
+            }, 200);
+            return;
+        }
         self.$parent.find(self._options.searchProductContainerSelector).html(template(self._options.searchProductTemplagteId, {
-            impellerDiameterArr: commonPage.splitFragment('impeller_diameter', '|', layoutData.pleaseSelect),
-            airVolumeArr: commonPage.splitFragment('air_volume', '|', layoutData.pleaseSelect),
-            powerCategoryArr: commonPage.splitFragment('power_category', '|', layoutData.pleaseSelect),
-            voltageArr: commonPage.splitFragment('voltage', '|', layoutData.pleaseSelect),
-            frequencyArr: commonPage.splitFragment('frequency', '|', layoutData.pleaseSelect),
-            atmosphericPressureArr: commonPage.splitFragment('atmospheric_pressure', '|', layoutData.pleaseSelect),
-            speedArr: commonPage.splitFragment('speed', '|', layoutData.pleaseSelect),
-            phaseNumberArr: commonPage.splitFragment('phase_number', '|', layoutData.pleaseSelect),
-            specificationsArr: commonPage.splitFragment('specifications', '|', layoutData.pleaseSelect),
+            formSelectOptions: {
+                impeller_diameter: commonPage.splitFragment('impeller_diameter', '|', layoutData.pleaseSelect),
+                air_volume: commonPage.splitFragment('air_volume', '|', layoutData.pleaseSelect),
+                power_categoryArr: commonPage.splitFragment('power_category', '|', layoutData.pleaseSelect),
+                voltage: commonPage.splitFragment('voltage', '|', layoutData.pleaseSelect),
+                frequency: commonPage.splitFragment('frequency', '|', layoutData.pleaseSelect),
+                atmospheric_pressure: commonPage.splitFragment('atmospheric_pressure', '|', layoutData.pleaseSelect),
+                speed: commonPage.splitFragment('speed', '|', layoutData.pleaseSelect),
+                phase_number: commonPage.splitFragment('phase_number', '|', layoutData.pleaseSelect),
+                specifications: commonPage.splitFragment('specifications', '|', layoutData.pleaseSelect)    
+            },
             layoutData: layoutData,
             fragmentData: storage.get('fragmentData'),
             condition: self.searchCondition
