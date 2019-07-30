@@ -1,21 +1,24 @@
 @import './common-common.less';
 
 //定义使用的两种背景
-@backgroundGray: #f6f6f6;//灰色背景
+@backgroundGray: #f6f6f6; //灰色背景
 @backgroundWhite: #ffffff;
 
 .content-area {
-    min-height: calc(~"100vh - 4em * 2")!important;
+    min-height: calc(~"100vh - 4em * 2") !important;
     background-color: @backgroundGray;
+
     //banner的样式
-    .banner-area{
+    .banner-area {
         width: 100%;
         height: 300px;
         background: @backgroundWhite;
-        .content-center{
-            width: 100%!important;
-            max-width: 1920px!important;
+
+        .content-center {
+            width: 100% !important;
+            max-width: 1920px !important;
             height: 100%;
+
             img {
                 height: 100%;
                 position: relative;
@@ -23,15 +26,16 @@
                 left: 50%;
                 *left: 0;
                 transform: translateX(-50%);
-            } 
+            }
         }
     }
 
     //二级导航
-    .second-category{
+    .second-category {
         @secondHeight: 50px;
         background: @backgroundWhite;
-        .content-center{
+
+        .content-center {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -42,7 +46,8 @@
             border-top-color: transparent;
             border-radius: 2px;
             flex-wrap: nowrap;
-            > span{
+
+            >span {
                 display: block;
                 cursor: pointer;
                 line-height: calc(@secondHeight - 20px);
@@ -53,13 +58,16 @@
                 letter-spacing: 1px;
                 color: @black4;
                 .textUnSelect();
-                &:last-child{
+
+                &:last-child {
                     border-right-color: transparent;
                 }
-                &.second-selected{
-                    color: @primaryColor;   
+
+                &.second-selected {
+                    color: @primaryColor;
                 }
-                &:hover{
+
+                &:hover {
                     color: @primaryColor;
                 }
             }
@@ -67,9 +75,10 @@
     }
 
     //地址栏（二级导航）
-    .website-local{
+    .website-local {
         background: @backgroundWhite;
-        .content-center{
+
+        .content-center {
             background: @backgroundWhite;
             width: 100%;
             line-height: 3em;
@@ -81,44 +90,52 @@
             display: flex;
             flex-wrap: nowrap;
             color: #333333;
-            > span{
+
+            >span {
                 display: inline-block;
                 padding: 0 0.5em;
                 line-height: 3em;
                 height: 3em;
-                &:last-child{
+
+                &:last-child {
                     width: 20em;
                     .ellipsis-row();
                 }
             }
-            > a{
+
+            >a {
                 display: none;
                 color: inherit;
-                &.second-selected, &.no-list{
+
+                &.second-selected,
+                &.no-list {
                     display: inline-block;
                 }
-                &:hover{
+
+                &:hover {
                     color: @aTagHoverColor;
                 }
-            }    
+            }
         }
     }
 
     //搜索栏
     .search-area {
-        .content-center{
+        .content-center {
             background-color: @backgroundWhite;
             border: 1px solid #eee;
             margin: 0.5em 0;
             border-left-width: 0;
             border-right-width: 0;
-            .fast-search{
+
+            .fast-search {
                 display: flex;
                 align-items: center;
                 justify-content: left;
                 padding: 0.5em 0;
                 border-bottom: 1px solid @blackF5;
-                span.title{
+
+                span.title {
                     font-size: 16px;
                     width: 7em;
                     .ellipsis-row();
@@ -128,10 +145,12 @@
                     color: #333333;
                     vertical-align: middle;
                 }
+
                 .list-group {
                     flex-grow: 1;
                     padding-left: 1em;
                     text-align: left;
+
                     a {
                         vertical-align: middle;
                         font-size: 14px;
@@ -145,25 +164,30 @@
                         .ellipsis-row();
                         height: 2em;
                         border-radius: 2em;
-                        &[selected]{
+
+                        &[selected] {
                             background-color: @primaryColor;
                             color: #ffffff;
                         }
                     }
                 }
             }
-            .category-search{
+
+            .category-search {
                 padding: 0.5em 0;
-                &:after{
+
+                &:after {
                     .clearfix;
                 }
-                .cs-item{
+
+                .cs-item {
                     display: inline-block;
                     width: 33%;
                     float: left;
                     line-height: 2.5em;
                     color: @black3;
-                    span{
+
+                    span {
                         width: 6em;
                         display: inline-block;
                         text-align: right;
@@ -172,8 +196,9 @@
                         line-height: 1em;
                         padding-right: 0.5em;
                     }
-                    select{
-                        padding:0 1em;
+
+                    select {
+                        padding: 0 1em;
                         border-radius: 1.1em;
                         width: 15em;
                         color: @black6;
@@ -183,14 +208,16 @@
                         outline: none;
                         line-height: 1em;
                     }
-                    
+
                 }
             }
-            .handle-bar{
+
+            .handle-bar {
                 line-height: 1em;
                 padding: 0.5em 0;
                 text-align: right;
-                > a{
+
+                >a {
                     font-size: 14px;
                     display: inline-block;
                     background: @primaryColor;
@@ -202,25 +229,29 @@
                     height: 2em;
                     border-radius: 1em;
                     color: #ffffff;
-                    button{
+
+                    button {
                         border: 0;
                         background: transparent;
                         color: inherit;
                     }
                 }
-            }    
+            }
         }
-        
+
     }
 
     //二级栏目内容
-    .second-content{
+    .second-content {
         min-height: 50vh;
-        .content-center{
+
+        .content-center {
             min-height: 50vh;
             background-color: @backgroundWhite;
+
             //在富文本编辑器出来的html才重置格式
-            .rich-html{
+            .rich-html {
+
                 // padding: 2em 1em;
                 span,
                 div,
@@ -235,57 +266,67 @@
                 h4,
                 h5,
                 h6,
-                table{
+                table {
                     float: initial;
                     position: initial;
-                }    
+                }
             }
 
             //联系方式页面
-            .information-detail{
+            .information-detail {
                 background: @backgroundWhite;
                 display: flex;
-                justify-items: stretch; 
+                justify-items: stretch;
                 color: @black3;
-                min-height: 45vh;       
-                > div{
+                min-height: 45vh;
+
+                >div {
                     display: block;
                     width: 50%;
                     padding: 1em;
-                    &.left{
-                        > p{
+
+                    &.left {
+                        >p {
                             line-height: 2.5em;
                             font-size: 14px;
-                            &.information-title{
+
+                            &.information-title {
                                 font-size: 20px;
                                 line-height: 2em;
-                            }  
+                            }
                         }
-                        > div.agent-area{
+
+                        >div.agent-area {
                             display: block;
                             // padding: 0.5em 0;
                             padding: 0;
                         }
                     }
-                    &.right{ 
+
+                    &.right {
                         padding: 0;
-                        .map-content{
+
+                        .map-content {
                             width: 100%;
                             height: 100%;
                         }
                     }
                 }
-                > form{
+
+                >form {
                     width: 600px;
                     margin: 0 auto;
                     padding: 1em;
-                    > div{
+
+                    >div {
                         display: block;
                         margin: 0.5em 0;
                         position: relative;
-                        &:not(.handle-bar){
+
+                        &:not(.handle-bar) {
                             display: flex;
-                            label{
+
+                            label {
                                 width: 15em;
                                 text-align: right;
                                 display: block;
@@ -295,7 +336,9 @@
                                 font-size: 18px;
                                 color: @black3;
                             }
-                            input,textarea{
+
+                            input,
+                            textarea {
                                 flex-grow: 1;
                                 display: block;
                                 line-height: 1em;
@@ -309,11 +352,13 @@
                                 border: 1px solid @blackC;
                                 outline: none;
                             }
-                            textarea{
+
+                            textarea {
                                 min-height: 3em;
-                                resize:vertical;
+                                resize: vertical;
                             }
-                            img{
+
+                            img {
                                 position: absolute;
                                 right: 1px;
                                 top: 1px;
@@ -323,14 +368,16 @@
                                 cursor: pointer;
                             }
                         }
-                        &.handle-bar{
+
+                        &.handle-bar {
                             line-height: 3em;
                             font-size: 16px;
                             text-align: center;
                             padding-top: 1em;
                             margin-top: 1em;
                             border-top: 1px solid #fefefe;
-                            > button{
+
+                            >button {
                                 padding: 0.5em 2em;
                                 background-color: #ffffff;
                                 line-height: 1em;
@@ -338,12 +385,14 @@
                                 border: unset;
                                 border-radius: 0.2em;
                                 cursor: pointer;
-                                &:first-child{
+
+                                &:first-child {
                                     background: @primaryColor;
                                     color: #ffffff;
                                     margin-right: 15%;
                                 }
-                                &:nth-child(2){
+
+                                &:nth-child(2) {
                                     color: @black3;
                                     border: 1px solid @blackC;
                                 }
@@ -354,12 +403,14 @@
             }
 
             // 文章列表
-            .article-list{
+            .article-list {
                 background: transparent;
-                &::after{
+
+                &::after {
                     .clearfix;
                 }
-                > a{
+
+                >a {
                     width: 33.3333%;
                     height: 340px;
                     overflow: hidden;
@@ -368,39 +419,49 @@
                     padding: 0.5em;
                     float: left;
                     background: @blackF;
-                    &.item-img-text{
-                        .img-section{
+
+                    &.item-img-text {
+                        .img-section {
                             width: 100%;
                             height: 200px;
                             padding: 0.5em;
-                            > img{
-                            width: 100%;
-                            height: 100%;  
+                            overflow: hidden;
+                            >img {
+                                margin: 0 0.5em;
+                                position: relative;
+                                left: 50%;
+                                transform: translateX(-50%);
+                                height: 100%;
                             }
                         }
-                        .text-section{
+
+                        .text-section {
                             width: 100%;
                             height: 50%;
                             padding: 0.5em;
                             color: inherit;
                             letter-spacing: 1px;
-                            > h4{
+
+                            >h4 {
                                 line-height: 2em;
                                 height: 2em;
                                 .ellipsis-row();
                                 font-size: 18px;
                                 color: @primaryColor;
-                                &:hover{
+
+                                &:hover {
                                     color: @aTagHoverColor;
                                 }
                             }
-                            > p{
+
+                            >p {
                                 line-height: 1.5em;
-                                
+
                                 text-indent: 2em;
                                 color: @black9;
                                 .ellipsis(3);
-                                &:hover{
+
+                                &:hover {
                                     color: @black3;
                                 }
                             }
@@ -410,11 +471,12 @@
             }
 
             //文章列表
-            .product-list{
-                &:after{
+            .product-list {
+                &:after {
                     .clearfix;
                 }
-                > a{
+
+                >a {
                     width: 33.33%;
                     padding: 1em;
                     display: block;
@@ -422,14 +484,16 @@
                     float: left;
                     overflow: hidden;
                     border: 1px solid @blackF5;
-                    .left{
+
+                    .left {
                         width: 50%;
                         height: 100%;
                         float: left;
                         background-color: @blackF5;
                         border-radius: 1em;
                         overflow: hidden;
-                        > img{
+
+                        >img {
                             width: 100%;
                             height: auto;
                             max-height: 100%;
@@ -439,14 +503,17 @@
                             *top: 0;
                         }
                     }
-                    .right{
+
+                    .right {
                         float: left;
                         width: 50%;
                         height: 100%;
                         padding: 0.5em;
-                        p{
+
+                        p {
                             line-height: 2em;
-                            &:first-child{
+
+                            &:first-child {
                                 line-height: 2.5em;
                                 height: 2.5em;
                                 .ellipsis-row();
@@ -454,13 +521,14 @@
                             }
                         }
                     }
-                } 
+                }
             }
 
             //文章详情
-            .article-detail{
+            .article-detail {
                 padding: 1em 0;
-                .p-title{
+
+                .p-title {
                     padding-top: 1em;
                     font-size: 24px;
                     font-weight: normal;
@@ -471,7 +539,8 @@
                     margin: 0;
                     padding: 0;
                 }
-                .p-subtitle{
+
+                .p-subtitle {
                     font-size: 14px;
                     font-weight: normal;
                     color: #666666;
@@ -479,7 +548,8 @@
                     line-height: 2em;
                     padding-bottom: 0.5em;
                     border-bottom: 1px solid #eee;
-                    &::before{
+
+                    &::before {
                         content: '';
                         width: 10em;
                         height: 1em;
@@ -488,5 +558,5 @@
                 }
             }
         }
-    }   
+    }
 }

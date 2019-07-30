@@ -50,8 +50,8 @@
   background: #ffffff;
 }
 .content-area .banner-area .content-center {
-  width: 100%!important;
-  max-width: 1920px!important;
+  width: 100% !important;
+  max-width: 1920px !important;
   height: 100%;
 }
 .content-area .banner-area .content-center img {
@@ -413,9 +413,13 @@
   width: 100%;
   height: 200px;
   padding: 0.5em;
+  overflow: hidden;
 }
 .content-area .second-content .content-center .article-list > a.item-img-text .img-section > img {
-  width: 100%;
+  margin: 0 0.5em;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   height: 100%;
 }
 .content-area .second-content .content-center .article-list > a.item-img-text .text-section {
