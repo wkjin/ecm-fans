@@ -302,10 +302,20 @@ var indexPage = {
     //填充关于公司
     _fullAboutCompany: function (fragmentData) {
         var self = this;
+        if(typeof fragmentData !== 'object' || fragmentData === null){
+            setTimeout(function(){
+                self._fullAboutCompany(storage.get('fragmentData'));
+            }, 200);
+            return;
+        }
         setTimeout(function () {
             self.$parent.find(self._options.aboutCompanyInfoContainerSelector).html(template(self._options.aboutCompanyInfoTemplateId, {
                 fragmentData: fragmentData
             }));
+            //跳转到企业简介
+            self.$parent.find(self._options.aboutCompanyInfoContainerSelector).off('click').on('click','div.left, div.right', function(){
+                window.location.href = '/about.html?c=0';
+            });
         }, 500);
     },
 

@@ -278,9 +278,9 @@
 .content-area .news-area .content-center .content-list > div.thumb {
   width: 33.33%;
   padding: 0 0.5em;
+  overflow: hidden;
 }
 .content-area .news-area .content-center .content-list > div.thumb > img {
-  width: 100%;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -400,13 +400,18 @@
 }
 .content-area .info-area .content-center > div {
   display: block;
+  cursor: pointer;
 }
 .content-area .info-area .content-center > div.left {
   width: 33.33%;
   padding: 0 0.5em;
+  overflow: hidden;
 }
 .content-area .info-area .content-center > div.left > img {
-  width: 100%;
+  display: block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   height: 100%;
 }
 .content-area .info-area .content-center > div.right {
