@@ -495,13 +495,13 @@
 }
 .content-area .second-content .content-center .product-list > a .right p {
   line-height: 2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .content-area .second-content .content-center .product-list > a .right p:first-child {
   line-height: 2.5em;
   height: 2.5em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   margin-bottom: 0.5em;
 }
 .content-area .second-content .content-center .article-detail {
