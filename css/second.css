@@ -340,7 +340,7 @@
   flex-grow: 1;
   display: block;
   line-height: 1em;
-  border-radius: 0.2em;
+  border-radius: 1.5em;
   padding: 0.5em 1em;
   font-size: 16px;
   letter-spacing: 1px;
@@ -377,7 +377,7 @@
   line-height: 1em;
   font-size: inherit;
   border: unset;
-  border-radius: 0.2em;
+  border-radius: 1.5em;
   cursor: pointer;
 }
 .content-area .second-content .content-center .information-detail > form > div.handle-bar > button:first-child {
