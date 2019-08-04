@@ -61,8 +61,8 @@
                                     {{if fragmentData[i] && fragmentData[i].status === "1"}}
                                     <div class="cs-item">
                                         <span>{{layoutData[i]}}</span>
-                                        <select name="impeller_diameter">
-                                            {{each fit it i}}
+                                        <select name="{{i}}">
+                                            {{each fit it ii}}
                                             <option value="{{it.name}}" {{if it.name === condition[i]}}selected{{/if}}>{{it.value}}</option>
                                             {{/each}}
                                         </select>
