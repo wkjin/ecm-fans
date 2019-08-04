@@ -69,7 +69,12 @@ var pageContentArea = {
             voltage = commonTools.getRequestParam('voltage'),
             power_category = commonTools.getRequestParam('power_category'),
             air_volume = commonTools.getRequestParam('air_volume'),
-            impeller_diameter = commonTools.getRequestParam('impeller_diameter');
+            impeller_diameter = commonTools.getRequestParam('impeller_diameter'),
+            power_categoryArr = commonTools.getRequestParam('power_categoryArr'),
+            atmospheric_pressure = commonTools.getRequestParam('atmospheric_pressure'),
+            speed = commonTools.getRequestParam('speed'),
+            phase_number = commonTools.getRequestParam('phase_number'),
+            specifications = commonTools.getRequestParam('specifications');
         if (frequency !== null) {
             self.searchCondition['frequency'] = frequency;
         }
@@ -83,7 +88,22 @@ var pageContentArea = {
             self.searchCondition['air_volume'] = air_volume;
         }
         if (frequency !== null) {
-            self.searchCondition['impeller_diameter'] = impeller_diameter;
+            self.searchCondition['frequency'] = frequency;
+        }
+        if (power_categoryArr !== null) {
+            self.searchCondition['power_categoryArr'] = power_categoryArr;
+        }
+        if (atmospheric_pressure !== null) {
+            self.searchCondition['atmospheric_pressure'] = atmospheric_pressure;
+        }
+        if (speed !== null) {
+            self.searchCondition['speed'] = speed;
+        }
+        if (phase_number !== null) {
+            self.searchCondition['phase_number'] = phase_number;
+        }
+        if (specifications !== null) {
+            self.searchCondition['specifications'] = specifications;
         }
 
         //获取所选栏目
