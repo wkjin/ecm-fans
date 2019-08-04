@@ -83,8 +83,25 @@ var pageContentArea={
             //填充栏目图
             self.$parent.find(self._options.categoryBannerContainerSelector).html(template(self._options.categoryBannerTemplateId, {categoryImgUrl: categoryData.thumb}));
 
+            //填充二级导航（地址栏）
+            function loadSecondCategory(){
+                var layoutData = storage.get('layoutData');
+                if(typeof layoutData !== 'object' || layoutData === null){
+                    setTimeout(function(){
+                        loadSecondCategory();
+                    }, 200);
+                    return;
+                }else{
+                    self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {
+                        categorysList: categoryData._child,
+                        layoutData: layoutData
+                    }));
+                }
+            }; 
+            loadSecondCategory();
+
             //填充二级导航
-            self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {categorysList: categoryData._child}));
+            // self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {categorysList: categoryData._child}));
 
             //模拟点击栏目进行选中
             self._selectSecondCategory(self.showCategoryIndex);
@@ -108,7 +125,7 @@ var pageContentArea={
         var self = this;
         var selectedClass = self._options.secondCategorySelectedClass;
         index = parseInt(index);
-        var secondCategoryList = self.$parent.find(self._options.secondCategoryContainerSelector).find('> span');
+        var secondCategoryList = self.$parent.find(self._options.secondCategoryContainerSelector).find('> a[data-index]');
         if(isNaN(index) || index >= secondCategoryList.length || index < 0){
             index = 0;
         }
