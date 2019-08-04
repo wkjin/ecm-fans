@@ -48,6 +48,7 @@
                         <script id="js-product-category" type="text/html">
                             <span class="title">{{layoutData.product_category}}</span>
                             <div class="list-group">
+                                <a href="./product-list.html?c=-1" class="js-category-item" data-id="0">{{layoutData.allProduct}}</a>
                                 {{each categorysList it i}}
                                     <a href="{{it.url}}" class="js-category-item" data-id="{{it.id}}">{{it.name}}</a>
                                 {{/each}}
