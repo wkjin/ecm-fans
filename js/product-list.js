@@ -87,8 +87,8 @@ var pageContentArea = {
         if (air_volume !== null) {
             self.searchCondition['air_volume'] = air_volume;
         }
-        if (frequency !== null) {
-            self.searchCondition['frequency'] = frequency;
+        if (impeller_diameter !== null) {
+            self.searchCondition['impeller_diameter'] = impeller_diameter;
         }
         if (power_categoryArr !== null) {
             self.searchCondition['power_categoryArr'] = power_categoryArr;
