@@ -381,6 +381,7 @@
   border: unset;
   border-radius: 1.5em;
   cursor: pointer;
+  outline: none;
 }
 .content-area .second-content .content-center .information-detail > form > div.handle-bar > button:first-child {
   background: #4395ff;
