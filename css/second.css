@@ -349,8 +349,10 @@
   background-color: #ffffff;
   border: 1px solid #cccccc;
   outline: none;
+  overflow: hidden;
 }
 .content-area .second-content .content-center .information-detail > form > div:not(.handle-bar) textarea {
+  border-radius: 0.5em;
   min-height: 3em;
   resize: vertical;
 }
