@@ -83,8 +83,25 @@ var pageContentArea={
             //填充栏目图
             self.$parent.find(self._options.categoryBannerContainerSelector).html(template(self._options.categoryBannerTemplateId, {categoryImgUrl: categoryData.thumb}));
 
+            //填充二级导航（地址栏）
+            function loadSecondCategory(){
+                var layoutData = storage.get('layoutData');
+                if(typeof layoutData !== 'object' || layoutData === null){
+                    setTimeout(function(){
+                        loadSecondCategory();
+                    }, 200);
+                    return;
+                }else{
+                    self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {
+                        categorysList: categoryData._child,
+                        layoutData: layoutData
+                    }));
+                }
+            }; 
+            loadSecondCategory();
+
             //填充二级导航
-            self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {categorysList: categoryData._child}));
+            // self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {categorysList: categoryData._child}));
 
             //模拟点击栏目进行选中
             self._selectSecondCategory(self.showCategoryId);
@@ -109,7 +126,7 @@ var pageContentArea={
         var selectedClass = self._options.secondCategorySelectedClass;
         cid = parseInt(cid);
         if(!isNaN(cid) && cid > 0){
-            var $secondCategory = self.$parent.find(self._options.secondCategoryContainerSelector).find('> span[data-id="'+cid+'"]');
+            var $secondCategory = self.$parent.find(self._options.secondCategoryContainerSelector).find('> a[data-id="'+cid+'"]');
             if($secondCategory.length > 0){
                 $secondCategory.addClass(selectedClass).siblings().removeClass(selectedClass);
                 window.location.href = (window.location.href.replace(/#cid=\d*/, '') + '#cid=' + cid);
@@ -127,7 +144,6 @@ var pageContentArea={
                 return;
             }
         }
-        alert('栏目错误');
         setTimeout(function(){
             window.history.go(-1);
         }, 1500);

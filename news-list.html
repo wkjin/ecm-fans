@@ -25,7 +25,22 @@
                 </div>
             </div>
             <!-- 二级导航部分 -->
-            <div class="second-category">
+            <div class="website-local">
+                <div class="content-center js-second-category-container">
+                    <script id="js-second-category" type="text/html">
+                        <span>{{layoutData.youLocal}}：</span>
+                        <a class="no-list" href="/">{{layoutData.home}}</a>
+                        <span class="fa fa-angle-right"></span>
+                        <a class="no-list" href="{{categorysList[0].url}}">{{layoutData.news}}</a> 
+                        <span class="fa fa-angle-right"></span>
+                        {{each categorysList it i}}
+                            <a href="{{it.url}}" data-index="{{i}}" data-id="{{it.id}}" >{{it.name}}</a>
+                        {{/each}}
+                    </script>
+                </div>
+            </div>
+            <!-- 二级导航部分 -->
+            <!-- <div class="second-category">
                 <div class="content-center js-second-category-container">
                     <script id="js-second-category" type="text/html">
                         {{each categorysList it i}}
@@ -33,7 +48,7 @@
                         {{/each}}
                     </script>
                 </div>
-            </div>
+            </div> -->
             <!-- 二级页面内容部分 -->
             <div class="second-content">
                 <div class="content-center js-second-category-content-container">
