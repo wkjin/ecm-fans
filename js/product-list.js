@@ -196,7 +196,7 @@ var pageContentArea = {
             if (handle === 'search') {
 
             } else if (handle === 'searchAll') {
-                window.location.href = self.showCategoryData.url;
+                window.location.href = self.showCategoryData?self.showCategoryData.url:'./product-list.html?c=-1';
             } else {
                 console.log('没有绑定处理');
             }
