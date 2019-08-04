@@ -231,6 +231,7 @@ var pageContentArea = {
         var secondCategoryList = self.$parent.find(self._options.secondCategoryContainerSelector).find('> a');
         if (isNaN(index) || index >= secondCategoryList.length || index < 0) {
             //留到最后做统一处理
+            self.$parent.find('.js-category-item[data-id="0"]').attr('selected', true);
         }else{
             var $selected = self.$parent.find(self._options.secondCategoryContainerSelector).find('> a[data-index="'+index+'"]');
             if($selected.length > 0){
