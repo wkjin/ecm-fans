@@ -35,22 +35,22 @@
     "power_category_cn": "电源类别",
     "power_category_en": "Power Category",
 
-    "voltage_cn": "电压[V]",
+    "voltage_cn": "电压[v]",
     "voltage_en": "voltage",
 
     "frequency_cn": "频率[Hz]",
     "frequency_en": "frequency",
 
-    "impeller_diameter_cn": "叶轮直径",
+    "impeller_diameter_cn": "叶轮直径[mm]",
     "impeller_diameter_en": "Impeller Diameter",
     
     "speed_cn": "转速[rpm]",
     "speed_en": "speed[rpm]",
 
-    "atmospheric_pressure_cn": "最大功率",
+    "atmospheric_pressure_cn": "最大功率[W]",
     "atmospheric_pressure_en": "pressure",
 
-    "specifications_cn": "最大静压",
+    "specifications_cn": "最大静压[Pa]",
     "specifications_en": "specifications",
 
     "phase_number_cn": "相数",
