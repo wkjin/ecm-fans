@@ -59,13 +59,13 @@
     "impeller_diameter_cn": "叶轮直径[mm]",
     "impeller_diameter_en": "Impeller Diameter",
     
-    "speed_cn": "转速[rpm]",
-    "speed_en": "speed[rpm]",
+    "speed_cn": "最大功率[W]",
+    "speed_en": "speed[W]",
 
-    "atmospheric_pressure_cn": "最大功率[W]",
-    "atmospheric_pressure_en": "pressure",
+    "atmospheric_pressure_cn": "最大静压[Pa]",
+    "atmospheric_pressure_en": "pressure[Pa]",
 
-    "specifications_cn": "最大静压[Pa]",
+    "specifications_cn": "规格",
     "specifications_en": "specifications",
 
     "phase_number_cn": "相数",
