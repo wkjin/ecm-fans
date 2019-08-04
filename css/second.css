@@ -498,12 +498,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  -webkit-text-size-adjust: none;
-  font-size: 10px;
+  font-size: 14px;
 }
 .content-area .second-content .content-center .product-list > a .right p:first-child {
   line-height: 2.5em;
   height: 2.5em;
+  font-size: 16px;
   margin-bottom: 0.5em;
 }
 .content-area .second-content .content-center .article-detail {
