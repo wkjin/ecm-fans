@@ -498,6 +498,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  -webkit-text-size-adjust: none;
+  font-size: 10px;
 }
 .content-area .second-content .content-center .product-list > a .right p:first-child {
   line-height: 2.5em;
