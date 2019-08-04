@@ -44,7 +44,7 @@
     "product_category_cn": "产品类别",
     "product_category_en": "Product Category",
 
-    "air_volume_cn": "风量[m³/h]",
+    "air_volume_cn": "最大风量[m³/h]",
     "air_volume_en": "Air Volume",
 
     "power_category_cn": "电源类别",
