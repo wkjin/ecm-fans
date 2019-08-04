@@ -474,7 +474,7 @@
   border: 1px solid #F5F5F5;
 }
 .content-area .second-content .content-center .product-list > a .left {
-  width: 50%;
+  width: 45%;
   height: 100%;
   float: left;
   background-color: #F5F5F5;
@@ -492,9 +492,9 @@
 }
 .content-area .second-content .content-center .product-list > a .right {
   float: left;
-  width: 50%;
+  width: 55%;
   height: 100%;
-  padding: 0.5em;
+  padding: 0.5em 0 0.5em 0.5em;
 }
 .content-area .second-content .content-center .product-list > a .right p {
   line-height: 2em;
