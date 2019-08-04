@@ -211,7 +211,7 @@
   color: #333333;
 }
 .content-area .search-area .content-center .category-search .cs-item span {
-  width: 8em;
+  width: 10em;
   display: inline-block;
   text-align: right;
   overflow: hidden;
@@ -224,7 +224,7 @@
 .content-area .search-area .content-center .category-search .cs-item select {
   padding: 0 1em;
   border-radius: 1.1em;
-  width: 13em;
+  width: 15em;
   color: #666666;
   background: #ffffff;
   border: 1px solid #cccccc;
