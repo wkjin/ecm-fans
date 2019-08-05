@@ -114,7 +114,7 @@ var pageContentArea={
         var self = this;
 
         //从地址栏获取选中的栏目
-        self.$parent.find(self._options.secondCategoryContainerSelector).off('click').on('click', 'span', function(){
+        self.$parent.find(self._options.secondCategoryContainerSelector + '-1').off('click').on('click', 'span', function(){
             var $this = $(this);
             self._selectSecondCategory($this.data('index'));
         });
