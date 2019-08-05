@@ -101,7 +101,7 @@ var pageContentArea={
             loadSecondCategory();
 
             //填充二级导航
-            // self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {categorysList: categoryData._child}));
+            self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {categorysList: categoryData._child}));
 
             //模拟点击栏目进行选中
             self._selectSecondCategory(self.showCategoryId);
@@ -114,7 +114,7 @@ var pageContentArea={
         var self = this;
 
         //从地址栏获取选中的栏目
-        self.$parent.find(self._options.secondCategoryContainerSelector).off('click').on('click', 'span', function(){
+        self.$parent.find(self._options.secondCategoryContainerSelector + '-1').off('click').on('click', 'span', function(){
             var $this = $(this);
             self._selectSecondCategory($this.data('id'));
         });
@@ -126,6 +126,7 @@ var pageContentArea={
         var selectedClass = self._options.secondCategorySelectedClass;
         cid = parseInt(cid);
         if(!isNaN(cid) && cid > 0){
+            self.$parent.find(self._options.secondCategoryContainerSelector + '-1').find('> span[data-id="'+cid+'"]').addClass(selectedClass).siblings().removeClass(selectedClass);
             var $secondCategory = self.$parent.find(self._options.secondCategoryContainerSelector).find('> a[data-id="'+cid+'"]');
             if($secondCategory.length > 0){
                 $secondCategory.addClass(selectedClass).siblings().removeClass(selectedClass);
