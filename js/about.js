@@ -103,7 +103,7 @@ var pageContentArea={
             
 
             //填充二级导航
-            // self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {categorysList: categoryData._child}));
+            self.$parent.find(self._options.secondCategoryContainerSelector + '-1').html(template(self._options.secondCategoryTemplagteId  + '-1', {categorysList: categoryData._child}));
 
             //模拟点击栏目进行选中
             self._selectSecondCategory(self.showCategoryIndex);
@@ -128,6 +128,7 @@ var pageContentArea={
         var selectedClass = self._options.secondCategorySelectedClass;
         index = parseInt(index);
         var secondCategoryList = self.$parent.find(self._options.secondCategoryContainerSelector).find('> a[data-index]');
+        self.$parent.find(self._options.secondCategoryContainerSelector).find('> span[data-index="'+index+'"]').addClass(selectedClass).siblings().removeClass(selectedClass);
         if(isNaN(index) || index >= secondCategoryList.length || index < 0){
             index = 0;
         }
