@@ -62,9 +62,6 @@
   *left: 0;
   transform: translateX(-50%);
 }
-.content-area .second-category {
-  background: #ffffff;
-}
 .content-area .second-category .content-center {
   display: flex;
   justify-content: center;
@@ -76,6 +73,7 @@
   border-top-color: transparent;
   border-radius: 2px;
   flex-wrap: nowrap;
+  background: #ffffff;
 }
 .content-area .second-category .content-center > span {
   display: block;
