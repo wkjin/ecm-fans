@@ -125,8 +125,8 @@ var pageContentArea={
         var self = this;
         var selectedClass = self._options.secondCategorySelectedClass;
         index = parseInt(index);
-        var secondCategoryList = self.$parent.find(self._options.secondCategoryContainerSelector).find('> a[data-index]');
-        self.$parent.find(self._options.secondCategoryContainerSelector + '-1').find('> span[data-index="'+index+'"]').addClass(selectedClass).siblings().removeClass(selectedClass);
+        var secondCategoryList = self.$parent.find(self._options.secondCategoryContainerSelector + '-1').find('> span[data-index]');
+        self.$parent.find(self._options.secondCategoryContainerSelector).find('> a[data-index="'+index+'"]').addClass(selectedClass).siblings().removeClass(selectedClass);
         if(isNaN(index) || index >= secondCategoryList.length || index < 0){
             index = 0;
         }
