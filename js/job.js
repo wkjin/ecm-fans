@@ -101,7 +101,7 @@ var pageContentArea={
             loadSecondCategory();
 
             //填充二级导航
-            self.$parent.find(self._options.secondCategoryContainerSelector + '-1').html(template(self._options.secondCategoryTemplagteId, {categorysList: categoryData._child}));
+            self.$parent.find(self._options.secondCategoryContainerSelector + '-1').html(template(self._options.secondCategoryTemplagteId + '-1', {categorysList: categoryData._child}));
 
             //模拟点击栏目进行选中
             self._selectSecondCategory(self.showCategoryIndex);
