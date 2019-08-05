@@ -74,6 +74,7 @@
   border-radius: 2px;
   flex-wrap: nowrap;
   background: #ffffff;
+  border-width: 1px 0;
 }
 .content-area .second-category .content-center > span {
   display: block;
