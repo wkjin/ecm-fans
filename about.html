@@ -24,16 +24,7 @@
                     </script>
                 </div>
             </div>
-            <!-- 二级导航部分 -->
-            <div class="second-category">
-                <div class="content-center js-second-category-container-1">
-                    <script id="js-second-category-1" type="text/html">
-                        {{each categorysList it i}}
-                            <span data-index="{{i}}" data-target="">{{it.name}}</span>
-                        {{/each}}
-                    </script>
-                </div>
-            </div>
+            
             <!-- 二级导航部分 -->
             <div class="website-local">
                 <div class="content-center js-second-category-container">
@@ -45,6 +36,16 @@
                         <span class="fa fa-angle-right"></span>
                         {{each categorysList it i}}
                             <a href="{{it.url}}" data-index="{{i}}" >{{it.name}}</a>
+                        {{/each}}
+                    </script>
+                </div>
+            </div>
+            <!-- 二级导航部分 -->
+            <div class="second-category">
+                <div class="content-center js-second-category-container-1">
+                    <script id="js-second-category-1" type="text/html">
+                        {{each categorysList it i}}
+                            <span data-index="{{i}}" data-target="">{{it.name}}</span>
                         {{/each}}
                     </script>
                 </div>
