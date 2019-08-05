@@ -82,8 +82,6 @@ var pageContentArea={
         if(typeof categoryData === 'object' && categoryData !== null){
             //填充栏目图
             self.$parent.find(self._options.categoryBannerContainerSelector).html(template(self._options.categoryBannerTemplateId, {categoryImgUrl: categoryData.thumb}));
-
-            console.log(storage.get('layoutData'), categoryData._child);
             //填充二级导航（地址栏）
             function loadSecondCategory(){
                 var layoutData = storage.get('layoutData');
@@ -128,7 +126,7 @@ var pageContentArea={
         var selectedClass = self._options.secondCategorySelectedClass;
         index = parseInt(index);
         var secondCategoryList = self.$parent.find(self._options.secondCategoryContainerSelector).find('> a[data-index]');
-        self.$parent.find(self._options.secondCategoryContainerSelector).find('> span[data-index="'+index+'"]').addClass(selectedClass).siblings().removeClass(selectedClass);
+        self.$parent.find(self._options.secondCategoryContainerSelector + '-1').find('> span[data-index="'+index+'"]').addClass(selectedClass).siblings().removeClass(selectedClass);
         if(isNaN(index) || index >= secondCategoryList.length || index < 0){
             index = 0;
         }
