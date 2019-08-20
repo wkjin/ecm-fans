@@ -127,11 +127,7 @@ var pageContentArea={
         //从地址栏获取选中的栏目
         self.$parent.find(self._options.secondCategoryContainerSelector + '-1').off('click').on('click', 'span', function(){
             var $this = $(this);
-            var id = parseInt($this.data('id'));
-            self._selectSecondCategory(id);
-            if(id === 15){//如果是企业样本，就直接跳转
-                window.location.href = $this.data('url');
-            }
+            window.location.href = $this.data('url');
         });
     },
     //选中二级栏目
