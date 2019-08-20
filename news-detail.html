@@ -56,7 +56,7 @@
                 <div class="content-center js-second-category-content-container">
                     <script id="js-second-category-content" type="text/html">
                         <div class="article-detail">
-                            {{if parseInt(data.id) !== 15}}
+                            {{if data.id != '15'}}
                             <h3 class="p-title">{{data.title}}</h3>
                             <p class="p-subtitle">{{data.update_time}}</p>
                             {{/if}}
