@@ -95,10 +95,24 @@ var pageContentArea={
             self.$parent.find(self._options.categoryBannerContainerSelector).html(template(self._options.categoryBannerTemplateId, {categoryImgUrl: categoryData.thumb}));
 
             //填充二级导航（地址栏）
-            self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {
-                categorysList: categoryData._child, 
-                layoutData: storage.get('layoutData')
-            }));
+            function loadSecondCategory(){
+                var layoutData = storage.get('layoutData');
+                if(typeof layoutData !== 'object' || layoutData === null){
+                    setTimeout(function(){
+                        loadSecondCategory();
+                    }, 200);
+                    return;
+                }else{
+                    self.$parent.find(self._options.secondCategoryContainerSelector).html(template(self._options.secondCategoryTemplagteId, {
+                        categorysList: categoryData._child,
+                        layoutData: layoutData
+                    }));
+                }
+            }; 
+            loadSecondCategory();
+
+            //填充二级导航
+            self.$parent.find(self._options.secondCategoryContainerSelector + '-1').html(template(self._options.secondCategoryTemplagteId + '-1', {categorysList: categoryData._child}));
 
             //模拟点击栏目进行选中
             self._selectSecondCategory(self.showCategoryId);
@@ -128,6 +142,7 @@ var pageContentArea={
                 window.history.go(-1);
             }, 1500);
         }else{
+            self.$parent.find(self._options.secondCategoryContainerSelector + '-1').find('> span[data-id="'+cid+'"]').addClass(selectedClass).siblings().removeClass(selectedClass);
             var $secondCategory = self.$parent.find(self._options.secondCategoryContainerSelector).find('> a[data-id="'+cid+'"]');
             if($secondCategory.length > 0){
                 $secondCategory.addClass(selectedClass).siblings().removeClass(selectedClass);

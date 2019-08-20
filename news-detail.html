@@ -31,11 +31,23 @@
                         <span>{{layoutData.youLocal}}：</span>
                         <a class="no-list" href="/">{{layoutData.home}}</a>
                         <span class="fa fa-angle-right"></span>
+                        <a class="no-list" href="{{categorysList[0].url}}">{{layoutData.contact}}</a> 
+                        <span class="fa fa-angle-right"></span>
                         {{each categorysList it i}}
                             <a href="{{it.url}}" data-index="{{i}}" data-id="{{it.id}}">{{it.name}}</a>
                         {{/each}}
                         <span class="fa fa-angle-right"></span>
                         <span class="js-news-name no-event"></span>
+                    </script>
+                </div>
+            </div>
+            <!-- 二级导航部分 -->
+            <div class="second-category">
+                <div class="content-center js-second-category-container-1">
+                    <script id="js-second-category-1" type="text/html">
+                        {{each categorysList it i}}
+                            <span data-index="{{i}}" data-target="">{{it.name}}</span>
+                        {{/each}}
                     </script>
                 </div>
             </div>
