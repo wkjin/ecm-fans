@@ -150,7 +150,7 @@ var pageContentArea={
                 server.getArticleDetail({article_id: self.newsId},function(res){
                     if(res.status === 1){
                         storage.set(self._options.contentAreaDetailDataName, res.data);
-                        if(parseInt(article_id) === 15){
+                        if(parseInt(self.newsId) === 15){
                             self.$parent.find(self._options.newsNameSelector).hide().prev().hide();
                         }
                         //设置文章
