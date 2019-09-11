@@ -215,7 +215,8 @@ var commonPage = {
                 if(typeof fragmentData === 'object' && fragmentData !== null){
                     var _fragmentData = {};//去掉多余的信息
                     Object.keys(fragmentData).forEach(function(key){
-                        _fragmentData[key] = fragmentData[key].value;
+                        var it = fragmentData[key];
+                        _fragmentData[key] = parseInt(it.status) === 1?it.value:null;
                     });
                     func(_fragmentData, -1, self.storage.get(self._options.layoutDataName), -1);
                 }
